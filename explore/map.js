@@ -17,8 +17,8 @@ window.onload = function() {
       polygon = layer
         .createFeature("polygon")
         .data(
-          data.features.map(function(county) {
-            return county.geometry;
+          data.features.map(function(state) {
+            return state.geometry;
           })
         )
         .polygon(function(d) {

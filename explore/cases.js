@@ -1,8 +1,8 @@
-window.onload = function() {
+window.onload = function () {
   var map = geo.map({
     node: "#map",
     center: { x: -97, y: 41 },
-    zoom: 4
+    zoom: 4,
   });
 
   map.createLayer("osm").opacity(0.5);
@@ -12,27 +12,27 @@ window.onload = function() {
   var states;
 
   fetch("./USstates_avg_latLong.json")
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       states = layer
         .createFeature("point")
         .data(data)
-        .position(function(state) {
+        .position(function (state) {
           return {
             x: state.longitude,
-            y: state.latitude
+            y: state.latitude,
           };
         })
         .draw();
       fetch("https://covidtracking.com/api/states")
-        .then(res => res.json())
-        .then(cases => {
-          var caseCount = cases.map(function(stateCases) {
+        .then((res) => res.json())
+        .then((cases) => {
+          var caseCount = cases.map(function (stateCases) {
             return stateCases.positive;
           });
           var domain = [
             Math.min.apply(null, caseCount),
-            Math.max.apply(null, caseCount)
+            Math.max.apply(null, caseCount),
           ];
           var colorRange = ["rgb(0,255,0)", "rgb(255,0,0)"];
           var cScale = d3.scale
@@ -49,8 +49,8 @@ window.onload = function() {
             .range([1, 30]);
           states
             .style({
-              fillColor: function(d, idx, state) {
-                let x = cases.find(function(c) {
+              fillColor: function (d, idx, state) {
+                let x = cases.find(function (c) {
                   return c.state === d.state;
                 });
                 if (x) {
@@ -61,8 +61,8 @@ window.onload = function() {
               },
               stroke: false,
               fillOpacity: 0.8,
-              radius: function(d, idx, state) {
-                let x = cases.find(function(c) {
+              radius: function (d, idx, state) {
+                let x = cases.find(function (c) {
                   return c.state === d.state;
                 });
                 if (x) {
@@ -70,14 +70,22 @@ window.onload = function() {
                 } else {
                   return false;
                 }
-              }
+              },
             })
-            .draw();
+            .geoOff(geo.event.feature.mouseover)
+            .geoOff(geo.event.feature.mouseout)
+            .geoOn(geo.event.feature.mouseover, function (evt) {
+              if (!evt.top) {
+                return;
+              }
+              console.log(evt);
+            });
+          states.draw();
           var ui = map.createLayer("ui");
           var legend = ui.createWidget("colorLegend", {
             position: {
               right: 20,
-              top: 10
+              top: 10,
             },
             categories: [
               {
@@ -85,9 +93,9 @@ window.onload = function() {
                 type: "continuous",
                 scale: "pow",
                 domain: domain,
-                colors: colorRange
-              }
-            ]
+                colors: colorRange,
+              },
+            ],
           });
         });
     });

@@ -1,8 +1,8 @@
-window.onload = function() {
+window.onload = function () {
   var map = geo.map({
     node: "#map",
     center: { x: -97, y: 41 },
-    zoom: 4
+    zoom: 4,
   });
 
   map.createLayer("osm");
@@ -11,43 +11,41 @@ window.onload = function() {
   var polygon;
 
   fetch("./gz_2010_us_050_00_20m.json")
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       console.log(data);
       polygon = layer
         .createFeature("polygon")
         .data(
-          data.features.map(function(state) {
+          data.features.map(function (state) {
             return state.geometry;
           })
         )
-        .polygon(function(d) {
+        .polygon(function (d) {
           if (d.type == "MultiPolygon") {
             return {
               outer: d.coordinates[0][0],
-              inner: d.coordinates[0][1]
+              inner: d.coordinates[0][1],
             };
           }
           return {
-            outer: d.coordinates[0]
+            outer: d.coordinates[0],
           };
         })
-        .position(function(d) {
+        .position(function (d) {
           return { x: d[0], y: d[1] };
         });
 
-      var populations = data.features.map(function(county) {
-        let x = county.geometry.coordinates
-          .flatten()
-          .flatten()
-          .flatten().length;
+      var populations = data.features.map(function (county) {
+        let x = county.geometry.coordinates.flatten().flatten().flatten()
+          .length;
 
         console.log(x);
         return x;
       });
       var domain = [
         Math.min.apply(null, populations),
-        Math.max.apply(null, populations)
+        Math.max.apply(null, populations),
       ];
       var colorRange = ["rgb(0,255,0)", "rgb(255,0,0)"];
       var scale = d3.scale
@@ -59,15 +57,12 @@ window.onload = function() {
 
       polygon
         .style({
-          fillColor: function(d, idx, state) {
+          fillColor: function (d, idx, state) {
             return scale(
-              state.coordinates
-                .flatten()
-                .flatten()
-                .flatten().length
+              state.coordinates.flatten().flatten().flatten().length
             );
           },
-          fillOpacity: 0.5
+          fillOpacity: 0.5,
         })
         .draw();
     });

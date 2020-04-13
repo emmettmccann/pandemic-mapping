@@ -1,0 +1,1050 @@
+[
+   {
+      "key": "AL",
+      "values": [
+         {
+            "place_nyt_style": "Alabama",
+            "geography": "state",
+            "state": "AL",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": false,
+            "link_localnews": "https://www.al.com/news/2020/04/gov-kay-ivey-to-give-update-on-coronavirus-response.html",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-4 at 5 p.m."
+         }
+      ],
+      "statename": "Alabama",
+      "blurb": "Gov. Kay Ivey had resisted a statewide order, saying that she wanted to balance the health of the state's residents with the health of the economy. \"We are not California,\" she said on a conference call with reporters, according to AL.com. But after Birmingham, the largest city in the state, issued a shelter-in-place order for its residents, and amid growing pressure, the governor issued a statewide order. “You need to understand we are past urging people to stay at home,\" she said. \"It is now the law.”",
+      "statewide": true
+   },
+   {
+      "key": "AK",
+      "values": [
+         {
+            "place_nyt_style": "Alaska",
+            "geography": "state",
+            "state": "AK",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "http://dhss.alaska.gov/News/Documents/press/2020/FAQs_03272020-SOA-COVID-19-Health-Mandate-011-012.pdf",
+            "link_localnews": "https://www.adn.com/alaska-news/2020/03/27/anchorage-sees-first-covid-19-death-in-alaska-hospital-officials-say/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-28 at 5 p.m."
+         }
+      ],
+      "statename": "Alaska",
+      "blurb": "\"We crossed a line today,\" Gov. Mike Dunleavy said, issuing instructions for people to stay home or remain six feet or more from one another when outside. The mayor of Anchorage had previously asked residents to \"hunker down.\"",
+      "statewide": true
+   },
+   {
+      "key": "AZ",
+      "values": [
+         {
+            "place_nyt_style": "Arizona",
+            "geography": "state",
+            "state": "AZ",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://azgovernor.gov/governor/news/2020/03/new-executive-order-stay-home-stay-healthy-stay-connected",
+            "link_localnews": "https://www.azcentral.com/story/news/local/arizona-health/2020/03/30/arizona-coronavirus-stay-home-order-issued-gov-doug-ducey/5088109002/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-31 at 5 p.m."
+         }
+      ],
+      "statename": "Arizona",
+      "blurb": "Gov. Doug Ducey said he issued the order at the recommendation of health officials. \"I’m grateful to everyone making adjustments to fight this virus and protect others,\" he said. \"We need to keep these efforts up.\"",
+      "statewide": true
+   },
+   {
+      "key": "CA",
+      "values": [
+         {
+            "place_nyt_style": "California",
+            "geography": "state",
+            "state": "CA",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://covid19.ca.gov/img/Executive-Order-N-33-20.pdf",
+            "link_localnews": "https://www.latimes.com/california/story/2020-03-20/coronavirus-and-california-landmarks-empty-and-surreal",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-19"
+         }
+      ],
+      "statename": "California",
+      "blurb": "California, America’s most populous state, was the first to order all residents to stay home. Others quickly followed suit. “This is not a permanent state, this is a moment in time,” Gov. Gavin Newsom said. “We will look back at these decisions as pivotal.”",
+      "statewide": true
+   },
+   {
+      "key": "CO",
+      "values": [
+         {
+            "place_nyt_style": "Colorado",
+            "geography": "state",
+            "state": "CO",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://twitter.com/GovofCO/status/1242943191394877441?s=20",
+            "link_localnews": "https://gazette.com/news/colorado-stay-at-home-order-issued-by-gov-polis-wednesday/article_7b3e0834-6ed7-11ea-84db-678f7b49011f.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-26 at 6 a.m."
+         }
+      ],
+      "statename": "Colorado",
+      "blurb": "A number of counties and cities in the state, including Denver and Boulder, had issued their own stay-at-home orders, but Gov. Jared Polis also issued a statewide order, reiterating the need for everyone to stay at home. “We owe it to ourselves and our fellow Americans in order to save lives,” he said.",
+      "statewide": true
+   },
+   {
+      "key": "CT",
+      "values": [
+         {
+            "place_nyt_style": "Connecticut",
+            "geography": "state",
+            "state": "CT",
+            "order": "Stay at home",
+            "formal_order": false,
+            "link_order": "https://portal.ct.gov/Office-of-the-Governor/News/Press-Releases/2020/03-2020/Governor-Lamont-Signs-Executive-Order-Asking-Connecticut-Businesses-and-Residents-Stay-Safe",
+            "link_localnews": "https://www.courant.com/coronavirus/hc-news-coronavirus-update-0320-20200320-m5oro7ss3vb3nlqsormcmt6nty-story.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-23 at 8 p.m."
+         }
+      ],
+      "statename": "Connecticut",
+      "blurb": "“At this critical time it is essential that everyone just stay home,” Gov. Ned Lamont said. ",
+      "statewide": true
+   },
+   {
+      "key": "DE",
+      "values": [
+         {
+            "place_nyt_style": "Delaware",
+            "geography": "state",
+            "state": "DE",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "https://governor.delaware.gov/wp-content/uploads/sites/24/2020/03/Fifth-Modification-to-State-of-Emergency-03222020.pdf",
+            "link_localnews": "https://www.delawareonline.com/story/news/coronavirus-in-delaware/2020/03/22/coronavirus-delaware-count-up-47-confirmed-cases-state/2894015001/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-24 at 8 a.m."
+         }
+      ],
+      "statename": "Delaware",
+      "blurb": "“I don’t want Delaware to be the example of what not to do in response to this crisis,” Gov. John Carney said. ",
+      "statewide": true
+   },
+   {
+      "key": "DC",
+      "values": [
+         {
+            "place_nyt_style": "District of Columbia",
+            "geography": "D.C.",
+            "state": "DC",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://coronavirus.dc.gov/stayhome",
+            "link_localnews": "https://www.washingtonpost.com/dc-md-va/2020/03/30/coronavirus-dc-maryland-virginia-live-updates/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "District-wide",
+            "date_effective_fmt": "2020-04-1 at 12:01 a.m."
+         }
+      ],
+      "statename": "District of Columbia",
+      "blurb": "Mayor Muriel E. Bowser issued a stay-at-home order for all residents, joining the nearby states of Maryland and Virginia in a move that virtually shut down the nation's capital region. \"Many people want to know how they can help right now,\" the mayor said. \"For most people this is how — by staying home.\"",
+      "statewide": true
+   },
+   {
+      "key": "FL",
+      "values": [
+         {
+            "place_nyt_style": "Florida",
+            "geography": "state",
+            "state": "FL",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": false,
+            "link_localnews": "https://www.tampabay.com/news/health/2020/04/01/florida-gov-ron-desantis-issues-statewide-stay-at-home-order/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-3 at 12:01 a.m."
+         }
+      ],
+      "statename": "Florida",
+      "blurb": "Gov. Ron DeSantis, who for weeks resisted more stringent statewide measures even as cities and counties took action, announced that he would order the state’s more than 21 million residents to largely stay at home. The governor said he started coming around to the necessity of a statewide order once the White House extended national guidelines to combat the coronavirus until 2020-04-30. “To me, that was, ’People aren’t just going to back to work,’” Mr. DeSantis said at a news conference in Tallahassee, the state capital. “That’s a national pause button.” ",
+      "statewide": true
+   },
+   {
+      "key": "GA",
+      "values": [
+         {
+            "place_nyt_style": "Georgia",
+            "geography": "state",
+            "state": "GA",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": false,
+            "link_localnews": "https://www.ajc.com/blog/politics/breaking-georgia-governor-orders-shelter-place-curb-coronavirus/vdAoWkjq39W2usr9e8W8BL/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-3"
+         }
+      ],
+      "statename": "Georgia",
+      "blurb": "Gov. Brian Kemp announced that he would issue a statewide order for all residents to shelter in place, following a similar stay-at-home order in Atlanta and other areas. He said he made the decision, in part, after learning that many people without symptoms are transmitting the virus. \"At this point,\" he said, \"I think it's the right thing to do.\" ",
+      "statewide": true
+   },
+   {
+      "key": "HI",
+      "values": [
+         {
+            "place_nyt_style": "Hawaii",
+            "geography": "state",
+            "state": "HI",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://governor.hawaii.gov/wp-content/uploads/2020/03/2003162-ATG_Third-Supplementary-Proclamation-for-COVID-19-signed.pdf",
+            "link_localnews": "https://www.hawaiinewsnow.com/2020/03/24/live-governor-expected-issue-statewide-stay-at-home-order-coronavirus-cases-swell/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-25 at 12:01 a.m."
+         }
+      ],
+      "statename": "Hawaii",
+      "blurb": "As in other states, there are exceptions to the stay-at-home order in Hawaii, including leaving the house to go surfing and swimming. But the governor's office said violations could be punishable by a fine of up to $5,000, or as much as one year in jail. “The threat of COVID-19 is unprecedented and requires aggressive action,\" Gov. David Ige said. ",
+      "statewide": true
+   },
+   {
+      "key": "ID",
+      "values": [
+         {
+            "place_nyt_style": "Idaho",
+            "geography": "state",
+            "state": "ID",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://coronavirus.idaho.gov/statewide-stay-home-order/",
+            "link_localnews": "https://amp.idahostatesman.com/news/coronavirus/article241495446.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-25 at 1:30 p.m."
+         }
+      ],
+      "statename": "Idaho",
+      "blurb": "“Our health care and public safety workers are putting themselves in harm’s way to respond to the coronavirus emergency, and we owe it to them to do our part by following this statewide stay-home order,” Gov. Brad Little said.",
+      "statewide": true
+   },
+   {
+      "key": "IL",
+      "values": [
+         {
+            "place_nyt_style": "Illinois",
+            "geography": "state",
+            "state": "IL",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www2.illinois.gov/Pages/news-item.aspx?ReleaseID=21288",
+            "link_localnews": "https://www.chicagotribune.com/coronavirus/ct-coronavirus-illinois-shelter-in-place-lockdown-order-20200320-teedakbfw5gvdgmnaxlel54hau-story.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-21 at 5 p.m."
+         }
+      ],
+      "statename": "Illinois",
+      "blurb": "“I don’t come to this decision easily,” Gov. J.B. Pritzker said. “I fully recognize that, in some cases, I am choosing between people’s lives and saving people’s livelihood. But ultimately, you can’t have a livelihood if you don’t have your life.”",
+      "statewide": true
+   },
+   {
+      "key": "IN",
+      "values": [
+         {
+            "place_nyt_style": "Indiana",
+            "geography": "state",
+            "state": "IN",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.in.gov/gov/3232.htm",
+            "link_localnews": "https://www.indystar.com/story/news/health/2020/03/23/indiana-coronavirus-updates-indianapolis-covid-19-latest-news/2896967001/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-24 at 11:59 p.m."
+         }
+      ],
+      "statename": "Indiana",
+      "blurb": "Gov. Eric J. Holcomb asked \"Hoosiers to hunker down.\" He added: “You must be part of the solution, not the problem.”",
+      "statewide": true
+   },
+   {
+      "key": "KS",
+      "values": [
+         {
+            "place_nyt_style": "Kansas",
+            "geography": "state",
+            "state": "KS",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://governor.kansas.gov/governor-kelly-issues-temporary-statewide-stay-home-order-in-ongoing-effort-to-combat-covid-19/",
+            "link_localnews": "https://www.cjonline.com/news/20200328/kansas-coronavirus-update-gov-laura-kelly-imposes-statewide-stay-at-home-order-state-logs-5th-death-261-cases",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-30 at 12:01 a.m."
+         }
+      ],
+      "statename": "Kansas",
+      "blurb": "After several municipalities in Kansas issued stay-at-home instructions in quick succession, including in the greater Kansas City region, Gov. Laura Kelly issued a statewide order. \"While I left these decisions to local health departments as long as possible,\" she said, \"the reality is that the patchwork approach that has developed is inconsistent and is a recipe for chaos.\" ",
+      "statewide": true
+   },
+   {
+      "key": "KY",
+      "values": [
+         {
+            "place_nyt_style": "Kentucky",
+            "geography": "state",
+            "state": "KY",
+            "order": "Healthy at home",
+            "formal_order": false,
+            "link_order": "https://kentucky.gov/Pages/Activity-stream.aspx?n=GovernorBeshear&prId=105",
+            "link_localnews": "https://www.courier-journal.com/story/news/local/2020/03/23/coronavirus-kentucky-healthy-at-home-shelter-in-place-andy-beshear/2899060001/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-26 at 8 p.m."
+         }
+      ],
+      "statename": "Kentucky",
+      "blurb": "Gov. Andy Beshear ordered all non-essential businesses to stop operating in-person services by 2020-03-26 and urged residents to stay \"healthy at home.\" In a news conference on 2020-03-27, he clarified that the state's campaign amounted to telling residents to stay home. \"That doesn't mean you need to cower down in your home,\" he said. But \"you stay at home, unless you are getting groceries or other supplies that you may need.\" ",
+      "statewide": true
+   },
+   {
+      "key": "LA",
+      "values": [
+         {
+            "place_nyt_style": "Louisiana",
+            "geography": "state",
+            "state": "LA",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://gov.louisiana.gov/assets/Proclamations/2020/JBE-33-2020.pdf",
+            "link_localnews": "https://www.theadvocate.com/baton_rouge/news/coronavirus/article_922869e8-6c6d-11ea-aeee-6b6fd5e8f4bd.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-23 at 5 p.m."
+         }
+      ],
+      "statename": "Louisiana",
+      "blurb": "“If we want to flatten the curve, we have to take action today,” Gov. John Bel Edwards said. New Orleans had previously issued its own order. ",
+      "statewide": true
+   },
+   {
+      "key": "ME",
+      "values": [
+         {
+            "place_nyt_style": "Maine",
+            "geography": "state",
+            "state": "ME",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.maine.gov/governor/mills/sites/maine.gov.governor.mills/files/inline-files/An%20Order%20Regarding%20Further%20Restrictions%20on%20Public%20Contact%20and%20Movement%2C%20Schools%2C%20Vehicle%20Travel%20and%20Retail%20Business%20Operations.pdf",
+            "link_localnews": "https://www.wabi.tv/content/news/Gov-Mills-issues-stay-at-home-order-for-Maine-569260011.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-2 at 12:01 a.m."
+         }
+      ],
+      "statename": "Maine",
+      "blurb": "“We are in the midst of one of the greatest public health crises this world has seen in more than a century,\" Gov. Janet Mills said. \"This virus will continue to sicken people across our state; our cases will only grow, and more people will die. I say this to be direct, to be as honest with you as I can. Because saving lives will depend on us.”",
+      "statewide": true
+   },
+   {
+      "key": "MD",
+      "values": [
+         {
+            "place_nyt_style": "Maryland",
+            "geography": "state",
+            "state": "MD",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://governor.maryland.gov/2020/03/30/as-covid-19-crisis-escalates-in-capital-region-governor-hogan-issues-stay-at-home-order-effective-tonight/",
+            "link_localnews": "https://www.baltimoresun.com/coronavirus/bs-md-stay-at-home-hogan-covid-19-20200330-pmid22rvirdwbppx4xpgjadoim-story.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-30 at 8 p.m."
+         }
+      ],
+      "statename": "Maryland",
+      "blurb": "Citing a drastic uptick in cases and deaths in Maryland and the United States, Gov. Larry Hogan issued a statewide stay-at-home order. \"We are no longer asking or suggesting that Marylanders stay home,\" he said. \"We are directing them to do so.\"",
+      "statewide": true
+   },
+   {
+      "key": "MA",
+      "values": [
+         {
+            "place_nyt_style": "Massachusetts",
+            "geography": "state",
+            "state": "MA",
+            "order": "Stay at home advisory",
+            "formal_order": false,
+            "link_order": "https://www.mass.gov/news/governor-charlie-baker-orders-all-non-essential-businesses-to-cease-in-person-operation",
+            "link_localnews": "https://www.bostonglobe.com/2020/03/23/metro/list-what-can-stay-open-during-bakers-stay-at-home-advisory/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-24 at 12 p.m."
+         }
+      ],
+      "statename": "Massachusetts",
+      "blurb": "Gov. Charlie Baker stopped short of declaring a formal order, but announced an advisory for residents to stay home. “I do not believe I can or should order U.S. citizens to be confined to their home for days on end,” he said. “It doesn’t make sense from a public health point of view, and it’s not realistic.”",
+      "statewide": true
+   },
+   {
+      "key": "MI",
+      "values": [
+         {
+            "place_nyt_style": "Michigan",
+            "geography": "state",
+            "state": "MI",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.michigan.gov/whitmer/0,9309,7-387-90499_90705-522626--,00.html",
+            "link_localnews": "https://www.freep.com/story/news/local/michigan/2020/03/23/michigan-shelter-in-place-order-coronavirus/2887578001/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-24 at 12:01 a.m."
+         }
+      ],
+      "statename": "Michigan",
+      "blurb": "“Without a comprehensive national strategy, we, the states, must take action,” Gov. Gretchen Whitmer said, urging residents to stay home.",
+      "statewide": true
+   },
+   {
+      "key": "MN",
+      "values": [
+         {
+            "place_nyt_style": "Minnesota",
+            "geography": "state",
+            "state": "MN",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://mn.gov/governor/covid-19/",
+            "link_localnews": "https://www.startribune.com/gov-tim-walz-to-order-new-covid-19-restrictions-on-minnesotans/569095212/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-27 at 11:59 p.m."
+         }
+      ],
+      "statename": "Minnesota",
+      "blurb": "Gov. Tim Walz emphasized the need to slow the spread of the virus over time and not overwhelm hospitals in Minnesota. \"We are asking you — because it is going to take cooperation and collaboration — stay home,\" he said. ",
+      "statewide": true
+   },
+   {
+      "key": "MS",
+      "values": [
+         {
+            "place_nyt_style": "Mississippi",
+            "geography": "state",
+            "state": "MS",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "https://yallpolitics.com/2020/04/01/mississippi-governor-tate-reeves-orders-statewide-shelter-at-home/unnamed-13-2/",
+            "link_localnews": "https://yallpolitics.com/2020/04/01/mississippi-governor-tate-reeves-orders-statewide-shelter-in-place/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-3 at 5 p.m."
+         }
+      ],
+      "statename": "Mississippi",
+      "blurb": "Gov. Tate Reeves announced a shelter-in-place order and asked all residents to take enforcement seriously. \"If you will self-enforce this, it will go a long way to slowing the spread,\" he said.",
+      "statewide": true
+   },
+   {
+      "key": "MO",
+      "values": [
+         {
+            "place_nyt_style": "Missouri",
+            "geography": "state",
+            "state": "MO",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://twitter.com/GovParsonMO/status/1246196795107160064?s=20",
+            "link_localnews": "https://www.kansascity.com/news/politics-government/article241743921.html",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-6 at 12:01 a.m."
+         }
+      ],
+      "statename": "Missouri",
+      "blurb": "Residents in the Kansas City, St. Louis and St. Louis County areas were among those under instructions to stay at home before Gov. Mike Parson issued a statewide order. The governor had previously rejected the step, but issued the order to \"stay ahead of the battle.\"",
+      "statewide": true
+   },
+   {
+      "key": "MT",
+      "values": [
+         {
+            "place_nyt_style": "Montana",
+            "geography": "state",
+            "state": "MT",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://covid19.mt.gov/Portals/223/Documents/Stay%20at%20Home%20Directive.pdf?ver=2020-03-26-173332-177",
+            "link_localnews": "https://helenair.com/news/state-and-regional/govt-and-politics/montana-sees-first-covid--death-residents-ordered-to-stay/article_f92d251e-cfe6-5e99-ab9f-0aa9dd433b91.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-28 at 12:01 a.m."
+         }
+      ],
+      "statename": "Montana",
+      "blurb": "\"We cannot rebuild our economic strength without doing everything we can now to flatten the curve and slow the spread of this virus,\" Gov. Steve Bullock said. ",
+      "statewide": true
+   },
+   {
+      "key": "NV",
+      "values": [
+         {
+            "place_nyt_style": "Nevada",
+            "geography": "state",
+            "state": "NV",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://nvhealthresponse.nv.gov/wp-content/uploads/2020/04/Declaration-of-Emergency-Directive-010-Stay-at-Home-3-31-20.pdf",
+            "link_localnews": "https://www.reviewjournal.com/news/politics-and-government/nevada/sisolak-issues-stay-at-home-order-1996415/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-1"
+         }
+      ],
+      "statename": "Nevada",
+      "blurb": "Gov. Steve Sisolak had shut down all nonessential businesses and encouraged residents to stay home for weeks before issuing a formal order, codifying a message he had been trying to send for weeks: \"STAY HOME for our State,\" he said on Twitter.",
+      "statewide": true
+   },
+   {
+      "key": "NH",
+      "values": [
+         {
+            "place_nyt_style": "New Hampshire",
+            "geography": "state",
+            "state": "NH",
+            "order": "Stay at home",
+            "formal_order": false,
+            "link_order": "https://www.governor.nh.gov/news-media/emergency-orders/documents/emergency-order-17-1.pdf",
+            "link_localnews": "https://www.concordmonitor.com/Thursday-update-NH-covid-cases-disease-spread-33554702",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-27 at 11:59 p.m."
+         }
+      ],
+      "statename": "New Hampshire",
+      "blurb": "Gov. Chris Sununu had earlier described a stay-at-home order as not a \"practical ask\" of residents, but later put one in place. \"We can't stress this enough — you should stay at your house unless absolutely necessary,\" he said. ",
+      "statewide": true
+   },
+   {
+      "key": "NJ",
+      "values": [
+         {
+            "place_nyt_style": "New Jersey",
+            "geography": "state",
+            "state": "NJ",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://nj.gov/infobank/eo/056murphy/pdf/EO-107.pdf",
+            "link_localnews": "https://www.nj.com/coronavirus/2020/03/new-jersey-lockdown-rules-what-residents-need-to-know-about-stay-at-home-order.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-21 at 9 p.m."
+         }
+      ],
+      "statename": "New Jersey",
+      "blurb": "“We know the virus spreads through person-to-person contact, and the best way to prevent further exposure is to limit our public interactions,” Gov. Phil Murphy said.",
+      "statewide": true
+   },
+   {
+      "key": "NM",
+      "values": [
+         {
+            "place_nyt_style": "New Mexico",
+            "geography": "state",
+            "state": "NM",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.governor.state.nm.us/wp-content/uploads/2020/03/COVID-19-DOH-Order-fv.pdf",
+            "link_localnews": "https://www.abqjournal.com/1435599/lujan-grisham-to-announce-stay-at-home-instruction.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-24 at 8 a.m."
+         }
+      ],
+      "statename": "New Mexico",
+      "blurb": "\n\nAddressing questions about whether she was issuing a shelter-in-place order, Gov. Michelle Lujan Grisham said that “the tantamount effect of what we’re doing is basically the same.” She added: “This is quite frankly an instruction to stay home.”",
+      "statewide": true
+   },
+   {
+      "key": "NY",
+      "values": [
+         {
+            "place_nyt_style": "New York",
+            "geography": "state",
+            "state": "NY",
+            "order": "Stay at home",
+            "formal_order": false,
+            "link_order": "https://coronavirus.health.ny.gov/new-york-state-pause",
+            "link_localnews": "https://www.nytimes.com/article/what-is-shelter-in-place-coronavirus.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-22 at 8 p.m."
+         }
+      ],
+      "statename": "New York",
+      "blurb": "Gov. Andrew M. Cuomo has shied away from the language of a shelter-in-place order, which he said evoked images of shooter situations or nuclear war. “Words matter,” the governor said, instead describing it as putting all of New York on pause. “This is the most drastic action we can take,” he said.",
+      "statewide": true
+   },
+   {
+      "key": "NC",
+      "values": [
+         {
+            "place_nyt_style": "North Carolina",
+            "geography": "state",
+            "state": "NC",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://twitter.com/NC_Governor/status/1243629131646078976?s=20",
+            "link_localnews": "https://www.newsobserver.com/news/coronavirus/article241469211.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-30 at 5 p.m."
+         }
+      ],
+      "statename": "North Carolina",
+      "blurb": "A number of cities and counties in North Carolina had already ordered their residents to stay home, but Gov. Roy Cooper made it official statewide. \"Even if you don’t think you have to worry about yourself, consider our nurses, doctors, custodial staff & other hospital workers who will be stretched beyond their capacity if we are unable to slow the spread of this disease,\" he said on Twitter. ",
+      "statewide": true
+   },
+   {
+      "key": "OH",
+      "values": [
+         {
+            "place_nyt_style": "Ohio",
+            "geography": "state",
+            "state": "OH",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://content.govdelivery.com/attachments/OHOOD/2020/03/22/file_attachments/1407840/Stay%20Home%20Order.pdf",
+            "link_localnews": "https://www.dispatch.com/news/20200322/coronavirus-ohio-issues-stay-at-home-order-allows-only-essential-businesses-and-day-cares-at-6-children-per-room",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-23 at 11:59 pm."
+         }
+      ],
+      "statename": "Ohio",
+      "blurb": "Gov. Mike DeWine has been notably aggressive in his response to the coronavirus, and Ohio was among the first wave of states to adopt this measure. “We haven’t faced an enemy like we are facing today in 102 years,” he said. “We are at war.”",
+      "statewide": true
+   },
+   {
+      "key": "OK",
+      "values": [
+         {
+            "place_nyt_style": "Claremore",
+            "geography": "city",
+            "state": "OK",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.claremorecity.com/DocumentCenter/View/4999/Emergency-Management-Order-3",
+            "link_localnews": "https://ktul.com/news/local/claremore-issues-stay-at-home-order",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Claremore",
+            "date_effective_fmt": "2020-04-6 at 8 a.m."
+         },
+         {
+            "place_nyt_style": "Edmond",
+            "geography": "city",
+            "state": "OK",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "http://edmondok.com/1568/COVID-19-Coronavirus-Information",
+            "link_localnews": "https://www.edmondsun.com/news/shelter-in-place-close-non-essential-businesses-in-edmond/article_9351d77a-72ec-11ea-baf9-efe3ccd9894e.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Edmond",
+            "date_effective_fmt": "2020-03-30 at 11:59 p.m."
+         },
+         {
+            "place_nyt_style": "Moore",
+            "geography": "city",
+            "state": "OK",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "https://www.cityofmoore.com/uploads/Parks/EMERGENCY-PROCLAMATION-00382020.pdf",
+            "link_localnews": "https://www.normantranscript.com/news/local_news/moore-issues-shelter-in-place-order-schools-update-distance-learning/article_e429efb1-025d-54ea-bc4c-d5afbcf1799f.html",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Moore",
+            "date_effective_fmt": "2020-04-4 at 11:59 p.m."
+         },
+         {
+            "place_nyt_style": "Norman",
+            "geography": "city",
+            "state": "OK",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://static1.squarespace.com/static/5e73c3526ab9182890fd4c29/t/5e7a745761495f27e26b1e5c/1585083479590/Proclamation+2020-04.pdf",
+            "link_localnews": "https://oklahoman.com/article/5658480/coronavirus-in-oklahoma-norman-mayor-to-announce-shelter-in-place-order",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Norman",
+            "date_effective_fmt": "2020-03-25 at 11:59 p.m."
+         },
+         {
+            "place_nyt_style": "Oklahoma City",
+            "geography": "city",
+            "state": "OK",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "https://www.okc.gov/Home/Components/News/News/3321/18",
+            "link_localnews": "https://oklahoman.com/article/5658851/coronavirus-in-oklahoma-oklahoma-city-to-implement-shelter-in-place-order",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Oklahoma City",
+            "date_effective_fmt": "2020-03-28 at 11:59 p.m."
+         },
+         {
+            "place_nyt_style": "Sallisaw",
+            "geography": "city",
+            "state": "OK",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "http://www.sallisawok.org/DocumentCenter/View/1505/COVID19PROCLAMATIONSallisaw",
+            "link_localnews": "https://www.4029tv.com/article/sallisaw-mayor-orders-people-to-shelter-in-place/32038696",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Sallisaw",
+            "date_effective_fmt": "2020-04-4 at 11:59 p.m."
+         },
+         {
+            "place_nyt_style": "Stillwater",
+            "geography": "city",
+            "state": "OK",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "http://stillwater.org/files/news-releases/covid-declarations/copiers_20200330_114236.pdf",
+            "link_localnews": "https://www.stwnewspress.com/covid-19/shelter-in-place-for-stillwater-going-into-effect-just-before/article_245f9bd0-72b6-11ea-8fc8-63cef71d9e5e.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Stillwater",
+            "date_effective_fmt": "2020-03-30 at 11:59 p.m."
+         },
+         {
+            "place_nyt_style": "Tulsa",
+            "geography": "city",
+            "state": "OK",
+            "order": "Shelter in place",
+            "formal_order": true,
+            "link_order": "http://www.cityoftulsa.org/media/12617/2020-04.pdf",
+            "link_localnews": "https://www.tulsaworld.com/news/not-a-recommendation-mayor-g-t-bynum-issues-shelter-in/article_5d2fda2b-0b00-5119-80fd-a3f25e7cde81.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Tulsa",
+            "date_effective_fmt": "2020-03-28 at 11:59 p.m."
+         }
+      ],
+      "statename": "Oklahoma",
+      "blurb": "Gov. Kevin Stitt has told older and vulnerable people across Oklahoma to stay home, but mayors in the state's major cities, including Oklahoma City, Tulsa and Norman, ordered all residents to do so. \"We want to leave no doubt,\" Mayor David Holt of Oklahoma City said. \"The safest course of action during this public health crisis is to stay home.\"",
+      "statewide": false
+   },
+   {
+      "key": "OR",
+      "values": [
+         {
+            "place_nyt_style": "Oregon",
+            "geography": "state",
+            "state": "OR",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://govsite-assets.s3.amazonaws.com/jkAULYKcSh6DoDF8wBM0_EO%2020-12.pdf",
+            "link_localnews": "https://www.oregonlive.com/coronavirus/2020/03/its-a-matter-of-life-or-death-gov-kate-brown-begs-oregonians-to-stay-home-as-people-crowd-coast-gorge.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-23"
+         }
+      ],
+      "statename": "Oregon",
+      "blurb": "Gov. Kate Brown took the action after seeing the state’s scenic trails and beaches packed with people over the weekend. “If you're still not sure about an activity, skip it,” she said. “Staying home will save lives.”",
+      "statewide": true
+   },
+   {
+      "key": "PA",
+      "values": [
+         {
+            "place_nyt_style": "Pennsylvania",
+            "geography": "state",
+            "state": "PA",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.governor.pa.gov/wp-content/uploads/2020/04/20200401-GOV-Statewide-Stay-at-Home-Order.pdf",
+            "link_localnews": "https://www.inquirer.com/news/pennsylvania/spl/pennsylvania-pa-coronavirus-stay-at-home-order-statewide-20200401.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-1 at 8 p.m."
+         }
+      ],
+      "statename": "Pennsylvania",
+      "blurb": "Starting 2020-03-23, Gov. Tom Wolf began ordering an expanding number of counties to stay at home, including in the Philadelphia and Pittsburgh regions. On 2020-04-1, he announced he was enacting the order statewide. “We appreciate the shared sacrifice of all 12.8 million Pennsylvanians,\" he said. \"We are in this together.\"",
+      "statewide": true
+   },
+   {
+      "key": "PR",
+      "values": [
+         {
+            "place_nyt_style": "Puerto Rico",
+            "geography": "territory",
+            "state": "PR",
+            "order": "Curfew",
+            "formal_order": true,
+            "link_order": "https://www.scribd.com/document/451785912/Orden-ejecutiva-de-la-gobernadora-para-combatir-el-coronavirus#from_embed",
+            "link_localnews": "https://www.elnuevodia.com/noticias/locales/nota/wandavazquezdecretatoquedequedaparatodopuertoricoparacontenerelcoronavirus-2552934/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Across entire territory",
+            "date_effective_fmt": "2020-03-15 at 6 p.m."
+         }
+      ],
+      "statename": "Puerto Rico",
+      "blurb": "Gov. Wanda Vázquez issued an order imposing a nightly curfew and allowing people to leave their homes during the day only to buy groceries or medicine, go to the bank, attend medical appointments, tend to caregiving responsibilities or work in businesses deemed essential. “All citizens will have to stay home to stop the spread of this virus,” she said.",
+      "statewide": true
+   },
+   {
+      "key": "RI",
+      "values": [
+         {
+            "place_nyt_style": "Rhode Island",
+            "geography": "state",
+            "state": "RI",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "http://governor.ri.gov/documents/orders/Executive-Order-20-13.pdf",
+            "link_localnews": "https://www.providencejournal.com/news/20200328/ri-tightens-restrictions-after-2-virus-deaths",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-28"
+         }
+      ],
+      "statename": "Rhode Island",
+      "blurb": "Gov. Gina Raimondo issued a stay-at-home order in a state that has gone to great lengths to protect itself from outsiders, especially people fleeing New York City. She said a surge in cases was inevitable. \"This is going to get very real very fast for all of us,\" she said. ",
+      "statewide": true
+   },
+   {
+      "key": "SC",
+      "values": [
+         {
+            "place_nyt_style": "South Carolina",
+            "geography": "state",
+            "state": "SC",
+            "order": "Stay at home ",
+            "formal_order": true,
+            "link_order": "https://governor.sc.gov/sites/default/files/Documents/Executive-Orders/2020-04-06%20eFILED%20Executive%20Order%20No.%202020-21%20-%20Stay%20at%20Home%20or%20Work%20Order.pdf",
+            "link_localnews": "https://www.postandcourier.com/health/covid19/sc-issues-coronavirus-stay-at-home-order-limits-number-of-shoppers-in-stores/article_144481a6-7834-11ea-b747-9324c93bd43b.html",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-7 at 5 p.m."
+         }
+      ],
+      "statename": "South Carolina",
+      "blurb": "Charleston and Columbia had previously ordered residents in those cities to stay at home before Gov. Henry McMaster issued a statewide \"home or work order,\" which requires all South Carolinians to limit movement outside their home or place of work except for essential activities. South Carolina became the last state on the East Coast to issue such an order.",
+      "statewide": true
+   },
+   {
+      "key": "TN",
+      "values": [
+         {
+            "place_nyt_style": "Tennessee",
+            "geography": "state",
+            "state": "TN",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://publications.tnsosfiles.com/pub/execorders/exec-orders-lee22.pdf",
+            "link_localnews": "https://www.tennessean.com/story/news/health/2020/03/30/tennessee-governor-bill-lee-stay-at-home-order-to-stop-coronavirus/2937429001/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-31 at 11:59 p.m."
+         }
+      ],
+      "statename": "Tennessee",
+      "blurb": "Residents in the Nashville and Memphis areas were already under instructions to stay at home as much as possible when Gov. Bill Lee issued statewide guidelines urging everyone to do so. \"We need you to do that to protect the lives of your neighbors,\" he said.",
+      "statewide": true
+   },
+   {
+      "key": "TX",
+      "values": [
+         {
+            "place_nyt_style": "Texas",
+            "geography": "state",
+            "state": "TX",
+            "order": "Stay at home",
+            "formal_order": false,
+            "link_order": "https://gov.texas.gov/uploads/files/press/EO-GA-14_Statewide_Essential_Service_and_Activity_COVID-19_IMAGE_03-31-2020.pdf",
+            "link_localnews": "https://www.texastribune.org/2020/03/31/greg-abbott-texas-executive-order-closures/",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-04-2 at 12:01 a.m."
+         }
+      ],
+      "statename": "Texas",
+      "blurb": "For weeks, Gov. Greg Abbott left it to local officials to impose the most restrictive orders. Millions of people in certain cities and counties were told to stay home, including in Harris County, which includes Houston; Dallas and Tarrant Counties in the Dallas-Fort Worth region; and Bexar County, which includes San Antonio. \nOn 2020-03-31, Mr. Abbott tightened guidelines, but said that \"this is not a stay-at-home strategy.\" The next day, he released a video message to Texans, saying he had ordered \"all Texans to stay at home, except to provide essential services or do essential things like going to the grocery store.” A spokesman for Mr. Abbott later confirmed that Texas was under a statewide stay-at-home mandate.",
+      "statewide": true
+   },
+   {
+      "key": "UT",
+      "values": [
+         {
+            "place_nyt_style": "Davis County",
+            "geography": "county",
+            "state": "UT",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "http://www.co.davis.ut.us/docs/librariesprovider5/covid-19/public-health-order-4-1-20/public-health-order-2020-04-1-2020.pdf?sfvrsn=4b453153_2",
+            "link_localnews": "https://www.sltrib.com/news/2020/04/01/davis-county-issues/",
+            "publish_social_distancing_page": "",
+            "place_fmt": "Davis County",
+            "date_effective_fmt": "2020-04-1 at 11:59 p.m."
+         },
+         {
+            "place_nyt_style": "Salt Lake County",
+            "geography": "county",
+            "state": "UT",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://slco.org/globalassets/1-site-files/health/programs/covid/pho/pho3.pdf",
+            "link_localnews": "https://www.sltrib.com/news/2020/03/29/coronavirus-cases-utah/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Salt Lake County",
+            "date_effective_fmt": "2020-03-30 at 12:01 a.m."
+         },
+         {
+            "place_nyt_style": "Summit County",
+            "geography": "county",
+            "state": "UT",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://summitcountyhealth.org/public-announcements/3-25-20-summit-county-issues-stay-at-home-order-to-residents/",
+            "link_localnews": "https://www.sltrib.com/news/2020/03/25/summit-county-orders/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Summit County",
+            "date_effective_fmt": "2020-03-27 at 12:01 a.m."
+         }
+      ],
+      "statename": "Utah",
+      "blurb": "Summit County, a popular area for skiing and tourism, became the first in Utah to issue such a restriction, The Salt Lake Tribune reported. Salt Lake County also issued a similar order. “The goals are to save lives and stop our hospital system from being overrun,” Mayor Jenny Wilson of Salt Lake County said.  ",
+      "statewide": false
+   },
+   {
+      "key": "VT",
+      "values": [
+         {
+            "place_nyt_style": "Vermont",
+            "geography": "state",
+            "state": "VT",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://governor.vermont.gov/sites/scott/files/documents/ADDENDUM%206%20TO%20EXECUTIVE%20ORDER%2001-20.pdf",
+            "link_localnews": "https://www.burlingtonfreepress.com/story/news/local/2020/03/24/vermont-gov-phil-scott-all-vermonters-should-stay-home-order/2909062001/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-25 at 5 p.m."
+         }
+      ],
+      "statename": "Vermont",
+      "blurb": "“I need all Vermonters to understand that the more quickly and closely we follow these stay-at-home measures, the faster and safer we can get through this and get our daily lives, and our economy, moving again,\" Gov. Phil Scott said. ",
+      "statewide": true
+   },
+   {
+      "key": "VA",
+      "values": [
+         {
+            "place_nyt_style": "Virginia",
+            "geography": "state",
+            "state": "VA",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.governor.virginia.gov/newsroom/all-releases/2020/2020-03-headline-855702-en.html",
+            "link_localnews": "https://www.roanoke.com/news/virginia/gov-northam-to-issue-stay-at-home-order/article_b80fb621-1eca-57dd-b8e4-67c8a7dd8ebc.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-30"
+         }
+      ],
+      "statename": "Virginia",
+      "blurb": "Gov. Ralph Northam, who shut down schools and nonessential businesses and banned gatherings of more than 10 people, had said that issuing a stay-at-home order was a matter of semantics. But after seeing beaches and other public areas packed with people, he issued a formal order. \"It is clear more people still need to hear this basic message: Stay home.\" ",
+      "statewide": true
+   },
+   {
+      "key": "WA",
+      "values": [
+         {
+            "place_nyt_style": "Washington ",
+            "geography": "state",
+            "state": "WA",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.documentcloud.org/documents/6817957-20-25-Coronovirus-Stay-Safe-Stay-Healthy.html",
+            "link_localnews": "https://www.seattletimes.com/seattle-news/inslee-to-hold-televised-address-monday-evening-to-announce-enhanced-strategies-on-covid-19/",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-23"
+         }
+      ],
+      "statename": "Washington",
+      "blurb": "Gov. Jay Inslee tried begging people to stay at home in Washington State, which has among the worst outbreaks of the virus in the country. Then he made it mandatory. “The fastest way to get back to normal is to hit this hard,” he said. ",
+      "statewide": true
+   },
+   {
+      "key": "WV",
+      "values": [
+         {
+            "place_nyt_style": "West Virginia",
+            "geography": "state",
+            "state": "WV",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://dhhr.wv.gov/COVID-19/Pages/Governor-Issues-Stay-at-Home-Order.aspx",
+            "link_localnews": "https://www.wvgazettemail.com/coronavirus/justice-issues-stay-at-home-order-closes-non-essential-businesses/article_37bc0158-d9b4-5255-83d1-cc4dd57f409b.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-24 at 8 p.m."
+         }
+      ],
+      "statename": "West Virginia",
+      "blurb": "West Virginia was the last state to have a confirmed case of the virus, but Gov. Jim Justice quickly joined a chorus of other governors calling on residents to stay inside. “A stay-at-home order is not martial law,” he said, reminding residents that they could still leave their homes for food and outdoor activity. But he warned: “The magnitude of this is unbelievable.” ",
+      "statewide": true
+   },
+   {
+      "key": "WI",
+      "values": [
+         {
+            "place_nyt_style": "Wisconsin",
+            "geography": "state",
+            "state": "WI",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.wpr.org/sites/default/files/health_order_12_safer_at_home.pdf",
+            "link_localnews": "https://www.wpr.org/evers-administration-issues-stay-home-order-wisconsin",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Statewide",
+            "date_effective_fmt": "2020-03-25 at 8 a.m."
+         }
+      ],
+      "statename": "Wisconsin",
+      "blurb": "Gov. Tony Evers initially thought he would not have to issue such an order, but later changed his mind. “You can still get out and walk the dogs — it’s good exercise and it’s good for everyone’s mental health — but please don’t take any other unnecessary trips,\" he said. \"Limit your travel to essential needs like going to the doctor, grabbing groceries or getting medication.” ",
+      "statewide": true
+   },
+   {
+      "key": "WY",
+      "values": [
+         {
+            "place_nyt_style": "Jackson",
+            "geography": "city",
+            "state": "WY",
+            "order": "Stay at home",
+            "formal_order": true,
+            "link_order": "https://www.jacksonwy.gov/DocumentCenter/View/3048/Mar28-EmOrd1249-StayAtHomeOrder?bidId=",
+            "link_localnews": "https://trib.com/news/local/casper/jackson-issues-shelter-in-place-order-to-limit-spread-of/article_40c9fa29-c59b-540f-b4cd-7b211b6eb335.html",
+            "publish_social_distancing_page": "yes",
+            "place_fmt": "Jackson",
+            "date_effective_fmt": "2020-03-28"
+         }
+      ],
+      "statename": "Wyoming",
+      "blurb": "Jackson, a popular tourist destination for skiers in the Jackson Hole valley, was the first town in the state to issue a stay-at-home order, according to the Casper Star-Tribune. ",
+      "statewide": false
+   }
+]

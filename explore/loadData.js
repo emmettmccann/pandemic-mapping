@@ -14,3 +14,18 @@ async function getData() {
   });
   return states;
 }
+
+async function getTimeSeries() {
+  let series = await fetch(
+    "https://coronadatascraper.com/timeseries-byLocation.json"
+  ).then((res) => res.json());
+  // let states = series.filter((el) => {
+
+  // }
+  let states = [];
+  for (const zone in series) {
+    const el = series[zone];
+    if (el.level == "state" && el.country == "United States") states.push(el);
+  }
+  console.log(states);
+}

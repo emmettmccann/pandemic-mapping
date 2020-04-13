@@ -12,8 +12,9 @@ window.onload = async function () {
   var states;
 
   let data = await getData();
+  let d2 = await getTimeSeries();
 
-  console.log(data);
+  // console.log(data);
 
   states = layer
     .createFeature("point")
@@ -40,18 +41,18 @@ window.onload = async function () {
     .interpolate(d3.interpolateHcl)
     .range(colorRange);
 
-  var scale = d3.scale.pow().exponent(0.3).domain(domain).range([1, 30]);
+  var scale = d3.scale.linear().domain(domain).range([1, 2000]);
   // return;
   states
     .style({
       fillColor: function (d, idx, state) {
-        console.log(d.data.positive);
+        // console.log(d.data.positive);
         return cScale(d.data.positive);
       },
       stroke: false,
       fillOpacity: 0.8,
       radius: function (d, idx, state) {
-        return scale(d.data.positive);
+        return Math.sqrt(scale(d.data.positive) / Math.PI);
       },
     })
     .geoOff(geo.event.feature.mouseover)

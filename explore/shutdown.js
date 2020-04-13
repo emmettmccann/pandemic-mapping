@@ -11,22 +11,31 @@ window.onload = async function () {
 
   var states;
 
-  let data = await getData();
+  let data = await getTimeSeries();
+  data = await addShutdown(data);
+  console.log(data);
 
-  // console.log(data);
+  data = data.filter((el) => {
+    return (
+      typeof el.cases !== "undefined" && typeof el.cases.cases !== "undefined"
+    );
+  });
+
+  //   console.log(data);
 
   states = layer
     .createFeature("point")
     .data(data)
     .position(function (state) {
+      let coords = state.stateData.coordinates;
       return {
-        x: state.longitude,
-        y: state.latitude,
+        x: coords[0].toFixed(3),
+        y: coords[1].toFixed(3),
       };
     })
     .draw();
   var caseCount = data.map(function (state) {
-    return state.data.positive;
+    return state.cases.cases;
   });
   var domain = [
     Math.min.apply(null, caseCount),
@@ -41,17 +50,16 @@ window.onload = async function () {
     .range(colorRange);
 
   var scale = d3.scale.linear().domain(domain).range([1, 2000]);
-  // return;
+  //   return;
   states
     .style({
       fillColor: function (d, idx, state) {
-        // console.log(d.data.positive);
-        return cScale(d.data.positive);
+        return cScale(d.cases.cases);
       },
       stroke: false,
       fillOpacity: 0.8,
       radius: function (d, idx, state) {
-        return Math.sqrt(scale(d.data.positive) / Math.PI);
+        return Math.sqrt(scale(d.cases.cases) / Math.PI);
       },
     })
     .geoOff(geo.event.feature.mouseover)
@@ -60,9 +68,34 @@ window.onload = async function () {
       if (!evt.top) {
         return;
       }
-      console.log(evt.data.data.positive);
+      console.log(evt.data.cases.cases);
     });
   states.draw();
+
+  states.geoOn(geo.event.feature.mouseclick, function (evt) {
+    if (!evt.top) {
+      return;
+    }
+    console.log("click");
+    let coords = evt.data.stateData.coordinates;
+    let ct = {
+      x: coords[0].toFixed(3),
+      y: coords[1].toFixed(3),
+    };
+    map.transition({
+      center: ct,
+      zoom: 6,
+      duration: 1000,
+      // done: () => {
+      //   map.transition({
+      //     center: ct,
+      //     zoom: 6,
+      //     duration: 500,
+      //   });
+      // },
+    });
+  });
+
   var ui = map.createLayer("ui");
   var legend = ui.createWidget("colorLegend", {
     position: {

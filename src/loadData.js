@@ -58,7 +58,7 @@ export async function getTimeSeries() {
 
     state.dates[Object.keys(state.dates)[Object.keys(state.dates).length - 1]].events.push({
       type: "current",
-      title: "Current Cases",
+      title: "Currently",
       notes: "",
     });
 

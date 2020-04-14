@@ -45,11 +45,14 @@
   @tailwind utilities;
 </style>
 
-<select bind:value={selected} class="fixed z-10">
-  {#each views as view}
-    <option value={view.id}>{view.text}</option>
-  {/each}
-</select>
+<div
+  class="fixed z-30 flex flex-row justify-center w-screen h-12 mt-6 align-center">
+  <select bind:value={selected} class="text-3xl shadow-xl stroke-0">
+    {#each views as view}
+      <option value={view.id}>{view.text}</option>
+    {/each}
+  </select>
+</div>
 
 <Map lat={41} lon={-97} zoom={3}>
   {#each states as state}

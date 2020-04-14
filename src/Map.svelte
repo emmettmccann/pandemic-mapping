@@ -26,6 +26,7 @@
         zoom,
         attributionControl: false
       });
+      map.getCanvas().style.cursor = "crosshair";
     };
 
     document.head.appendChild(link);
@@ -39,8 +40,9 @@
 
 <style>
   div {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    /* cursor: crosshair; */
   }
 </style>
 

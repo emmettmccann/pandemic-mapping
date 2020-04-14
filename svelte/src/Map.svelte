@@ -23,7 +23,8 @@
         container,
         style: "mapbox://styles/emmettmccann/ck8z41m4f014n1inw6emiz6hk",
         center: [lon, lat],
-        zoom
+        zoom,
+        attributionControl: false
       });
     };
 

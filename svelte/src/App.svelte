@@ -1,19 +1,59 @@
 <script>
   import Map from "./Map.svelte";
   import MapMarker from "./MapMarker.svelte";
+  import { getTimeSeries, addShutdown, addSchools } from "./loadData.js";
+
+  let states = [];
+  let selected = "current";
+  let views = [
+    // { id: "first_case", text: "First Case" },
+    { id: "current", text: "Current Cases" },
+    { id: "first_death", text: "First Death" },
+    { id: "stay_home", text: "Stay Home Orders" },
+    { id: "school_closure", text: "School Closures" }
+  ];
+
+  $: maxValue = getMax(states, selected);
+
+  function getMax(s, v) {
+    let vals = s
+      .map(function(state) {
+        for (const dateID in state.dates) {
+          let date = state.dates[dateID];
+          if (date.events.length > 0 && date.events[0].type == v) {
+            return date.cases;
+          }
+        }
+      })
+      .filter(el => !isNaN(el));
+    if (vals.length > 0) return vals.reduce((a, b) => Math.max(a, b));
+  }
+
+  async function loadData() {
+    states = await getTimeSeries();
+    states = await addShutdown(states);
+    states = await addSchools(states);
+    console.log(states);
+  }
+
+  loadData();
 </script>
 
-<Map lat={35} lon={-84} zoom={3.5}>
-  <MapMarker lat={37.8225} lon={-122.0024} label="Svelte Body Shaping" />
-  <MapMarker
-    lat={33.8981}
-    lon={-118.4169}
-    label="Svelte Barbershop & Essentials" />
-  <MapMarker lat={29.723} lon={-95.4189} label="Svelte Waxing Studio" />
-  <MapMarker
-    lat={28.3378}
-    lon={-81.3966}
-    label="Svelte 30 Nutritional Consultants" />
-  <MapMarker lat={40.6483} lon={-74.0237} label="Svelte Brands LLC" />
-  <MapMarker lat={40.6986} lon={-74.41} label="Svelte Medical Systems" />
+<style global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+</style>
+
+<select bind:value={selected} class="fixed z-10">
+  {#each views as view}
+    <option value={view.id}>{view.text}</option>
+  {/each}
+</select>
+
+<Map lat={41} lon={-97} zoom={3}>
+  {#each states as state}
+    <MapMarker {state} {maxValue} bind:view={selected} />
+  {/each}
+
 </Map>

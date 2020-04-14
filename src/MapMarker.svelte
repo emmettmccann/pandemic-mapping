@@ -22,7 +22,14 @@
       let date = s.dates[dateID];
       if (date.events.length > 0 && date.events[0].type == v) return date;
     }
-    return {};
+    return {
+      cases: 0,
+      events: [
+        {
+          title: "No data"
+        }
+      ]
+    };
   }
 
   // load this info on mount so that the div is in place to take over for the marker

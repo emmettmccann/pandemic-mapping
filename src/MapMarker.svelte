@@ -24,6 +24,7 @@
     }
     return {
       cases: 0,
+      date: "N/A",
       events: [
         {
           title: "No data"
@@ -82,22 +83,23 @@
     {#if hov}
       <g style="pointer-events : none;" class="z-10">
         <rect
-          x="5"
-          y="5"
-          height="90"
-          width="90"
+          x="0"
+          y="0"
+          height="100"
+          width="100"
           rx="5"
           ry="5"
           fill="white"
           fill-opacity="0.95" />
-        <text x="50" y="25" text-anchor="middle" class="text-lg font-medium">
+        <text x="50" y="20" text-anchor="middle" class="text-lg font-medium">
           {label}
         </text>
-        <foreignObject x="10" y="35" width="80" height="40">
+        <foreignObject x="10" y="30" width="80" height="40">
           <p class="leading-tight text-center">{date.events[0].title}</p>
         </foreignObject>
         <!-- <text x="50" y="50" text-anchor="middle"></text> -->
         <text x="50" y="80" text-anchor="middle">@ {date.cases} cases</text>
+        <text x="50" y="95" text-anchor="middle">{date.date}</text>
       </g>
     {/if}
   </svg>

@@ -1,24 +1,5 @@
-async function getData() {
-  let states = await fetch("./USstates_avg_latLong.json").then((res) =>
-    res.json()
-  );
-  let stateData = await fetch(
-    "https://covidtracking.com/api/states"
-  ).then((res) => res.json());
-
-  states = states.map((state) => {
-    state.data = stateData.find((sd) => {
-      return sd.state === state.state;
-    });
-    return state;
-  });
-  return states;
-}
-
 async function fetchTimeSeriesData() {
-  let series = await fetch(
-    "https://coronadatascraper.com/timeseries-byLocation.json"
-  ).then((res) => res.json());
+  let series = await fetch("https://coronadatascraper.com/timeseries-byLocation.json").then((res) => res.json());
 
   let states = [];
   for (const zone in series) {
@@ -32,29 +13,14 @@ async function fetchTimeSeriesData() {
 }
 
 async function getNYTSHO() {
-  let states = await fetch("./data/formattedNYT.json").then((res) =>
-    res.json()
-  );
-  return states;
+  return await fetch("./data/formattedNYT.json").then((res) => res.json());
 }
 
-async function getShutdown() {
-  let series = await getTimeSeries();
-  let sho = await getNYTSHO();
-
-  sho = sho.map((el) => {
-    let elMod = el;
-    let s = series.find((seriesData) => {
-      return el.key == seriesData.stateId.slice(-2);
-    });
-    elMod.cases = s.dates[el.date];
-    elMod.stateData = s;
-    return elMod;
-  });
-  return sho;
+async function getSchools() {
+  return await fetch("./data/schools.json").then((res) => res.json());
 }
 
-async function getTimeSeries() {
+export async function getTimeSeries() {
   // load the base time series for each state (live from coronadatascraper.com)
   let states = await fetchTimeSeriesData();
   // clean series by adding in case and death counts for null
@@ -90,27 +56,45 @@ async function getTimeSeries() {
       }
     }
 
+    state.dates[Object.keys(state.dates)[Object.keys(state.dates).length - 1]].events.push({
+      type: "current",
+      title: "Current Cases",
+      notes: "",
+    });
+
     return state;
   });
   return states;
 }
 
-async function addShutdown(states) {
+export async function addShutdown(states) {
   let StayHomeOrders = await getNYTSHO();
 
   StayHomeOrders.forEach((sho) => {
     let index = states.findIndex((el) => el.id == sho.key);
     let state = states[index];
     if (sho.statewide) {
-      console.log(state);
-      console.log(sho);
-      console.log(state.dates[sho.date]);
       state.dates[sho.date].events.push({
         type: "stay_home",
         title: sho.order,
         notes: sho.blurb,
       });
     }
+  });
+  return states;
+}
+
+export async function addSchools(states) {
+  let schools = await getSchools();
+
+  schools.forEach((sc) => {
+    let index = states.findIndex((el) => el.id == sc.key);
+    let state = states[index];
+    state.dates[sc.date].events.push({
+      type: "school_closure",
+      title: sc.status,
+      notes: sc.duration,
+    });
   });
   return states;
 }

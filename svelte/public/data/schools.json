@@ -1,0 +1,497 @@
+[
+   {
+      "key": "AL",
+      "state": "Alabama",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-19",
+      "schools": 1513,
+      "enrollment": 744930
+   },
+   {
+      "key": "AK",
+      "state": "Alaska",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 507,
+      "enrollment": 132737
+   },
+   {
+      "key": "AS",
+      "state": "American Samoa",
+      "status": "State ordered closure",
+      "duration": "Ordered closed until further notice",
+      "date": "2020-03-23",
+      "schools": 28,
+      "enrollment": 0
+   },
+   {
+      "key": "AZ",
+      "state": "Arizona",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 2308,
+      "enrollment": 1123137
+   },
+   {
+      "key": "AR",
+      "state": "Arkansas",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-17",
+      "schools": 1089,
+      "enrollment": 493447
+   },
+   {
+      "key": "CA",
+      "state": "California",
+      "status": "State recommended closure",
+      "duration": "Recommended closed for the academic year",
+      "date": "2020-03-19",
+      "schools": 10286,
+      "enrollment": 6309138
+   },
+   {
+      "key": "CO",
+      "state": "Colorado",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-23",
+      "schools": 1888,
+      "enrollment": 905019
+   },
+   {
+      "key": "CT",
+      "state": "Connecticut",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-20",
+      "date": "2020-03-17",
+      "schools": 1250,
+      "enrollment": 535118
+   },
+   {
+      "key": "DE",
+      "state": "Delaware",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-15",
+      "date": "2020-03-16",
+      "schools": 228,
+      "enrollment": 136264
+   },
+   {
+      "key": "DC",
+      "state": "District of Columbia",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-24",
+      "date": "2020-03-16",
+      "schools": 223,
+      "enrollment": 85850
+   },
+   {
+      "key": "FL",
+      "state": "Florida",
+      "status": "State recommended closure",
+      "duration": "2020-0Recommended closed through 5-1",
+      "date": "2020-03-16",
+      "schools": 4178,
+      "enrollment": 2816791
+   },
+   {
+      "key": "GA",
+      "state": "Georgia",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-18",
+      "schools": 2300,
+      "enrollment": 1764346
+   },
+   {
+      "key": "GU",
+      "state": "Guam",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 41,
+      "enrollment": 30758
+   },
+   {
+      "key": "HI",
+      "state": "Hawaii",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-23",
+      "schools": 290,
+      "enrollment": 181550
+   },
+   {
+      "key": "ID",
+      "state": "Idaho",
+      "status": "State recommended closure",
+      "duration": "Recommended closed for the academic year",
+      "date": "2020-03-24",
+      "schools": 745,
+      "enrollment": 297200
+   },
+   {
+      "key": "IL",
+      "state": "Illinois",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-17",
+      "schools": 4173,
+      "enrollment": 2026718
+   },
+   {
+      "key": "IN",
+      "state": "Indiana",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-20",
+      "schools": 1921,
+      "enrollment": 1049547
+   },
+   {
+      "key": "IA",
+      "state": "Iowa",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-16",
+      "schools": 1328,
+      "enrollment": 509831
+   },
+   {
+      "key": "KS",
+      "state": "Kansas",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-18",
+      "schools": 1318,
+      "enrollment": 494347
+   },
+   {
+      "key": "KY",
+      "state": "Kentucky",
+      "status": "State recommended closure",
+      "duration": "2020-0Recommended closed through 5-1",
+      "date": "2020-03-16",
+      "schools": 1539,
+      "enrollment": 684017
+   },
+   {
+      "key": "LA",
+      "state": "Louisiana",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-16",
+      "schools": 1404,
+      "enrollment": 716293
+   },
+   {
+      "key": "ME",
+      "state": "Maine",
+      "status": "State recommended closure",
+      "duration": "Recommended closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 605,
+      "enrollment": 180512
+   },
+   {
+      "key": "MD",
+      "state": "Maryland",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-24",
+      "date": "2020-03-16",
+      "schools": 1424,
+      "enrollment": 886221
+   },
+   {
+      "key": "MA",
+      "state": "Massachusetts",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-1",
+      "date": "2020-03-17",
+      "schools": 1856,
+      "enrollment": 964514
+   },
+   {
+      "key": "MI",
+      "state": "Michigan",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 3458,
+      "enrollment": 1528666
+   },
+   {
+      "key": "MN",
+      "state": "Minnesota",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-4",
+      "date": "2020-03-18",
+      "schools": 2513,
+      "enrollment": 875021
+   },
+   {
+      "key": "MS",
+      "state": "Mississippi",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-17",
+      "date": "2020-03-20",
+      "schools": 1066,
+      "enrollment": 483150
+   },
+   {
+      "key": "MO",
+      "state": "Missouri",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-23",
+      "schools": 2424,
+      "enrollment": 915040
+   },
+   {
+      "key": "MT",
+      "state": "Montana",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-24",
+      "date": "2020-03-16",
+      "schools": 820,
+      "enrollment": 146375
+   },
+   {
+      "key": "NE",
+      "state": "Nebraska",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-23",
+      "schools": 1095,
+      "enrollment": 319194
+   },
+   {
+      "key": "NV",
+      "state": "Nevada",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-16",
+      "schools": 657,
+      "enrollment": 473744
+   },
+   {
+      "key": "NH",
+      "state": "New Hampshire",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-4",
+      "date": "2020-03-16",
+      "schools": 490,
+      "enrollment": 180888
+   },
+   {
+      "key": "NJ",
+      "state": "New Jersey",
+      "status": "State ordered closure",
+      "duration": "Ordered closed until further notice ",
+      "date": "2020-03-18",
+      "schools": 2590,
+      "enrollment": 1410421
+   },
+   {
+      "key": "NM",
+      "state": "New Mexico",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 869,
+      "enrollment": 336263
+   },
+   {
+      "key": "NY",
+      "state": "New York",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-29",
+      "date": "2020-03-18",
+      "schools": 4798,
+      "enrollment": 2729776
+   },
+   {
+      "key": "NC",
+      "state": "North Carolina",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-15",
+      "date": "2020-03-16",
+      "schools": 2624,
+      "enrollment": 1550062
+   },
+   {
+      "key": "ND",
+      "state": "North Dakota",
+      "status": "State ordered closure",
+      "duration": "Ordered closed until further notice",
+      "date": "2020-03-16",
+      "schools": 519,
+      "enrollment": 109706
+   },
+   {
+      "key": "OH",
+      "state": "Ohio",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-1",
+      "date": "2020-03-17",
+      "schools": 3591,
+      "enrollment": 1710143
+   },
+   {
+      "key": "OK",
+      "state": "Oklahoma",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-17",
+      "schools": 1792,
+      "enrollment": 693903
+   },
+   {
+      "key": "OR",
+      "state": "Oregon",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 1243,
+      "enrollment": 606277
+   },
+   {
+      "key": "PA",
+      "state": "Pennsylvania",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 3004,
+      "enrollment": 1727497
+   },
+   {
+      "key": "PR",
+      "state": "Puerto Rico",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-1",
+      "date": "2020-03-16",
+      "schools": 1283,
+      "enrollment": 365181
+   },
+   {
+      "key": "RI",
+      "state": "Rhode Island",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-23",
+      "schools": 315,
+      "enrollment": 142150
+   },
+   {
+      "key": "SC",
+      "state": "South Carolina",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-16",
+      "schools": 1252,
+      "enrollment": 771250
+   },
+   {
+      "key": "SD",
+      "state": "South Dakota",
+      "status": "State recommended closure",
+      "duration": "Recommended closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 697,
+      "enrollment": 136302
+   },
+   {
+      "key": "TN",
+      "state": "Tennessee",
+      "status": "State recommended closure",
+      "duration": "2020-0Recommended closed through 4-24",
+      "date": "2020-03-20",
+      "schools": 1774,
+      "enrollment": 1001562
+   },
+   {
+      "key": "TX",
+      "state": "Texas",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-4",
+      "date": "2020-03-23",
+      "schools": 8909,
+      "enrollment": 5360849
+   },
+   {
+      "key": "VI",
+      "state": "U.S. Virgin Islands",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-18",
+      "schools": 28,
+      "enrollment": 13194
+   },
+   {
+      "key": "UT",
+      "state": "Utah",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 5-1",
+      "date": "2020-03-16",
+      "schools": 1037,
+      "enrollment": 659801
+   },
+   {
+      "key": "VT",
+      "state": "Vermont",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-18",
+      "schools": 312,
+      "enrollment": 88428
+   },
+   {
+      "key": "VA",
+      "state": "Virginia",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-16",
+      "schools": 2134,
+      "enrollment": 1287026
+   },
+   {
+      "key": "WA",
+      "state": "Washington",
+      "status": "State ordered closure",
+      "duration": "Ordered closed for the academic year",
+      "date": "2020-03-17",
+      "schools": 2436,
+      "enrollment": 1101711
+   },
+   {
+      "key": "WV",
+      "state": "West Virginia",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-16",
+      "schools": 739,
+      "enrollment": 273855
+   },
+   {
+      "key": "WI",
+      "state": "Wisconsin",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-23",
+      "date": "2020-03-18",
+      "schools": 2256,
+      "enrollment": 864432
+   },
+   {
+      "key": "WY",
+      "state": "Wyoming",
+      "status": "State ordered closure",
+      "duration": "2020-0Ordered closed through 4-30",
+      "date": "2020-03-16",
+      "schools": 371,
+      "enrollment": 94170
+   }
+]

@@ -32,7 +32,7 @@ function extractNode(parentName, node) {
 function formatGenomeNode(node) {
   return {
     type: "genome",
-    id: node.name,
+    id: formatID(node.name),
     sampled: node.name.slice(0, 5) != "NODE_", // check if this is an inferred node
     author: getDef(node.node_attrs.author),
     country: getDef(node.node_attrs.country),
@@ -61,9 +61,9 @@ function formatGenomeNode(node) {
 function formatLink(link) {
   return {
     type: "mutated",
-    id: link.parent + "-" + link.child,
-    parent: link.parent,
-    child: link.child,
+    id: formatID(link.parent + "-" + link.child),
+    parent: formatID(link.parent),
+    child: formatID(link.child),
     aaMut: link.mutation && link.mutation.labels ? link.mutation.labels.aa : undefined, // get the amino acid mutations if they exist
     nuc:
       link.mutation && link.mutation.mutations && link.mutation.mutations.nuc
@@ -79,7 +79,7 @@ function formatLink(link) {
 function formatDateLink(date) {
   return {
     type: "at",
-    id: date.parent + "@" + date.attrs.num_date.value,
+    id: formatID(date.parent + "@" + date.attrs.num_date.value),
     parent: date.parent,
     child: (() => {
       let d = getDef(date.attrs.num_date);
@@ -114,4 +114,8 @@ fs.writeFileSync("dates.json", JSON.stringify(dates));
 function getDef(x) {
   if (x) return x.value;
   return undefined;
+}
+
+function formatID(x) {
+  return x.replace(/\//g, "-");
 }

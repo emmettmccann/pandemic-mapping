@@ -109,36 +109,25 @@ function finish() {
   process.stdin.on("data", process.exit.bind(process, 0));
 }
 
-client
-  .open()
-  .then(dropGraph)
-  .then(async function () {
-    console.log("Adding %d nodes", nodes.length);
-    for (let i = 0; i < nodes.length; i++) {
-      if (i % 50 == 0) console.log(i);
-      await addVertex(nodes[i]);
-    }
-  })
-  .then(async function () {
-    console.log("Adding %d links", links.length);
-    for (let i = 1; i < links.length; i++) {
-      if (i % 50 == 0) console.log(i);
-      await addMut(links[i]);
-    }
-  })
-  .then(countVertices)
-  .then((res) => {
-    client.close();
-    finish();
-  })
-  .catch((err) => console.error("Fatal error:", err));
+function fixLocation(v) {
+  if (v.location == undefined) return client.submit("g.V(id).properties('location').drop()", v);
+  // return client.submit(query, v);
+}
 
 // client
 //   .open()
+//   .then(dropGraph)
+//   .then(async function () {
+//     console.log("Adding %d nodes", nodes.length);
+//     for (let i = 0; i < nodes.length; i++) {
+//       if (i % 50 == 0) console.log(i);
+//       await addVertex(nodes[i]);
+//     }
+//   })
 //   .then(async function () {
 //     console.log("Adding %d links", links.length);
 //     for (let i = 1; i < links.length; i++) {
-//       if (i % 100 == 0) console.log(i);
+//       if (i % 50 == 0) console.log(i);
 //       await addMut(links[i]);
 //     }
 //   })
@@ -148,6 +137,22 @@ client
 //     finish();
 //   })
 //   .catch((err) => console.error("Fatal error:", err));
+
+client
+  .open()
+  .then(async function () {
+    console.log("Fixing %d locations", nodes.length);
+    for (let i = 0; i < nodes.length; i++) {
+      if (i % 100 == 0) console.log((100 * i) / nodes.length);
+      await fixLocation(nodes[i]);
+    }
+  })
+  .then(countVertices)
+  .then((res) => {
+    client.close();
+    finish();
+  })
+  .catch((err) => console.error("Fatal error:", err));
 
 // client
 //   .open()

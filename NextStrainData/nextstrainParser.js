@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-let rawdata = fs.readFileSync(path.resolve(__dirname, "./global-4-17-genetic-tree.json"));
+let rawdata = fs.readFileSync(path.resolve(__dirname, "./global-4-22-genetic-tree.json"));
 let africa = JSON.parse(rawdata);
 
 let nodes = [];
@@ -106,9 +106,9 @@ console.log(links[1]);
 console.log("Generated %d date links of format: ", dates.length);
 console.log(dates[1]);
 
-fs.writeFileSync("nodes.json", JSON.stringify(nodes));
-fs.writeFileSync("links.json", JSON.stringify(links));
-fs.writeFileSync("dates.json", JSON.stringify(dates));
+fs.writeFileSync("nodes-4-22.json", JSON.stringify(nodes));
+fs.writeFileSync("links-4-22.json", JSON.stringify(links));
+fs.writeFileSync("dates-4-22.json", JSON.stringify(dates));
 
 // helped for pulling values out of optionally defined attributes of format x:{value:"DATA_HERE"}
 function getDef(x) {

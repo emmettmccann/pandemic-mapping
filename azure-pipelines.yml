@@ -3,19 +3,44 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: |
-    cd explore/
-    node hello.js
-  displayName: 'Write'
+jobs:
+- job: Fetch_New_Data
+  steps:
+  - script: |
+      cd data/intake/
+      node getCases.js
+    displayName: 'Fetch Case Data'
+  - script: |
+      cd data/intake/
+      node getGeneticTree.js
+    displayName: 'Fetch Phylogenetic Tree from Nextstrain'
 
-- script: |
-    cd explore/
-    node grabHello.js
-  displayName: 'Read'
+- job: Seed_Graph
+  steps:
+  - script: |
+        cd data/cosmos/
+        npm install
+      displayName: 'npm install'
+
+  - script: |
+      cd data/cosmos/
+      node seedMetadata.js
+    displayName: 'Seed Metadata'
+
+  - script: |
+      cd data/cosmos/
+      node seedCaseReports.js
+    displayName: 'Seed Case Reports'
+
+  - script: |
+      cd data/cosmos/
+      node seedGenetics.js
+    displayName: 'Seed Phylogenetic Tree'
+
+  - script: |
+      cd data/cosmos/
+      node linkGeneticMetadata.js
+    displayName: 'Link Genetic Metadata'

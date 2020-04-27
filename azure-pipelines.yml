@@ -3,19 +3,16 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
 - script: |
-    cd explore/
-    node hello.js
-  displayName: 'Write'
+    cd data/cosmos/
+    npm install
+  displayName: 'npm install'
 
 - script: |
-    cd explore/
-    node grabHello.js
-  displayName: 'Read'
+    cd data/cosmos/
+    node seedMetadata.js
+  displayName: 'Seed Metadata'

@@ -80,7 +80,7 @@ client.addNodesFromFile = async function (filename) {
   // upload each node in the file
   for (let i = 0; i < nodes.length; i++) {
     b1.update(i + 1);
-    await client.addVertex(nodes[i], str(i % 10));
+    await client.addVertex(nodes[i], i % 10);
   }
 
   b1.stop();

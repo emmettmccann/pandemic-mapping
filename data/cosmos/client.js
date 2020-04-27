@@ -1,16 +1,17 @@
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
+const Gremlin = require("gremlin");
+const fs = require("fs");
+const cliProgress = require("cli-progress");
+const _colors = require("colors");
+
 const config = {
   endpoint: "wss://wpi-iqp-covid19.gremlin.cosmos.azure.com:443/",
   primaryKey: "XcLrd2y1v8NNoM6vdJjTh55wjWdFgv8dJSO6fJpAllnZ7oCXyAKb7nLO5nsCb7lbTb9lba1zU2th0hmQD5BiNw==",
   database: "covidia",
-  collection: "ncov2",
+  collection: process.env.GRAPH_NAME,
 };
 
-const Gremlin = require("gremlin");
-const fs = require("fs");
-const path = require("path");
-
-const cliProgress = require("cli-progress");
-const _colors = require("colors");
 const b1 = new cliProgress.SingleBar(
   {
     format:

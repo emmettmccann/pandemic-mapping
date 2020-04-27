@@ -1,32 +1,33 @@
 const fs = require("fs");
 const path = require("path");
+const currDate = (() => {
+  let d = new Date();
+  return d.getMonth() + "-" + d.getDate();
+})();
 
-let rawdata = fs.readFileSync(path.resolve(__dirname, "./global-4-22-genetic-tree.json"));
-let africa = JSON.parse(rawdata);
+export function formatTree() {
+  let nodes = JSON.parse(fs.readFileSync(path.resolve(__dirname, "nodes-" + currDate + ".json")));
+  let links = JSON.parse(fs.readFileSync(path.resolve(__dirname, "links-" + currDate + ".json")));
+  let dates = JSON.parse(fs.readFileSync(path.resolve(__dirname, "dates-" + currDate + ".json")));
 
-let nodes = [];
-let links = [];
-let dates = [];
+  // format each genome node
+  nodes = nodes.map(formatGenomeNode);
+  // format each mutation link
+  links = links.map(formatLink);
+  // format date links for mapping to date nodes
+  dates = dates.map(formatDateLink);
 
-function extractNode(parentName, node) {
-  let n = {
-    name: node.name,
-    node_attrs: node.node_attrs,
-  };
-  let l = {
-    parent: parentName,
-    child: node.name,
-    mutation: node.branch_attrs,
-    attrs: node.node_attrs,
-  };
-  let d = {
-    parent: node.name,
-    attrs: node.node_attrs,
-  };
-  nodes.push(n);
-  links.push(l);
-  dates.push(d);
-  if (node.children) node.children.forEach((el) => extractNode(node.name, el));
+  console.log("Formatted %d genome nodes like: ", nodes.length);
+  console.log(nodes[1]);
+  console.log("Formatted %d mutation links like: ", links.length);
+  console.log(links[1]);
+  console.log("Formatted %d date links like: ", dates.length);
+  console.log(dates[1]);
+
+  // write back into the same files
+  fs.writeFileSync("nodes-" + currDate + ".json", JSON.stringify(nodes));
+  fs.writeFileSync("links-" + currDate + ".json", JSON.stringify(links));
+  fs.writeFileSync("dates-" + currDate + ".json", JSON.stringify(dates));
 }
 
 function formatGenomeNode(node) {
@@ -89,26 +90,6 @@ function formatDateLink(date) {
     })(),
   };
 }
-
-// recursively extract all info from the tree
-extractNode("root", africa.tree);
-
-// format each genome node and mutation relationships
-nodes = nodes.map(formatGenomeNode);
-links = links.map(formatLink);
-// format date links for mapping to date nodes
-dates = dates.map(formatDateLink);
-
-console.log("Generated %d genome nodes of format: ", nodes.length);
-console.log(nodes[1]);
-console.log("Generated %d mutation links of format: ", links.length);
-console.log(links[1]);
-console.log("Generated %d date links of format: ", dates.length);
-console.log(dates[1]);
-
-fs.writeFileSync("nodes-4-22.json", JSON.stringify(nodes));
-fs.writeFileSync("links-4-22.json", JSON.stringify(links));
-fs.writeFileSync("dates-4-22.json", JSON.stringify(dates));
 
 // helped for pulling values out of optionally defined attributes of format x:{value:"DATA_HERE"}
 function getDef(x) {

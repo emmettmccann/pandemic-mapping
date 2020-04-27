@@ -1,21 +1,6 @@
-"use strict";
-
-const Gremlin = require("gremlin");
-const config = require("./config");
+const client = require("./client");
 const fs = require("fs");
 const path = require("path");
-
-const authenticator = new Gremlin.driver.auth.PlainTextSaslAuthenticator(
-  `/dbs/${config.database}/colls/${config.collection}`,
-  config.primaryKey
-);
-
-const client = new Gremlin.driver.Client(config.endpoint, {
-  authenticator,
-  traversalsource: "g",
-  rejectUnauthorized: true,
-  mimeType: "application/vnd.gremlin-v2.0+json",
-});
 
 function addVertex(v) {
   let query = "g.addV(type)";
@@ -23,7 +8,6 @@ function addVertex(v) {
     query += ".property('" + k + "', " + k + ")";
   });
   query += ".property('pk', 'testpk')";
-  console.log(v.id);
   return client.submit(query, v);
 }
 
@@ -35,72 +19,42 @@ function addEdge(e) {
   return client.submit(query, e);
 }
 
-function countVertices() {
-  console.log("Running Count");
-  return client.submit("g.V().count()", {}).then(function (result) {
-    console.log("Result: %s\n", JSON.stringify(result));
-  });
+async function addNodesFromFile(filename) {
+  let nodes = JSON.parse(fs.readFileSync(path.resolve(__dirname, filename)));
+  console.log("Adding %d nodes", nodes.length);
+  for (let i = 0; i < nodes.length; i++) {
+    if (i % 50 == 0) console.log("%d/%d", i, nodes.length);
+    await addVertex(nodes[i]);
+  }
 }
 
-async function addNodesFromFile(filename) {}
-async function addNodesFromFile(filename) {
+async function addLinksFromFile(filename) {
   let links = JSON.parse(fs.readFileSync(path.resolve(__dirname, filename)));
-  console.log("Adding %d links", links.length);
+  console.log("Adding %d nodes", links.length);
   for (let i = 0; i < links.length; i++) {
-    if (i % 50 == 0) console.log(i);
+    if (i % 50 == 0) console.log("%d/%d", i, links.length);
     await addEdge(links[i]);
   }
 }
 
+function count() {
+  return client
+    .submit("g.E().count().store('Edges').V().count().store('Nodes').select('Nodes','Edges')", {})
+    .then(function (result) {
+      console.log("Result: %s\n", JSON.stringify(result._items));
+    });
+}
 function finish() {
   console.log("Finished");
   client.close();
 }
 
-client
-  .open()
-  .then(async function () {
-    let nodes = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../caseData/states.json")));
-    console.log("Adding %d nodes", nodes.length);
-    for (let i = 0; i < nodes.length; i++) {
-      if (i % 50 == 0) console.log(i);
-      await addVertex(nodes[i]);
-    }
-  })
-  .then(finish)
-  .catch((err) => console.error("Fatal error:", err));
+client.open().then(count).then(finish);
 
 // client
 //   .open()
-//   .then(dropGraph)
-//   .then(async function () {
-//     console.log("Adding %d nodes", nodes.length);
-//     for (let i = 0; i < nodes.length; i++) {
-//       if (i % 50 == 0) console.log(i);
-//       await addVertex(nodes[i]);
-//     }
-//   })
-//   .then(async function () {
-//     console.log("Adding %d links", links.length);
-//     for (let i = 1; i < links.length; i++) {
-//       if (i % 50 == 0) console.log(i);
-//       await addMut(links[i]);
-//     }
-//   })
-//   .then(countVertices)
-//   .then((res) => {
-//     client.close();
-//     finish();
-//   })
-//   .catch((err) => console.error("Fatal error:", err));
-
-// client
-//   .open()
-//   .then(dropGraph)
-//   .then(addVertex1)
-//   .then(countVertices)
-//   .then((res) => {
-//     client.close();
-//     finish();
-//   })
-//   .catch((err) => console.error("Fatal error:", err));
+//   .then(() => addNodesFromFile("../artifacts/nodes-3-26.json"))
+//   .then(() => addLinksFromFile("../artifacts/links-3-26.json"))
+//   .then(() => addLinksFromFile("../artifacts/dates-3-26.json"))
+//   .then(() => countVertices)
+//   .then(finish);

@@ -26,6 +26,10 @@ jobs:
     condition: succeededOrFailed()
     steps:
       - script: |
+          cd data/
+          npm install
+        displayName: 'npm install'
+      - script: |
           cd data/cosmos/
           node seedMetadata.js
         displayName: 'Seed Metadata'

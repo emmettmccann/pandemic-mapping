@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const fs = require("fs");
 
-export async function casesByStateTimeline() {
+async function casesByStateTimeline() {
   let series = await fetch("https://coronadatascraper.com/timeseries-byLocation.json").then((res) => res.json());
 
   let states = [];
@@ -16,3 +16,5 @@ export async function casesByStateTimeline() {
   fs.writeFileSync("../artifacts/casesByStateTimeline.json", JSON.stringify(states));
   console.log("Done");
 }
+
+casesByStateTimeline();

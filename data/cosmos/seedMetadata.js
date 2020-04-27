@@ -4,7 +4,6 @@ g.open()
   .then(dropMetadata)
   .then(() => g.addNodesFromFile("../artifacts/static/dateList.json"))
   .then(() => g.addNodesFromFile("../artifacts/static/states.json"))
-  .then(g.count)
   .then(g.finish);
 
 function dropMetadata() {

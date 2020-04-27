@@ -34,6 +34,20 @@ g.V()
   .from("b")
   .to("a");
 
+// link days
+g.V()
+  .hasLabel("date")
+  .as("a")
+  .V()
+  .hasLabel("date")
+  .as("b")
+  .where("a", eq("b"))
+  .by("id")
+  .by("prevDay")
+  .addE("nextDay")
+  .from("a")
+  .to("b");
+
 g.v().hasLabel("genome").has("sampled", true).has("country", "USA").values("division");
 
 g.v().hasLabel("genome").out("in").path().unfold();
@@ -45,3 +59,12 @@ g.E().groupCount().by("label").store("Edges").V().groupCount().by("label").store
 g.v("WA").in("reportedIn").order().by(out("reportedOn").id()).tail(2).valueMap();
 
 g.v().has("division").has("country", "USA").count();
+
+g.V()
+  .hasLabel("date")
+  .as("a")
+  .local(__.V().hasLabel("date").as("b").where("b", lt("a")).by(id()).order().limit(1))
+  .as("c")
+  .addE("nextDay")
+  .from("a")
+  .to("c");

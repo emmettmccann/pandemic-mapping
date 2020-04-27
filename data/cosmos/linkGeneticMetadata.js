@@ -1,6 +1,11 @@
 const g = require("./client");
+const currDate = require("../static/currDate");
 
-g.open().then(linkLocation).then(linkDate).then(g.finish);
+g.open()
+  .then(linkLocation)
+  .then(() => g.addLinksFromFile("../artifacts/dates-" + currDate + ".json"))
+  .then(g.finish)
+  .catch((err) => console.log(err));
 
 function linkLocation() {
   /*
@@ -12,20 +17,6 @@ function linkLocation() {
   console.log("Linking Locations...");
   return g.submit(
     "g.V().hasLabel('location').as('loc').V().hasLabel('genome').as('gen').where('loc', eq('gen')).by('name').by('division').addE('sampledIn').from('gen').to('loc')",
-    {}
-  );
-}
-
-function linkDate() {
-  /*
-   Find all date nodes (date)
-   Find all genome nodes (gen)
-   For all intersections:
-      if(date.id == b.date_formatted) make a new link (genome->sampledOn->date)
-   */
-  console.log("Linking Dates...");
-  return g.submit(
-    "g.V().hasLabel('date').as('date').V().hasLabel('genome').as('gen').where('date', eq('gen')).by('id').by('date_formatted').addE('sampledOn').from('gen').to('date')",
     {}
   );
 }

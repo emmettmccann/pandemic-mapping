@@ -55,7 +55,7 @@ client.addVertex = function (v, pk) {
   Object.keys(v).forEach((k) => {
     query += ".property('" + k + "', " + k + ")";
   });
-  query += ".property('pk', '" + (pk || "testpk") + "')";
+  query += ".property('pk', '" + (toString(pk) || "testpk") + "')";
   return client.submit(query, v);
 };
 
@@ -80,7 +80,7 @@ client.addNodesFromFile = async function (filename) {
   // upload each node in the file
   for (let i = 0; i < nodes.length; i++) {
     b1.update(i + 1);
-    await client.addVertex(nodes[i], i % 10);
+    await client.addVertex(nodes[i], str(i % 10));
   }
 
   b1.stop();

@@ -5,6 +5,7 @@
    "main": "app.js",
    "dependencies": {
       "async": "^2.6.0",
+      "cli-progress": "^3.8.0",
       "gremlin": "^3.3.4"
    }
 }

@@ -37,3 +37,9 @@ g.V()
 g.v().hasLabel("genome").has("sampled", true).has("country", "USA").values("division");
 
 g.v().hasLabel("genome").out("in").path().unfold();
+
+// get shape
+g.E().groupCount().by("label").store("Edges").V().groupCount().by("label").store("Nodes").select("Nodes", "Edges");
+
+// get most recent 2 case reports for state
+g.v("WA").in("reportedIn").order().by(out("reportedOn").id()).tail(2).valueMap();

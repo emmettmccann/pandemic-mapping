@@ -2,7 +2,7 @@ const config = {
   endpoint: "wss://wpi-iqp-covid19.gremlin.cosmos.azure.com:443/",
   primaryKey: "XcLrd2y1v8NNoM6vdJjTh55wjWdFgv8dJSO6fJpAllnZ7oCXyAKb7nLO5nsCb7lbTb9lba1zU2th0hmQD5BiNw==",
   database: "covidia",
-  collection: "covidia2",
+  collection: "covidia1",
 };
 
 const Gremlin = require("gremlin");
@@ -50,12 +50,12 @@ client.getShape = async function () {
     });
 };
 
-client.addVertex = function (v) {
+client.addVertex = function (v, pk) {
   let query = "g.addV(type)";
   Object.keys(v).forEach((k) => {
     query += ".property('" + k + "', " + k + ")";
   });
-  query += ".property('pk', 'testpk')";
+  query += ".property('pk', '" + (pk || "testpk") + "')";
   return client.submit(query, v);
 };
 
@@ -80,7 +80,7 @@ client.addNodesFromFile = async function (filename) {
   // upload each node in the file
   for (let i = 0; i < nodes.length; i++) {
     b1.update(i + 1);
-    await client.addVertex(nodes[i]);
+    await client.addVertex(nodes[i], i % 10);
   }
 
   b1.stop();

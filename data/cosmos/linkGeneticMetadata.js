@@ -2,8 +2,8 @@ const g = require("./client");
 const currDate = require("../static/currDate");
 
 g.open()
-  .then(linkLocation)
   .then(() => g.addLinksFromFile("../artifacts/dates-" + currDate + ".json"))
+  .then(linkLocation)
   .then(g.finish)
   .catch((err) => console.log(err));
 

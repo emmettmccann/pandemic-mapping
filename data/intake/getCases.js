@@ -18,6 +18,7 @@ async function casesByStateTimeline() {
   let caseDateLinks = [];
   let caseLocLinks = [];
   states.forEach((state) => {
+    let prevReport = "NoPrevReports";
     for (const dateID in state.dates) {
       let date = state.dates[dateID];
       date.date = dateID;
@@ -30,6 +31,7 @@ async function casesByStateTimeline() {
           tested: date.tested,
           source: "coronadatascraper.com",
           dateRetrieved: currDate,
+          prevReport: prevReport,
         });
         caseDateLinks.push({
           id: date.date + "@" + state.stateId + "-dateLink",
@@ -43,6 +45,7 @@ async function casesByStateTimeline() {
           child: state.stateId.slice(-2),
           parent: date.date + "@" + state.stateId,
         });
+        prevReport = date.date + "@" + state.stateId;
       }
     }
   });

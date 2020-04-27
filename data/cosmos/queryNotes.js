@@ -68,3 +68,35 @@ g.V()
   .addE("nextDay")
   .from("a")
   .to("c");
+
+g.V()
+  .hasLabel("caseReports")
+  .as("a")
+  .out("reportedOn")
+  .in("nextDay")
+  .in("reportedOn")
+  .as("b")
+  .where("a", eq("b"))
+  .by(out("reportedIn").id())
+  .as("c")
+  .select("a", "c")
+  .by("id");
+
+g.V().hasLabel("caseReport").as("a").out("reportedOn").in("nextDay").in("reportedOn").as("b").select("a", "b").by("id");
+
+g.V()
+  .hasLabel("caseReport")
+  .where(__.in("nextDay").count().is(0))
+  .limit(20)
+  .as("a")
+  .out("reportedOn")
+  .in("nextDay")
+  .in("reportedOn")
+  .as("b")
+  .where("a", eq("b"))
+  .by(out("reportedIn").id())
+  .as("c")
+  .addE("nextDay")
+  .to("a")
+  .from("b")
+  .count();

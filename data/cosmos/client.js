@@ -2,7 +2,7 @@ const config = {
   endpoint: "wss://wpi-iqp-covid19.gremlin.cosmos.azure.com:443/",
   primaryKey: "XcLrd2y1v8NNoM6vdJjTh55wjWdFgv8dJSO6fJpAllnZ7oCXyAKb7nLO5nsCb7lbTb9lba1zU2th0hmQD5BiNw==",
   database: "covidia",
-  collection: "covidia1",
+  collection: "ncov",
 };
 
 const Gremlin = require("gremlin");

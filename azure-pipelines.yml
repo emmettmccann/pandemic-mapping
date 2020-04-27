@@ -13,4 +13,9 @@ steps:
 - script: |
     cd explore/
     node hello.js
-  displayName: 'Hello World'
+  displayName: 'Write'
+
+- script: |
+    cd explore/
+    node grabHello.js
+  displayName: 'Read'

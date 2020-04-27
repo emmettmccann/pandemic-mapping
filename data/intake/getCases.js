@@ -17,6 +17,7 @@ async function casesByStateTimeline() {
   let cases = [];
   let caseDateLinks = [];
   let caseLocLinks = [];
+  let caseCaseLinks = [];
   states.forEach((state) => {
     let prevReport = "NoPrevReports";
     for (const dateID in state.dates) {
@@ -31,7 +32,11 @@ async function casesByStateTimeline() {
           tested: date.tested,
           source: "coronadatascraper.com",
           dateRetrieved: currDate,
-          prevReport: prevReport,
+        });
+        caseCaseLinks.push({
+          type: "nextReport",
+          child: date.date + "@" + state.stateId,
+          parent: prevReport,
         });
         caseDateLinks.push({
           id: date.date + "@" + state.stateId + "-dateLink",
@@ -54,6 +59,7 @@ async function casesByStateTimeline() {
   console.log(cases[1]);
 
   fs.writeFileSync("../artifacts/caseReports-" + currDate + ".json", JSON.stringify(cases));
+  fs.writeFileSync("../artifacts/caseCaseLinks-" + currDate + ".json", JSON.stringify(caseCaseLinks));
   fs.writeFileSync("../artifacts/caseDateLinks-" + currDate + ".json", JSON.stringify(caseDateLinks));
   fs.writeFileSync("../artifacts/caseLocLinks-" + currDate + ".json", JSON.stringify(caseLocLinks));
   console.log("Done");

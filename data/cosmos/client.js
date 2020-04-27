@@ -105,7 +105,7 @@ client.addLinksFromFile = async function (filename) {
   b1.stop();
 };
 
-client.finish = function () {
+client.finish = async function () {
   console.log("Finished");
 
   client.close();

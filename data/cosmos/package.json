@@ -1,0 +1,10 @@
+{
+   "name": "CovidiaPipeline",
+   "version": "0.0.0",
+   "description": "Short sample Node.js app to demonstrate seeding from JSON and traversing a path between two nodes",
+   "main": "app.js",
+   "dependencies": {
+      "async": "^2.6.0",
+      "gremlin": "^3.3.4"
+   }
+}

@@ -1,6 +1,7 @@
 const client = require("./client");
 const fs = require("fs");
 const path = require("path");
+const currDate = require("../static/currDate");
 
 // get basic stats on the current db
 client.open().then(count).then(finish);
@@ -9,9 +10,9 @@ client.open().then(count).then(finish);
 // client
 //   .open()
 //   .then(dropGeneticTree)
-//   .then(() => addNodesFromFile("../artifacts/nodes-3-26.json"))
-//   .then(() => addLinksFromFile("../artifacts/links-3-26.json"))
-//   .then(() => addLinksFromFile("../artifacts/dates-3-26.json"))
+//   .then(() => addNodesFromFile("../artifacts/nodes-" + currDate + ".json"))
+//   .then(() => addLinksFromFile("../artifacts/links-" + currDate + ".json"))
+//   .then(() => addLinksFromFile("../artifacts/dates-" + currDate + ".json"))
 //   .then(() => count)
 //   .then(finish);
 

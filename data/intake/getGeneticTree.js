@@ -1,9 +1,6 @@
 const fs = require("fs");
 const fetch = require("node-fetch");
-const currDate = (() => {
-  let d = new Date();
-  return d.getMonth() + "-" + d.getDate();
-})();
+const currDate = require("../static/currDate");
 
 var nodes = [];
 var links = [];

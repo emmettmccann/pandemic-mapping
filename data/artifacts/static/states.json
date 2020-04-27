@@ -1,6 +1,7 @@
 [
    {
       "type": "location",
+      "level": "state",
       "id": "VA",
       "stateID": "iso2:US-VA",
       "pop": 8535519,
@@ -11,6 +12,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "WA",
       "stateID": "iso2:US-WA",
       "pop": 7614893,
@@ -21,6 +23,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "AL",
       "stateID": "iso2:US-AL",
       "pop": 4903185,
@@ -31,6 +34,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "AK",
       "stateID": "iso2:US-AK",
       "pop": 731545,
@@ -41,6 +45,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "AZ",
       "stateID": "iso2:US-AZ",
       "pop": 7278717,
@@ -51,6 +56,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "AR",
       "stateID": "iso2:US-AR",
       "pop": 3017804,
@@ -61,6 +67,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "CA",
       "stateID": "iso2:US-CA",
       "pop": 39512223,
@@ -71,6 +78,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "CO",
       "stateID": "iso2:US-CO",
       "pop": 5758736,
@@ -81,6 +89,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "CT",
       "stateID": "iso2:US-CT",
       "pop": 3565287,
@@ -91,6 +100,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "DE",
       "stateID": "iso2:US-DE",
       "pop": 973764,
@@ -101,6 +111,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "DC",
       "stateID": "iso2:US-DC",
       "pop": 705749,
@@ -111,6 +122,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "FL",
       "stateID": "iso2:US-FL",
       "pop": 21477737,
@@ -121,6 +133,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "GA",
       "stateID": "iso2:US-GA",
       "pop": 10617423,
@@ -131,6 +144,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "HI",
       "stateID": "iso2:US-HI",
       "pop": 1415872,
@@ -141,6 +155,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "ID",
       "stateID": "iso2:US-ID",
       "pop": 1787065,
@@ -151,6 +166,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "IL",
       "stateID": "iso2:US-IL",
       "pop": 12671821,
@@ -161,6 +177,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "IN",
       "stateID": "iso2:US-IN",
       "pop": 6732219,
@@ -171,6 +188,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "IA",
       "stateID": "iso2:US-IA",
       "pop": 3155070,
@@ -181,6 +199,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "KS",
       "stateID": "iso2:US-KS",
       "pop": 2913314,
@@ -191,6 +210,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "KY",
       "stateID": "iso2:US-KY",
       "pop": 4467673,
@@ -201,6 +221,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "LA",
       "stateID": "iso2:US-LA",
       "pop": 4648794,
@@ -211,6 +232,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "ME",
       "stateID": "iso2:US-ME",
       "pop": 1344212,
@@ -221,6 +243,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MD",
       "stateID": "iso2:US-MD",
       "pop": 6045680,
@@ -231,6 +254,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MA",
       "stateID": "iso2:US-MA",
       "pop": 6892503,
@@ -241,6 +265,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MI",
       "stateID": "iso2:US-MI",
       "pop": 9986857,
@@ -251,6 +276,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MN",
       "stateID": "iso2:US-MN",
       "pop": 5639632,
@@ -261,6 +287,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MS",
       "stateID": "iso2:US-MS",
       "pop": 2976149,
@@ -271,6 +298,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MO",
       "stateID": "iso2:US-MO",
       "pop": 6137428,
@@ -281,6 +309,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MT",
       "stateID": "iso2:US-MT",
       "pop": 1068778,
@@ -291,6 +320,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "NE",
       "stateID": "iso2:US-NE",
       "pop": 1934408,
@@ -301,6 +331,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "NV",
       "stateID": "iso2:US-NV",
       "pop": 3080156,
@@ -311,6 +342,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "NH",
       "stateID": "iso2:US-NH",
       "pop": 1359711,
@@ -321,6 +353,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "NJ",
       "stateID": "iso2:US-NJ",
       "pop": 8882190,
@@ -331,6 +364,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "NM",
       "stateID": "iso2:US-NM",
       "pop": 2096829,
@@ -341,6 +375,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "NY",
       "stateID": "iso2:US-NY",
       "pop": 19453561,
@@ -351,6 +386,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "NC",
       "stateID": "iso2:US-NC",
       "pop": 10488084,
@@ -361,6 +397,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "ND",
       "stateID": "iso2:US-ND",
       "pop": 762062,
@@ -371,6 +408,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "OH",
       "stateID": "iso2:US-OH",
       "pop": 11689100,
@@ -381,6 +419,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "OK",
       "stateID": "iso2:US-OK",
       "pop": 3956971,
@@ -391,6 +430,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "OR",
       "stateID": "iso2:US-OR",
       "pop": 4217737,
@@ -401,6 +441,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "PA",
       "stateID": "iso2:US-PA",
       "pop": 12801989,
@@ -411,6 +452,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "RI",
       "stateID": "iso2:US-RI",
       "pop": 1059361,
@@ -421,6 +463,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "SC",
       "stateID": "iso2:US-SC",
       "pop": 5148714,
@@ -431,6 +474,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "SD",
       "stateID": "iso2:US-SD",
       "pop": 884659,
@@ -441,6 +485,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "TN",
       "stateID": "iso2:US-TN",
       "pop": 6829174,
@@ -451,6 +496,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "TX",
       "stateID": "iso2:US-TX",
       "pop": 28995881,
@@ -461,6 +507,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "UT",
       "stateID": "iso2:US-UT",
       "pop": 3205958,
@@ -471,6 +518,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "VT",
       "stateID": "iso2:US-VT",
       "pop": 623989,
@@ -481,6 +529,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "WV",
       "stateID": "iso2:US-WV",
       "pop": 1792147,
@@ -491,6 +540,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "WI",
       "stateID": "iso2:US-WI",
       "pop": 5822434,
@@ -501,6 +551,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "WY",
       "stateID": "iso2:US-WY",
       "pop": 578759,
@@ -511,6 +562,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "GU",
       "stateID": "iso2:US-GU",
       "pop": 167772,
@@ -521,6 +573,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "PR",
       "stateID": "iso2:US-PR",
       "pop": 3411307,
@@ -531,6 +584,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "AS",
       "stateID": "iso2:US-AS",
       "pop": 55689,
@@ -541,6 +595,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "MP",
       "stateID": "iso2:US-MP",
       "pop": 55144,
@@ -551,6 +606,7 @@
    },
    {
       "type": "location",
+      "level": "state",
       "id": "VI",
       "stateID": "iso2:US-VI",
       "pop": 104901,

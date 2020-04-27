@@ -6,6 +6,7 @@
    "dependencies": {
       "async": "^2.6.0",
       "cli-progress": "^3.8.0",
-      "gremlin": "^3.3.4"
+      "gremlin": "^3.3.4",
+      "node-fetch": "^2.6.0"
    }
 }

@@ -43,3 +43,5 @@ g.E().groupCount().by("label").store("Edges").V().groupCount().by("label").store
 
 // get most recent 2 case reports for state
 g.v("WA").in("reportedIn").order().by(out("reportedOn").id()).tail(2).valueMap();
+
+g.v().has("division").has("country", "USA").count();

@@ -55,7 +55,7 @@ client.addVertex = function (v, pk) {
   Object.keys(v).forEach((k) => {
     query += ".property('" + k + "', " + k + ")";
   });
-  query += ".property('pk', '" + (pk.toString() || "testpk") + "')";
+  query += ".property('pk', '" + (pk || "testpk").toString() + "')";
   return client.submit(query, v);
 };
 

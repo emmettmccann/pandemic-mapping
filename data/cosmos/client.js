@@ -107,7 +107,13 @@ client.addLinksFromFile = async function (filename) {
 
 client.finish = function () {
   console.log("Finished");
+
   client.close();
+  console.log("Closing");
+  await new Promise((resolve) => {
+    setTimeout(resolve, 500);
+  });
+  console.log("Closed");
 };
 
 // simple function for queries in Node REPL

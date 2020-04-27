@@ -25,10 +25,10 @@ jobs:
   #   dependsOn: Fetch_New_Data
   #   condition: succeededOrFailed()
   #   steps:
-      - script: |
-          cd data/
-          npm install
-        displayName: 'npm install'
+      # - script: |
+      #     cd data/
+      #     npm install
+      #   displayName: 'npm install'
       - script: |
           cd data/cosmos/
           node seedMetadata.js

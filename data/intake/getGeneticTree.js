@@ -111,7 +111,7 @@ function formatLink(link) {
 
 function formatDateLink(date) {
   return {
-    type: "at",
+    type: "sampledOn",
     id: formatID(date.parent + "@" + date.attrs.num_date.value),
     parent: date.parent,
     child: (() => {

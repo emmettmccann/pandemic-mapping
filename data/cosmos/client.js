@@ -2,7 +2,7 @@ const config = {
   endpoint: "wss://wpi-iqp-covid19.gremlin.cosmos.azure.com:443/",
   primaryKey: "XcLrd2y1v8NNoM6vdJjTh55wjWdFgv8dJSO6fJpAllnZ7oCXyAKb7nLO5nsCb7lbTb9lba1zU2th0hmQD5BiNw==",
   database: "covidia",
-  collection: "grrremlin",
+  collection: "covidia2",
 };
 
 const Gremlin = require("gremlin");
@@ -34,6 +34,17 @@ var client = new Gremlin.driver.Client(config.endpoint, {
 client.count = async function () {
   return client
     .submit("g.E().count().store('Edges').V().count().store('Nodes').select('Nodes','Edges')", {})
+    .then(function (result) {
+      console.log("Result: %s\n", JSON.stringify(result._items));
+    });
+};
+
+client.getShape = async function () {
+  return client
+    .submit(
+      "g.E().groupCount().by('label').store('Edges').V().groupCount().by('label').store('Nodes').select('Nodes','Edges')",
+      {}
+    )
     .then(function (result) {
       console.log("Result: %s\n", JSON.stringify(result._items));
     });
@@ -81,7 +92,7 @@ client.addLinksFromFile = async function (filename) {
 
   // start progress information
   console.log("Adding %d links  from " + filename, links.length);
-  b1.start(nodes.length, 0, {
+  b1.start(links.length, 0, {
     speed: "N/A",
   });
 

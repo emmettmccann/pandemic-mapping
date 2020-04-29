@@ -100,3 +100,35 @@ g.V()
   .to("a")
   .from("b")
   .count();
+
+g.V().where(out("sampledIn").has("id", "WA")).repeat(__.in("mutated")).times(1).path().unfold();
+
+g.V("NODE_0000741").out();
+
+g.V("NODE_0000741").out().out("sampledIn").path().unfold();
+
+g.V("USA-WA1-2020").out().out("sampledIn").path().unfold()[
+  {
+    Nodes: [
+      {
+        date: 150,
+        location: 56,
+        caseReport: 2910,
+        genome: 6078,
+      },
+    ],
+    Edges: [
+      {
+        nextDay: 149,
+        reportedIn: 2910,
+        reportedOn: 2910,
+        nextReport: 2854,
+        mutated: 6077,
+        sampledOn: 2658,
+        sampledIn: 1909,
+      },
+    ],
+  }
+];
+
+9194;

@@ -93,7 +93,7 @@ function formatGenomeNode(node) {
 
 function formatLink(link) {
   return {
-    type: "mutated",
+    type: "mutatedTo",
     id: formatID(link.parent + "-" + link.child),
     parent: formatID(link.parent),
     child: formatID(link.child),
@@ -106,6 +106,8 @@ function formatLink(link) {
             }, "")
             .slice(1) // cut out the first comma of the list (pre-content)
         : undefined,
+    diff:
+      link.mutation && link.mutation.mutations && link.mutation.mutations.nuc ? link.mutation.mutations.nuc.length : 0,
   };
 }
 

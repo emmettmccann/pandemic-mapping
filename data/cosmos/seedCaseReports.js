@@ -1,7 +1,7 @@
 const g = require("./client");
 const currDate = require("../static/currDate");
 
-g.open()
+g.o()
   .then(dropCases)
   .then(() => g.addNodesFromFile("../artifacts/caseReports-" + currDate + ".json"))
   .then(() => g.addLinksFromFile("../artifacts/caseLocLinks-" + currDate + ".json"))

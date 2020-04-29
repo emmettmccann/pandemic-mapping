@@ -32,6 +32,11 @@ var client = new Gremlin.driver.Client(config.endpoint, {
   mimeType: "application/vnd.gremlin-v2.0+json",
 });
 
+client.o = async function () {
+  console.log("Connecting to %s", process.env.GRAPH_NAME);
+  return client.open();
+};
+
 client.count = async function () {
   return client
     .submit("g.E().count().store('Edges').V().count().store('Nodes').select('Nodes','Edges')", {})

@@ -31,9 +31,6 @@ stages:
     jobs:
       - job: Metadata
         steps:
-          - download: current
-            artifact: data
-            displayName: 'Download New Data Artifact'
           - script: |
               cd data/
               npm install
@@ -45,8 +42,11 @@ stages:
       - job: CaseReports
         dependsOn: Metadata
         steps:
-          - download: current
-            artifact: data
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              source: current
+              artifact: data
+              targetPath: $(System.DefaultWorkingDirectory)/data/artifacts
             displayName: 'Download New Data Artifact'
           - script: |
               cd data/
@@ -59,8 +59,11 @@ stages:
       - job: GeneticData
         dependsOn: Metadata
         steps:
-          - download: current
-            artifact: data
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              source: current
+              artifact: data
+              targetPath: $(System.DefaultWorkingDirectory)/data/artifacts
             displayName: 'Download New Data Artifact'
           - script: |
               cd data/

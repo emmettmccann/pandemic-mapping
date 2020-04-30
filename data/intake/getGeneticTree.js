@@ -4,7 +4,6 @@ const currDate = require("../static/currDate");
 
 var nodes = [];
 var links = [];
-var dates = [];
 
 getTree();
 
@@ -23,13 +22,10 @@ async function getTree() {
   console.log(nodes[1]);
   console.log("Generated %d mutation links of raw format: ", links.length);
   console.log(links[1]);
-  console.log("Generated %d date links of raw format: ", dates.length);
-  console.log(dates[1]);
 
   // write the files
   fs.writeFileSync("../artifacts/nodes-" + currDate + ".json", JSON.stringify(nodes));
   fs.writeFileSync("../artifacts/links-" + currDate + ".json", JSON.stringify(links));
-  fs.writeFileSync("../artifacts/dates-" + currDate + ".json", JSON.stringify(dates));
 }
 
 function extractNode(parentName, node) {
@@ -43,13 +39,8 @@ function extractNode(parentName, node) {
     mutation: node.branch_attrs,
     attrs: node.node_attrs,
   };
-  let d = {
-    parent: node.name,
-    attrs: node.node_attrs,
-  };
   nodes.push(n);
   links.push(l);
-  dates.push(d);
   if (node.children) node.children.forEach((el) => extractNode(node.name, el));
 }
 
@@ -57,9 +48,7 @@ function formatTree() {
   // format each genome node
   nodes = nodes.map(formatGenomeNode);
   // format each mutation link
-  links = links.map(formatLink);
-  // format date links for mapping to date nodes
-  dates = dates.map(formatDateLink);
+  links = links.reduce((array, link) => array.concat(formatLink(link)), []);
 }
 
 function formatGenomeNode(node) {
@@ -92,9 +81,8 @@ function formatGenomeNode(node) {
 }
 
 function formatLink(link) {
-  return {
-    label: "mutatedTo",
-    id: formatID(link.parent + "-" + link.child),
+  let l1 = {
+    label: "gChild",
     parent: formatID(link.parent),
     child: formatID(link.child),
     aaMut: link.mutation && link.mutation.labels ? link.mutation.labels.aa : undefined, // get the amino acid mutations if they exist
@@ -109,21 +97,15 @@ function formatLink(link) {
     diff:
       link.mutation && link.mutation.mutations && link.mutation.mutations.nuc ? link.mutation.mutations.nuc.length : 0,
   };
-}
-
-function formatDateLink(date) {
-  return {
-    label: "sampledOn",
-    id: formatID(date.parent + "@" + date.attrs.num_date.value),
-    parent: date.parent,
-    child: (() => {
-      let d = getDef(date.attrs.num_date);
-      if (d == undefined) return undefined;
-      d = new Date((d - 1970) * 365.25 * 24 * 60 * 60 * 1000); // convert the datetime to proper date object
-      return d.toISOString().substring(0, 10);
-    })(),
-    rawdate: date.attrs.num_date.value,
+  let l2 = {
+    label: "gParent",
+    parent: l1.child,
+    child: l1.parent,
+    aaMut: l1.aaMut,
+    nuc: l1.nuc,
+    diff: l1.diff,
   };
+  return [l1, l2];
 }
 
 // helped for pulling values out of optionally defined attributes of format

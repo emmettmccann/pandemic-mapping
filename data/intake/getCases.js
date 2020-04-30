@@ -26,7 +26,7 @@ async function casesByStateTimeline() {
       if (date.cases >= 0) {
         cases.push({
           id: date.date + "@" + state.stateId,
-          type: "caseReport",
+          label: "caseReport",
           cases: date.cases,
           deaths: date.deaths,
           tested: date.tested,
@@ -34,19 +34,19 @@ async function casesByStateTimeline() {
           dateRetrieved: currDate,
         });
         caseCaseLinks.push({
-          type: "nextReport",
+          label: "nextReport",
           child: date.date + "@" + state.stateId,
           parent: prevReport,
         });
         caseDateLinks.push({
           id: date.date + "@" + state.stateId + "-dateLink",
-          type: "reportedOn",
+          label: "reportedOn",
           child: date.date,
           parent: date.date + "@" + state.stateId,
         });
         caseLocLinks.push({
           id: date.date + "@" + state.stateId + "-locLink",
-          type: "reportedIn",
+          label: "reportedIn",
           child: state.stateId.slice(-2),
           parent: date.date + "@" + state.stateId,
         });

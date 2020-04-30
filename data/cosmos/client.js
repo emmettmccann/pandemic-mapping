@@ -34,6 +34,23 @@ var client = new Gremlin.driver.Client(config.endpoint, {
 
 client.o = async function () {
   console.log("Connecting to %s", process.env.GRAPH_NAME);
+  if (process.env.CONFIRM == "true") {
+    console.log("Press ^C to cancel or any other key to continue");
+    await (async () => {
+      process.stdin.setRawMode(true);
+      return new Promise((resolve) =>
+        process.stdin.once("data", (data) => {
+          const byteArray = [...data];
+          if (byteArray.length > 0 && byteArray[0] === 3) {
+            console.log("^C");
+            process.exit(1);
+          }
+          process.stdin.setRawMode(false);
+          resolve();
+        })
+      );
+    })();
+  }
   return client.open();
 };
 
@@ -57,7 +74,7 @@ client.getShape = async function () {
 };
 
 client.addVertex = function (v, pk) {
-  let query = "g.addV(type)";
+  let query = "g.addV(label)";
   Object.keys(v).forEach((k) => {
     query += ".property('" + k + "', " + k + ")";
   });
@@ -66,7 +83,7 @@ client.addVertex = function (v, pk) {
 };
 
 client.addEdge = function (e) {
-  let query = "g.V(parent).addE(type).to(g.V(child))";
+  let query = "g.V(parent).addE(label).to(g.V(child))";
   Object.keys(e).forEach((k) => {
     query += ".property('" + k + "', " + k + ")";
   });

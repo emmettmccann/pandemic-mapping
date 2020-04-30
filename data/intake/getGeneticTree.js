@@ -64,7 +64,7 @@ function formatTree() {
 
 function formatGenomeNode(node) {
   return {
-    type: "genome",
+    label: "genome",
     id: formatID(node.name),
     sampled: node.name.slice(0, 5) != "NODE_", // check if this is an inferred node
     author: getDef(node.node_attrs.author),
@@ -93,7 +93,7 @@ function formatGenomeNode(node) {
 
 function formatLink(link) {
   return {
-    type: "mutatedTo",
+    label: "mutatedTo",
     id: formatID(link.parent + "-" + link.child),
     parent: formatID(link.parent),
     child: formatID(link.child),
@@ -113,7 +113,7 @@ function formatLink(link) {
 
 function formatDateLink(date) {
   return {
-    type: "sampledOn",
+    label: "sampledOn",
     id: formatID(date.parent + "@" + date.attrs.num_date.value),
     parent: date.parent,
     child: (() => {

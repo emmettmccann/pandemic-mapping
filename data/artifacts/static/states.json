@@ -1,6 +1,6 @@
 [
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "VA",
       "stateID": "iso2:US-VA",
@@ -11,7 +11,7 @@
       "name": "Virginia"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "WA",
       "stateID": "iso2:US-WA",
@@ -22,7 +22,7 @@
       "name": "Washington"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "AL",
       "stateID": "iso2:US-AL",
@@ -33,7 +33,7 @@
       "name": "Alabama"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "AK",
       "stateID": "iso2:US-AK",
@@ -44,7 +44,7 @@
       "name": "Alaska"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "AZ",
       "stateID": "iso2:US-AZ",
@@ -55,7 +55,7 @@
       "name": "Arizona"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "AR",
       "stateID": "iso2:US-AR",
@@ -66,7 +66,7 @@
       "name": "Arkansas"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "CA",
       "stateID": "iso2:US-CA",
@@ -77,7 +77,7 @@
       "name": "California"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "CO",
       "stateID": "iso2:US-CO",
@@ -88,7 +88,7 @@
       "name": "Colorado"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "CT",
       "stateID": "iso2:US-CT",
@@ -99,7 +99,7 @@
       "name": "Connecticut"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "DE",
       "stateID": "iso2:US-DE",
@@ -110,7 +110,7 @@
       "name": "Delaware"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "DC",
       "stateID": "iso2:US-DC",
@@ -121,7 +121,7 @@
       "name": "Washington, D.C."
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "FL",
       "stateID": "iso2:US-FL",
@@ -132,7 +132,7 @@
       "name": "Florida"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "GA",
       "stateID": "iso2:US-GA",
@@ -143,7 +143,7 @@
       "name": "Georgia"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "HI",
       "stateID": "iso2:US-HI",
@@ -154,7 +154,7 @@
       "name": "Hawaii"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "ID",
       "stateID": "iso2:US-ID",
@@ -165,7 +165,7 @@
       "name": "Idaho"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "IL",
       "stateID": "iso2:US-IL",
@@ -176,7 +176,7 @@
       "name": "Illinois"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "IN",
       "stateID": "iso2:US-IN",
@@ -187,7 +187,7 @@
       "name": "Indiana"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "IA",
       "stateID": "iso2:US-IA",
@@ -198,7 +198,7 @@
       "name": "Iowa"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "KS",
       "stateID": "iso2:US-KS",
@@ -209,7 +209,7 @@
       "name": "Kansas"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "KY",
       "stateID": "iso2:US-KY",
@@ -220,7 +220,7 @@
       "name": "Kentucky"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "LA",
       "stateID": "iso2:US-LA",
@@ -231,7 +231,7 @@
       "name": "Louisiana"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "ME",
       "stateID": "iso2:US-ME",
@@ -242,7 +242,7 @@
       "name": "Maine"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MD",
       "stateID": "iso2:US-MD",
@@ -253,7 +253,7 @@
       "name": "Maryland"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MA",
       "stateID": "iso2:US-MA",
@@ -264,7 +264,7 @@
       "name": "Massachusetts"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MI",
       "stateID": "iso2:US-MI",
@@ -275,7 +275,7 @@
       "name": "Michigan"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MN",
       "stateID": "iso2:US-MN",
@@ -286,7 +286,7 @@
       "name": "Minnesota"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MS",
       "stateID": "iso2:US-MS",
@@ -297,7 +297,7 @@
       "name": "Mississippi"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MO",
       "stateID": "iso2:US-MO",
@@ -308,7 +308,7 @@
       "name": "Missouri"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MT",
       "stateID": "iso2:US-MT",
@@ -319,7 +319,7 @@
       "name": "Montana"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "NE",
       "stateID": "iso2:US-NE",
@@ -330,7 +330,7 @@
       "name": "Nebraska"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "NV",
       "stateID": "iso2:US-NV",
@@ -341,7 +341,7 @@
       "name": "Nevada"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "NH",
       "stateID": "iso2:US-NH",
@@ -352,7 +352,7 @@
       "name": "New Hampshire"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "NJ",
       "stateID": "iso2:US-NJ",
@@ -363,7 +363,7 @@
       "name": "New Jersey"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "NM",
       "stateID": "iso2:US-NM",
@@ -374,7 +374,7 @@
       "name": "New Mexico"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "NY",
       "stateID": "iso2:US-NY",
@@ -385,7 +385,7 @@
       "name": "New York"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "NC",
       "stateID": "iso2:US-NC",
@@ -396,7 +396,7 @@
       "name": "North Carolina"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "ND",
       "stateID": "iso2:US-ND",
@@ -407,7 +407,7 @@
       "name": "North Dakota"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "OH",
       "stateID": "iso2:US-OH",
@@ -418,7 +418,7 @@
       "name": "Ohio"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "OK",
       "stateID": "iso2:US-OK",
@@ -429,7 +429,7 @@
       "name": "Oklahoma"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "OR",
       "stateID": "iso2:US-OR",
@@ -440,7 +440,7 @@
       "name": "Oregon"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "PA",
       "stateID": "iso2:US-PA",
@@ -451,7 +451,7 @@
       "name": "Pennsylvania"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "RI",
       "stateID": "iso2:US-RI",
@@ -462,7 +462,7 @@
       "name": "Rhode Island"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "SC",
       "stateID": "iso2:US-SC",
@@ -473,7 +473,7 @@
       "name": "South Carolina"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "SD",
       "stateID": "iso2:US-SD",
@@ -484,7 +484,7 @@
       "name": "South Dakota"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "TN",
       "stateID": "iso2:US-TN",
@@ -495,7 +495,7 @@
       "name": "Tennessee"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "TX",
       "stateID": "iso2:US-TX",
@@ -506,7 +506,7 @@
       "name": "Texas"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "UT",
       "stateID": "iso2:US-UT",
@@ -517,7 +517,7 @@
       "name": "Utah"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "VT",
       "stateID": "iso2:US-VT",
@@ -528,7 +528,7 @@
       "name": "Vermont"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "WV",
       "stateID": "iso2:US-WV",
@@ -539,7 +539,7 @@
       "name": "West Virginia"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "WI",
       "stateID": "iso2:US-WI",
@@ -550,7 +550,7 @@
       "name": "Wisconsin"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "WY",
       "stateID": "iso2:US-WY",
@@ -561,7 +561,7 @@
       "name": "Wyoming"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "GU",
       "stateID": "iso2:US-GU",
@@ -572,7 +572,7 @@
       "name": "Guam"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "PR",
       "stateID": "iso2:US-PR",
@@ -583,7 +583,7 @@
       "name": "Puerto Rico"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "AS",
       "stateID": "iso2:US-AS",
@@ -594,7 +594,7 @@
       "name": "American Samoa"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "MP",
       "stateID": "iso2:US-MP",
@@ -605,7 +605,7 @@
       "name": "Northern Mariana Islands"
    },
    {
-      "type": "location",
+      "label": "location",
       "level": "state",
       "id": "VI",
       "stateID": "iso2:US-VI",

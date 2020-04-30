@@ -41,7 +41,3 @@ jobs:
           cd data/cosmos/
           node seedGenetics.js
         displayName: 'Seed Phylogenetic Tree'
-      - script: |
-          cd data/cosmos/
-          node linkGeneticMetadata.js
-        displayName: 'Link Genetic Metadata'

@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const path = require("path");
 const fetch = require("node-fetch");
 
@@ -29,9 +29,9 @@ async function getTree() {
   console.log(locLinks[1]);
 
   // write the files
-  fs.writeFileSync("../artifacts/genomeNodes.json", JSON.stringify(nodes));
-  fs.writeFileSync("../artifacts/genomeMutationLinks.json", JSON.stringify(links));
-  fs.writeFileSync("../artifacts/genomeLocLinks.json", JSON.stringify(locLinks));
+  fs.outputJsonSync("../artifacts/genomeNodes.json", nodes);
+  fs.outputJsonSync("../artifacts/genomeMutationLinks.json", links);
+  fs.outputJsonSync("../artifacts/genomeLocLinks.json", locLinks);
 }
 
 function extractNode(parentName, node) {

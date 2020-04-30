@@ -23,6 +23,7 @@ jobs:
         displayName: 'Fetch Phylogenetic Tree from Nextstrain'
       - publish: $(System.DefaultWorkingDirectory)/data/artifacts
         artifact: data
+        displayName: 'Publish Data Artifact'
   # - job: Seed_Graph
   #   dependsOn: Fetch_New_Data
   #   condition: succeededOrFailed()

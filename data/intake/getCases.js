@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const fs = require("fs");
+const fs = require("fs-extra");
 const currDate = require("../static/currDate");
 
 async function casesByStateTimeline() {
@@ -63,9 +63,9 @@ async function casesByStateTimeline() {
   console.log("Found %d case reports of format: ", cases.length);
   console.log(cases[1]);
 
-  fs.writeFileSync("../artifacts/caseReports.json", JSON.stringify(cases));
-  fs.writeFileSync("../artifacts/caseCaseLinks.json", JSON.stringify(caseCaseLinks));
-  fs.writeFileSync("../artifacts/caseLocLinks.json", JSON.stringify(caseLocLinks));
+  fs.outputJsonSync("../artifacts/caseReports.json", cases);
+  fs.outputJsonSync("../artifacts/caseCaseLinks.json", caseCaseLinks);
+  fs.outputJsonSync("../artifacts/caseLocLinks.json", caseLocLinks);
   console.log("Done");
 }
 

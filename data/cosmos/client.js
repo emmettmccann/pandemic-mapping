@@ -1,7 +1,7 @@
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 const Gremlin = require("gremlin");
-const fs = require("fs");
+const fs = require("fs-extra");
 const cliProgress = require("cli-progress");
 const _colors = require("colors");
 

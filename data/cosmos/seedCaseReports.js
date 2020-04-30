@@ -5,7 +5,8 @@ g.o()
   .then(() => g.addNodesFromFile("../artifacts/caseReports.json"))
   .then(() => g.addLinksFromFile("../artifacts/caseCaseLinks.json"))
   .then(() => g.addLinksFromFile("../artifacts/caseLocLinks.json"))
-  .then(g.finish);
+  .then(g.finish)
+  .catch((err) => console.log(err));
 
 function dropCases() {
   return g.submit("g.V().hasLabel('caseReport').drop()", {});

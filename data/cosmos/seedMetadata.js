@@ -3,7 +3,8 @@ const g = require("./client");
 g.o()
   .then(dropMetadata)
   .then(() => g.addNodesFromFile("../static/states.json"))
-  .then(g.finish);
+  .then(g.finish)
+  .catch((err) => console.log(err));
 
 function dropMetadata() {
   console.log("Dropping Metadata");

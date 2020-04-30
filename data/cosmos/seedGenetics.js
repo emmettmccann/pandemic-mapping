@@ -8,7 +8,8 @@ const currDate = require("../static/currDate");
 g.o()
   .then(dropGeneticTree)
   .then(() => g.addNodesFromFile("../artifacts/nodes-" + currDate + ".json"))
-  .then(() => g.addLinksFromFile("../artifacts/links-" + currDate + ".json"))
+  .then(() => g.addLinksFromFile("../artifacts/genomeLinks-" + currDate + ".json"))
+  .then(() => g.addLinksFromFile("../artifacts/locLinks-" + currDate + ".json"))
   .then(g.count)
   .then(g.finish);
 

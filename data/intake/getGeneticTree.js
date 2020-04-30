@@ -1,9 +1,13 @@
 const fs = require("fs");
+const path = require("path");
 const fetch = require("node-fetch");
 const currDate = require("../static/currDate");
 
 var nodes = [];
 var links = [];
+var locLinks = [];
+
+let states = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../artifacts/static/states.json")));
 
 getTree();
 
@@ -22,10 +26,13 @@ async function getTree() {
   console.log(nodes[1]);
   console.log("Generated %d mutation links of raw format: ", links.length);
   console.log(links[1]);
+  console.log("Generated %d location links of raw format: ", locLinks.length);
+  console.log(locLinks[1]);
 
   // write the files
   fs.writeFileSync("../artifacts/nodes-" + currDate + ".json", JSON.stringify(nodes));
-  fs.writeFileSync("../artifacts/links-" + currDate + ".json", JSON.stringify(links));
+  fs.writeFileSync("../artifacts/genomeLinks-" + currDate + ".json", JSON.stringify(links));
+  fs.writeFileSync("../artifacts/locLinks-" + currDate + ".json", JSON.stringify(locLinks));
 }
 
 function extractNode(parentName, node) {
@@ -47,6 +54,8 @@ function extractNode(parentName, node) {
 function formatTree() {
   // format each genome node
   nodes = nodes.map(formatGenomeNode);
+  // must come after the formatting
+  nodes.map(pushLocLinks);
   // format each mutation link
   links = links.reduce((array, link) => array.concat(formatLink(link)), []);
 }
@@ -77,7 +86,29 @@ function formatGenomeNode(node) {
       d = new Date((d - 1970) * 365.25 * 24 * 60 * 60 * 1000); // convert the datetime to proper date object
       return d.toISOString().substring(0, 10);
     })(),
+    stateID: getStateID(getDef(node.node_attrs.division)),
   };
+}
+
+function pushLocLinks(node) {
+  // only do this for the sampled nodes. if not sampled, return early
+  if (!node.sampled) return;
+  locLinks.push({
+    label: "sampledIn",
+    parent: node.id,
+    child: node.stateID,
+    date: node.date,
+    date_formatted: node.date_formatted,
+    location: node.location,
+  });
+  locLinks.push({
+    label: "sampled",
+    child: node.id,
+    parent: node.stateID,
+    date: node.date,
+    date_formatted: node.date_formatted,
+    location: node.location,
+  });
 }
 
 function formatLink(link) {
@@ -117,4 +148,9 @@ function getDef(x) {
 
 function formatID(x) {
   return x.replace(/\//g, "-");
+}
+
+function getStateID(division) {
+  let s = states.find((el) => el.name == division);
+  return s !== undefined ? s.id : undefined;
 }

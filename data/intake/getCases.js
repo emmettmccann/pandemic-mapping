@@ -15,7 +15,6 @@ async function casesByStateTimeline() {
   states.pop();
 
   let cases = [];
-  let caseDateLinks = [];
   let caseLocLinks = [];
   let caseCaseLinks = [];
   states.forEach((state) => {
@@ -31,6 +30,7 @@ async function casesByStateTimeline() {
           deaths: date.deaths,
           tested: date.tested,
           source: "coronadatascraper.com",
+          date: date.date,
           dateRetrieved: currDate,
         });
         caseCaseLinks.push({
@@ -38,17 +38,22 @@ async function casesByStateTimeline() {
           child: date.date + "@" + state.stateId,
           parent: prevReport,
         });
-        caseDateLinks.push({
-          id: date.date + "@" + state.stateId + "-dateLink",
-          label: "reportedOn",
-          child: date.date,
+        caseCaseLinks.push({
+          label: "prevReport",
+          parent: date.date + "@" + state.stateId,
+          child: prevReport,
+        });
+        caseLocLinks.push({
+          label: "reportedBy",
+          date: date.date,
+          child: state.stateId.slice(-2),
           parent: date.date + "@" + state.stateId,
         });
         caseLocLinks.push({
-          id: date.date + "@" + state.stateId + "-locLink",
-          label: "reportedIn",
-          child: state.stateId.slice(-2),
-          parent: date.date + "@" + state.stateId,
+          label: "reported",
+          date: date.date,
+          parent: state.stateId.slice(-2),
+          child: date.date + "@" + state.stateId,
         });
         prevReport = date.date + "@" + state.stateId;
       }
@@ -60,7 +65,6 @@ async function casesByStateTimeline() {
 
   fs.writeFileSync("../artifacts/caseReports-" + currDate + ".json", JSON.stringify(cases));
   fs.writeFileSync("../artifacts/caseCaseLinks-" + currDate + ".json", JSON.stringify(caseCaseLinks));
-  fs.writeFileSync("../artifacts/caseDateLinks-" + currDate + ".json", JSON.stringify(caseDateLinks));
   fs.writeFileSync("../artifacts/caseLocLinks-" + currDate + ".json", JSON.stringify(caseLocLinks));
   console.log("Done");
 }

@@ -63,7 +63,7 @@ function formatGenomeNode(node) {
   return {
     label: "genome",
     id: formatID(node.name),
-    sampled: node.name.slice(0, 5) != "NODE_", // check if this is an inferred node
+    sampled: node.name.slice(0, 5) != "NODE_" && getDef(node.node_attrs.gisaid_epi_isl) != undefined, // check if this is an inferred node
     author: getDef(node.node_attrs.author),
     country: getDef(node.node_attrs.country),
     division: getDef(node.node_attrs.division),

@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const fetch = require("node-fetch");
-const currDate = require("../static/currDate");
 
 var nodes = [];
 var links = [];
@@ -30,9 +29,9 @@ async function getTree() {
   console.log(locLinks[1]);
 
   // write the files
-  fs.writeFileSync("../artifacts/nodes-" + currDate + ".json", JSON.stringify(nodes));
-  fs.writeFileSync("../artifacts/genomeLinks-" + currDate + ".json", JSON.stringify(links));
-  fs.writeFileSync("../artifacts/locLinks-" + currDate + ".json", JSON.stringify(locLinks));
+  fs.writeFileSync("../artifacts/genomeNodes.json", JSON.stringify(nodes));
+  fs.writeFileSync("../artifacts/genomeMutationLinks.json", JSON.stringify(links));
+  fs.writeFileSync("../artifacts/genomeLocLinks.json", JSON.stringify(locLinks));
 }
 
 function extractNode(parentName, node) {

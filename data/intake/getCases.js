@@ -63,9 +63,9 @@ async function casesByStateTimeline() {
   console.log("Found %d case reports of format: ", cases.length);
   console.log(cases[1]);
 
-  fs.writeFileSync("../artifacts/caseReports-" + currDate + ".json", JSON.stringify(cases));
-  fs.writeFileSync("../artifacts/caseCaseLinks-" + currDate + ".json", JSON.stringify(caseCaseLinks));
-  fs.writeFileSync("../artifacts/caseLocLinks-" + currDate + ".json", JSON.stringify(caseLocLinks));
+  fs.writeFileSync("../artifacts/caseReports.json", JSON.stringify(cases));
+  fs.writeFileSync("../artifacts/caseCaseLinks.json", JSON.stringify(caseCaseLinks));
+  fs.writeFileSync("../artifacts/caseLocLinks.json", JSON.stringify(caseLocLinks));
   console.log("Done");
 }
 

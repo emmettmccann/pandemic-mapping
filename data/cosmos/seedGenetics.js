@@ -1,5 +1,4 @@
 const g = require("./client");
-const currDate = require("../static/currDate");
 
 // get basic stats on the current db
 // g.o().then(g.count).then(g.close);
@@ -7,9 +6,9 @@ const currDate = require("../static/currDate");
 // upload from today's nextstrain files
 g.o()
   .then(dropGeneticTree)
-  .then(() => g.addNodesFromFile("../artifacts/nodes-" + currDate + ".json"))
-  .then(() => g.addLinksFromFile("../artifacts/genomeLinks-" + currDate + ".json"))
-  .then(() => g.addLinksFromFile("../artifacts/locLinks-" + currDate + ".json"))
+  .then(() => g.addNodesFromFile("../artifacts/genomeNodes.json"))
+  .then(() => g.addLinksFromFile("../artifacts/genomeMutationLinks.json"))
+  .then(() => g.addLinksFromFile("../artifacts/genomeLocLinks.json"))
   .then(g.count)
   .then(g.finish);
 

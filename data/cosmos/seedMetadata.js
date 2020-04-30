@@ -2,7 +2,7 @@ const g = require("./client");
 
 g.o()
   .then(dropMetadata)
-  .then(() => g.addNodesFromFile("../artifacts/static/states.json"))
+  .then(() => g.addNodesFromFile("../static/states.json"))
   .then(g.finish);
 
 function dropMetadata() {

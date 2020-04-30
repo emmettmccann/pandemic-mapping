@@ -137,6 +137,7 @@ client.finish = async function () {
     setTimeout(resolve, 500);
   });
   console.log("Closed");
+  process.exit(1);
 };
 
 // simple function for queries in Node REPL

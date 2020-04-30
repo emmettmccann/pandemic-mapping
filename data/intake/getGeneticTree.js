@@ -92,7 +92,7 @@ function formatGenomeNode(node) {
 
 function pushLocLinks(node) {
   // only do this for the sampled nodes. if not sampled, return early
-  if (!node.sampled) return;
+  if (!node.sampled || node.stateID == undefined) return;
   locLinks.push({
     label: "sampledIn",
     parent: node.id,

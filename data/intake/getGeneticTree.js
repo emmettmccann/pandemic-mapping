@@ -6,7 +6,7 @@ var nodes = [];
 var links = [];
 var locLinks = [];
 
-let states = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../artifacts/static/states.json")));
+let states = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../static/states.json")));
 
 getTree();
 

@@ -34,7 +34,7 @@ var client = new Gremlin.driver.Client(config.endpoint, {
 
 client.o = async function () {
   console.log("Connecting to %s", process.env.GRAPH_NAME);
-  if (process.env.CONFIRM == "true") {
+  if (process.env.VERBOSE) {
     console.log("Press ^C to cancel or any other key to continue");
     await (async () => {
       process.stdin.setRawMode(true);
@@ -96,13 +96,17 @@ client.addNodesFromFile = async function (filename) {
 
   // start progress information
   console.log("Adding %d nodes from " + filename, nodes.length);
-  b1.start(nodes.length, 0, {
-    speed: "N/A",
-  });
+  if (process.env.VERBOSE)
+    b1.start(nodes.length, 0, {
+      speed: "N/A",
+    });
 
   // upload each node in the file
   for (let i = 0; i < nodes.length; i++) {
-    b1.update(i + 1);
+    if (process.env.VERBOSE) b1.update(i + 1);
+    else {
+      if (i % 50 == 0) console.log("%d/%d", i, nodes.length);
+    }
     await client.addVertex(nodes[i]);
   }
 
@@ -115,13 +119,17 @@ client.addLinksFromFile = async function (filename) {
 
   // start progress information
   console.log("Adding %d links  from " + filename, links.length);
-  b1.start(links.length, 0, {
-    speed: "N/A",
-  });
+  if (process.env.VERBOSE)
+    b1.start(links.length, 0, {
+      speed: "N/A",
+    });
 
   // upload each link in the file with status updates every 50
   for (let i = 0; i < links.length; i++) {
-    b1.update(i + 1);
+    if (process.env.VERBOSE) b1.update(i + 1);
+    else {
+      if (i % 50 == 0) console.log("%d/%d", i, nodes.length);
+    }
     await client.addEdge(links[i]);
   }
 

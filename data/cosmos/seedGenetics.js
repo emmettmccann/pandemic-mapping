@@ -11,8 +11,10 @@ g.o()
   .then(() => g.addLinksFromFile("../artifacts/genomeLocLinks.json"))
   .then(g.count)
   .then(g.finish)
-  .catch((err) => console.log(err));
-
+  .catch((err) => {
+    console.error("Fatal:", err);
+    process.exit(1);
+  });
 function dropGeneticTree() {
   return g.submit("g.V().hasLabel('genome').drop()", {});
 }

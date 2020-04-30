@@ -6,7 +6,10 @@ g.o()
   .then(() => g.addLinksFromFile("../artifacts/caseCaseLinks.json"))
   .then(() => g.addLinksFromFile("../artifacts/caseLocLinks.json"))
   .then(g.finish)
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.error("Fatal:", err);
+    process.exit(1);
+  });
 
 function dropCases() {
   return g.submit("g.V().hasLabel('caseReport').drop()", {});

@@ -128,7 +128,7 @@ client.addLinksFromFile = async function (filename) {
   for (let i = 0; i < links.length; i++) {
     if (process.env.VERBOSE) b1.update(i + 1);
     else {
-      if (i % 50 == 0) console.log("%d/%d", i, nodes.length);
+      if (i % 50 == 0) console.log("%d/%d", i, links.length);
     }
     await client.addEdge(links[i]);
   }

@@ -9,7 +9,7 @@
       "colors": "^1.4.0",
       "dotenv": "^8.2.0",
       "fs-extra": "^9.0.0",
-      "gremlin": "^3.3.4",
+      "gremlin": "^3.4.6",
       "node-fetch": "^2.6.0"
    }
 }

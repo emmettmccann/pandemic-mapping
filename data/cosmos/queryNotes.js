@@ -1,3 +1,5 @@
+import { until } from "async";
+
 g.V().hasLabel("location");
 g.V().or(has("name", "Washington"), has("division", "Washington")).count();
 g.V().has("name", "Washington").count();
@@ -132,3 +134,31 @@ g.V("USA-WA1-2020").out().out("sampledIn").path().unfold()[
 ];
 
 9194;
+.by(constant(0.0)).by('diff').map(unfold().sum())
+
+const date1 = new Date('April 30, 2020 17:30:00');
+
+g.withSack(1.0f).v('NODE_0000078').repeat(outE('gParent','gChild').sack(add).by('diff').inV().simplePath()).times(10).sack()
+
+gremlin> g.withSack(1.0f).V().repeat(outE().sack(mult).by('weight').inV()).times(2).sack()
+
+g.v('NODE_0000078').repeat(outE('gParent','gChild').inV().simplePath()).times(10).path().map(unfold().coalesce(values('diff'),constant(0.0)).sum())
+
+g.v('NODE_0000078').repeat(outE('gParent','gChild').inV().simplePath()).times(10).path().unfold().project('v','t').by(limit(1)).by(tail(1)).select('v','t')
+.map(unfold().coalesce(values('diff'),constant(0.0)).sum())
+
+g.v('NODE_0000078').repeat(outE('gParent','gChild').inV().simplePath()).until(has('sampled',true).or().loops().is(10)).path().project('v','t').by(unfold().limit(1)).by(unfold().tail(1)).select('v','t').by('id')
+
+
+g.v('NODE_0000078').repeat(outE('gParent','gChild').inV().simplePath()).until(has('sampled',true).or().loops().is(10)).path().project('v','t','c','j').by(unfold().limit(1)).by(unfold().tail(1)).by(map(unfold().coalesce(values('diff'),constant(0.0)).sum())).by(unfold().count()).select('v','t','c','j').by('id').by('id').by().by().by(select('c'))
+
+
+g.v('NODE_0000078').repeat(outE('gParent','gChild').inV().simplePath()).until(has('sampled',true).or().loops().is(10)).path().project('source','target','mutations','steps').by(unfold().limit(1)).by(unfold().tail(1)).by(map(unfold().coalesce(values('diff'),constant(0.0)).sum())).by(unfold().count()).select('source','target','mutations','steps').by('division').by('division').by().by().order().by(select('mutations'))
+
+g.v('USA-NY-PV09147-2020').repeat(outE('gParent','gChild').inV().simplePath()).until(has('sampled',true).or().loops().is(10)).path().project('v','t','c','j').by(unfold().limit(1)).by(unfold().tail(1)).by(map(unfold().coalesce(values('diff'),constant(0.0)).sum())).by(unfold().count()).select('v','t','c','j').by('id').by('id').by().by().by(select('c'))
+
+g.v('USA-WA-S22-2020')    .repeat(outE('gParent','gChild').inV().simplePath())       .until(has('sampled',true).or().loops().is(10))    .path().project('source','target','mutations','steps')       .by(unfold().limit(1).id())       .by(unfold().tail(1).coalesce(values('division'),id()))       .by(map(unfold().coalesce(values('diff'),constant(0.0)).sum()))       .by(unfold().count())    .select('source','target','mutations','steps')       .by()       .by()       .by()       .by()    .order().by(select('mutations'))
+
+g.v('USA-WA-S22-2020')
+
+coalesce(values('division'),id())

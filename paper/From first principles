@@ -1,0 +1,54 @@
+From first principles:
+
+This is a scale problem
+
+each problem boils down to the scale of infections
+
+We show this the same way we show other time-based scale problems
+
+line charts
+
+We show the disease as growing bubbles on maps because that's how we think of it
+
+It "grows"
+
+This is a scale problem but at its heart, it is a transmission problem
+
+this is represented in our charts as R0: the growth or transmission rate
+
+how many people does each infected person infect
+
+But we don't respond to this on a person to person (R0) scale.
+
+	we just dont know who is infected so we can't yet do that.
+
+	its an asymptomatic disease
+
+we respond to it on a county to county, state to state, national scale.
+
+we can hope to impact the R0 but that is with sweeping measures.
+
+How can we better understand the transmission characteristics? (the core of the problem)
+
+We must get down to the transmission level
+
+traditionally this was done with interviews and trying to understand where each infection comes from 
+
+Community spread means people have been infected with the virus in an area, including some who are not sure how or where they became infected.
+
+The key there is that there are many (due to the scale of the problem) for which we cannot identify their path of infection
+
+So how can we understand spread without understanding the relationships and contact between people?
+
+Genetics. Specifically Phylogenetics
+
+Phylogenetics allows us to look at samples of the virus in each infected person and build out an understanding of how their virus is related to other samples
+
+The study of phylogenetics results in a phylogenetic tree that can help geneticists understand how viruses evolve over time.
+
+New methods can produce a phylogenetic tree of samples in near real time
+
+This helps us understand the mutation relationships between samples.
+
+But in order to understand transmission, we have to look at a bigger picture
+

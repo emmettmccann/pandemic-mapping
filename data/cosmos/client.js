@@ -1,7 +1,7 @@
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 const Gremlin = require("gremlin");
-const fs = require("fs");
+const fs = require("fs-extra");
 const cliProgress = require("cli-progress");
 const _colors = require("colors");
 
@@ -32,6 +32,28 @@ var client = new Gremlin.driver.Client(config.endpoint, {
   mimeType: "application/vnd.gremlin-v2.0+json",
 });
 
+client.o = async function () {
+  console.log("Connecting to %s", process.env.GRAPH_NAME);
+  if (process.env.VERBOSE) {
+    console.log("Press ^C to cancel or any other key to continue");
+    await (async () => {
+      process.stdin.setRawMode(true);
+      return new Promise((resolve) =>
+        process.stdin.once("data", (data) => {
+          const byteArray = [...data];
+          if (byteArray.length > 0 && byteArray[0] === 3) {
+            console.log("^C");
+            process.exit(1);
+          }
+          process.stdin.setRawMode(false);
+          resolve();
+        })
+      );
+    })();
+  }
+  return client.open();
+};
+
 client.count = async function () {
   return client
     .submit("g.E().count().store('Edges').V().count().store('Nodes').select('Nodes','Edges')", {})
@@ -52,7 +74,7 @@ client.getShape = async function () {
 };
 
 client.addVertex = function (v, pk) {
-  let query = "g.addV(type)";
+  let query = "g.addV(label)";
   Object.keys(v).forEach((k) => {
     query += ".property('" + k + "', " + k + ")";
   });
@@ -61,7 +83,7 @@ client.addVertex = function (v, pk) {
 };
 
 client.addEdge = function (e) {
-  let query = "g.V(parent).addE(type).to(g.V(child))";
+  let query = "g.V(parent).addE(label).to(g.V(child))";
   Object.keys(e).forEach((k) => {
     query += ".property('" + k + "', " + k + ")";
   });
@@ -74,13 +96,17 @@ client.addNodesFromFile = async function (filename) {
 
   // start progress information
   console.log("Adding %d nodes from " + filename, nodes.length);
-  b1.start(nodes.length, 0, {
-    speed: "N/A",
-  });
+  if (process.env.VERBOSE)
+    b1.start(nodes.length, 0, {
+      speed: "N/A",
+    });
 
   // upload each node in the file
   for (let i = 0; i < nodes.length; i++) {
-    b1.update(i + 1);
+    if (process.env.VERBOSE) b1.update(i + 1);
+    else {
+      if (i % 50 == 0) console.log("%d/%d", i, nodes.length);
+    }
     await client.addVertex(nodes[i]);
   }
 
@@ -93,13 +119,17 @@ client.addLinksFromFile = async function (filename) {
 
   // start progress information
   console.log("Adding %d links  from " + filename, links.length);
-  b1.start(links.length, 0, {
-    speed: "N/A",
-  });
+  if (process.env.VERBOSE)
+    b1.start(links.length, 0, {
+      speed: "N/A",
+    });
 
   // upload each link in the file with status updates every 50
   for (let i = 0; i < links.length; i++) {
-    b1.update(i + 1);
+    if (process.env.VERBOSE) b1.update(i + 1);
+    else {
+      if (i % 50 == 0) console.log("%d/%d", i, links.length);
+    }
     await client.addEdge(links[i]);
   }
 
@@ -115,6 +145,7 @@ client.finish = async function () {
     setTimeout(resolve, 500);
   });
   console.log("Closed");
+  // process.exit(1);
 };
 
 // simple function for queries in Node REPL

@@ -6,42 +6,72 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-jobs:
-  - job: Fetch_New_Data
-    steps:
-      - script: |
-          cd data/
-          npm install
-        displayName: 'npm install'
-      - script: |
-          cd data/intake/
-          node getCases.js
-        displayName: 'Fetch Case Data'
-      - script: |
-          cd data/intake/
-          node getGeneticTree.js
-        displayName: 'Fetch Phylogenetic Tree from Nextstrain'
-  # - job: Seed_Graph
-  #   dependsOn: Fetch_New_Data
-  #   condition: succeededOrFailed()
-  #   steps:
-      # - script: |
-      #     cd data/
-      #     npm install
-      #   displayName: 'npm install'
-      - script: |
-          cd data/cosmos/
-          node seedMetadata.js
-        displayName: 'Seed Metadata'
-      - script: |
-          cd data/cosmos/
-          node seedCaseReports.js
-        displayName: 'Seed Case Reports'
-      - script: |
-          cd data/cosmos/
-          node seedGenetics.js
-        displayName: 'Seed Phylogenetic Tree'
-      - script: |
-          cd data/cosmos/
-          node linkGeneticMetadata.js
-        displayName: 'Link Genetic Metadata'
+stages:
+  - stage: Fetch
+    jobs:
+      - job: Fetch_New_Data
+        steps:
+          - script: |
+              cd data/
+              npm install
+            displayName: 'npm install'
+          - script: |
+              cd data/intake/
+              node getCases.js
+            displayName: 'Fetch Case Data'
+          - script: |
+              cd data/intake/
+              node getGeneticTree.js
+            displayName: 'Fetch Phylogenetic Tree from Nextstrain'
+          - publish: $(System.DefaultWorkingDirectory)/data/artifacts
+            artifact: data
+            displayName: 'Publish Data Artifact'
+  - stage: Seed
+    condition: succeeded()
+    jobs:
+      - job: Metadata
+        steps:
+          - script: |
+              cd data/
+              npm install
+            displayName: 'npm install'
+          - script: |
+              cd data/cosmos/
+              node seedMetadata.js
+            displayName: 'Seed Metadata'
+      - job: GeneticData
+        dependsOn: Metadata
+        steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              source: current
+              artifact: data
+              targetPath: $(System.DefaultWorkingDirectory)/data/artifacts
+            displayName: 'Download New Data Artifact'
+          - script: |
+              cd data/
+              npm install
+            displayName: 'npm install'
+          - script: |
+              cd data/cosmos/
+              node seedGenetics.js
+            displayName: 'Seed Phylogenetic Tree'
+      - job: CaseReports
+        dependsOn: 
+        - Metadata
+        - GeneticData
+        steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              source: current
+              artifact: data
+              targetPath: $(System.DefaultWorkingDirectory)/data/artifacts
+            displayName: 'Download New Data Artifact'
+          - script: |
+              cd data/
+              npm install
+            displayName: 'npm install'
+          - script: |
+              cd data/cosmos/
+              node seedCaseReports.js
+            displayName: 'Seed Case Reports'

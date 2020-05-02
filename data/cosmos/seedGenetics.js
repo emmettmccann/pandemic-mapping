@@ -1,17 +1,20 @@
 const g = require("./client");
-const currDate = require("../static/currDate");
 
 // get basic stats on the current db
-// g.open().then(g.count).then(g.close);
+// g.o().then(g.count).then(g.close);
 
 // upload from today's nextstrain files
-g.open()
+g.o()
   .then(dropGeneticTree)
-  .then(() => g.addNodesFromFile("../artifacts/nodes-" + currDate + ".json"))
-  .then(() => g.addLinksFromFile("../artifacts/links-" + currDate + ".json"))
+  .then(() => g.addNodesFromFile("../artifacts/genomeNodes.json"))
+  .then(() => g.addLinksFromFile("../artifacts/genomeMutationLinks.json"))
+  .then(() => g.addLinksFromFile("../artifacts/genomeLocLinks.json"))
   .then(g.count)
-  .then(g.finish);
-
+  .then(g.finish)
+  .catch((err) => {
+    console.error("Fatal:", err);
+    process.exit(1);
+  });
 function dropGeneticTree() {
   return g.submit("g.V().hasLabel('genome').drop()", {});
 }

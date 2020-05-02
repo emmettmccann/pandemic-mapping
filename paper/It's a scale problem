@@ -1,0 +1,28 @@
+It's a scale problem
+at the heart of any scale problem is a transmission problem
+if you want to drive scale you have to drive transmission
+if you want to limit scale you have to limit transmission
+how can we limit transmission if we dont even understand what is happening
+we understand the person to person transmission and how to limit that
+but at the moment, our main source of understanding community spread and interstate and international spread is interviews
+we ask infected people where theyve been and who theyve been with
+but 'Community spread' means people have been infected with the virus in an area, including some who are not sure how or where they became infected.
+We can't understand the transmission within a community and even between communities if the spread is so dramatic that we cant keep up with our interviews
+interviews are essentially a one step ledger. "where were you last"
+Genetics gives us a much better picture
+the mutations in the genome of a virus essentially form a ledger of where theyve been
+if we can catch genome samples at each stage in the transmission chain, we can greatly understand where the virus moves and how it got there
+but we cant
+so weve moved to phylogenetics
+this is the study of how similar genomes are from a probabalistic standpoint
+we create a phylogenetic tree that essentially groups the genomes together
+by augmenting this with location data, you can begin to see interactions between states
+but if we put this in a format that is inherently about interaction and relationships, we can analyze it much better
+enter graph databases
+these let us really dig into the relationships between two genomes and understand some levels of where genomes come from.
+this mirrors the transmission chain.
+however, the way this is currently set up, this only tells us to shut down transmission between two genomes?
+that doesnt make any sense
+but augmenting this data with more layers, we can link those transmission chains to real locations: political divisions that can act.
+if our response is based in geopolitics, we need to understand the data from that perspective.
+thats where maps come in

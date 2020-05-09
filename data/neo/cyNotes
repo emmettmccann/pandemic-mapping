@@ -1,0 +1,96 @@
+MATCH (start:genome{id:'USA-AZ-TG273280-2020'}), (end:state)
+CALL gds.alpha.shortestPath.write({
+  nodeQuery:'MATCH (n:genome) RETURN id(n) AS id',
+  relationshipQuery:'MATCH (n:genome)-[r:MUTATED_TO]-(m:genome), (n:genome)-[o:SAMPLED_IN]->(m:state) RETURN id(n) AS source, id(m) AS target, r.diff AS weight',
+  startNode: start,
+  endNode: end,
+  relationshipWeightProperty: 'weight'
+})
+YIELD nodeCount, totalCost
+RETURN end.name,nodeCount,totalCost
+
+MATCH (from:genome{id:'USA-AZ-TG273280-2020'})-[:SAMPLED_IN]-(from)
+MATCH (:state{stateID:'AZ'})-[:SAMPLED_IN]-(from)
+MATCH (state:state)
+CALL apoc.algo.dijkstra(from, state, 'MUTATED_TO|SAMPLED_IN>', 'diff') yield path as path, weight as weight
+RETURN nodes(path)[-1], weight ORDER BY weight
+
+MATCH (start:genome{stateID:'WA'}) where start.date < 2020.1434426229507
+with start.date as d, start as start
+MATCH (end:genome {country:'USA',sampled:true})-[:SAMPLED_IN]->(state) where end.date < d
+CALL apoc.algo.dijkstra(start, end, 'MUTATED_TO|SAMPLED_IN>', 'diff') yield path as path, weight as weight
+WITH nodes(path)[0].id as head, nodes(path)[-1].id as tail, 1/(weight+1) as similarity
+return head, tail, similarity
+
+
+
+
+
+// get all WA nodes < given date
+MATCH (child:genome{stateID:'WA'}) where child.date < 2020.1434426229507
+with child.date as cDate, child as child
+// get all possible ancestors of those (in US)
+MATCH (child)-[:MUTATED_TO*]-(parent:genome {country:'USA',sampled:true}) where parent.date < cDate
+// find shortest path from each node to each ancestor
+CALL apoc.algo.dijkstra(child, parent, 'MUTATED_TO|SAMPLED_IN>', 'diff') yield path as path, weight as weight
+
+// get the node id, ancestor state, and directness (0 to 1)
+WITH nodes(path)[0] as head, nodes(path)[-1].stateID as tail, 1/(weight+1) as directness
+
+// average+sum the directness for each possible ancestral state
+with head as head, tail as tail, sum(directness) as dSum, avg(directness) as dAvg, count(directness) as dCount
+
+
+// // find the ancestral state node
+// MATCH (b:state)
+// WHERE b.id = tail
+// // create a relationship back to the ancestral state node
+// CREATE (head)-[r:PROBABLE_SOURCE { sum: dSum, avg:dAvg, count:dCount }]->(b)
+return head.id, tail, dSum, dAvg, dCount order by head, dCount DESC
+
+
+
+// get all WA nodes < given date
+MATCH (child:genome{country:'USA',sampled:true})-[:SAMPLED_IN]-()
+with child.date as cDate, child as child
+// get all possible ancestors of those (in US)
+Optional MATCH (child)-[:MUTATED_TO*1..5]-(parent:genome {country:'USA',sampled:true}) where parent.date < cDate
+// find shortest path from each node to each ancestor
+CALL apoc.algo.dijkstra(child, parent, 'MUTATED_TO|SAMPLED_IN>', 'diff') yield path as path, weight as weight
+
+// get the node id, ancestor state, and directness (0 to 1)
+WITH nodes(path)[0] as head, nodes(path)[-1].stateID as tail, 1/(weight+1) as directness
+
+// average+sum the directness for each possible ancestral state
+with head as head, tail as tail, sum(directness) as dSum, avg(directness) as dAvg, max(directness) as dMax, count(directness) as dCount
+
+
+// find the ancestral state node
+MATCH (b:state)
+WHERE b.id = tail
+// create a relationship back to the ancestral state node
+CREATE (head)-[r:PROBABLE_SOURCE { sum: dSum, avg:dAvg, max:dMax, count:dCount }]->(b)
+return head.id, tail, dSum, dAvg, dCount order by head, dCount DESC
+
+
+// get all WA nodes < given date
+MATCH (child:genome{stateID:'WA'}) where child.date < 2020.1434426229507
+with child.date as cDate, child as child
+// get all possible ancestors of those (in US)
+MATCH (parent:genome {country:'USA',sampled:true})-[:SAMPLED_IN]->(state) where parent.date < cDate
+// find shortest path from each node to each ancestor
+CALL apoc.algo.dijkstra(child, parent, 'MUTATED_TO|SAMPLED_IN>', 'diff') yield path as path, weight as weight
+
+// get the node id, ancestor state, and directness (0 to 1)
+WITH nodes(path)[0] as head, nodes(path)[-1].stateID as tail, 1/(weight+1) as directness
+
+// average+sum the directness for each possible ancestral state
+with head as head, tail as tail, sum(directness) as dSum, avg(directness) as dAvg, count(directness) as dCount
+
+
+// // find the ancestral state node
+// MATCH (b:state)
+// WHERE b.id = tail
+// // create a relationship back to the ancestral state node
+// CREATE (head)-[r:PROBABLE_SOURCE { sum: dSum, avg:dAvg, count:dCount }]->(b)
+return head.id, tail, dSum, dAvg, dCount order by head, dCount DESC

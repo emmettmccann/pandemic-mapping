@@ -13,7 +13,7 @@ exports.getSession = function (context) {
 
 exports.closeSession = async function (context) {
   if (context.neo4jSession) {
-    await this.session.close();
+    await context.neo4jSession.close();
     context.neo4jSession = null;
     return true;
   } else {

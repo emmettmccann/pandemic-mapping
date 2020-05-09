@@ -36,9 +36,9 @@ router.get("/probables", function (req, res, next) {
     db.closeSession(req);
     const response = result.records.map((record) => {
       return {
-        source: record.get("parent"),
-        location: record.get("loc"),
-        transmission: record.get("seed"),
+        parent: record.get("parent").properties,
+        child: record.get("loc").properties,
+        data: record.get("seed").properties,
       };
     });
     res.json(response);

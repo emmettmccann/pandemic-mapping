@@ -29,9 +29,9 @@ async function getTree() {
   console.log(locLinks[1]);
 
   // write the files
-  fs.outputJsonSync("../artifacts/genomeNodes.json", nodes);
-  fs.outputJsonSync("../artifacts/genomeMutationLinks.json", links);
-  fs.outputJsonSync("../artifacts/genomeLocLinks.json", locLinks);
+  fs.outputJsonSync("../../artifacts/genomeNodes.json", nodes);
+  fs.outputJsonSync("../../artifacts/genomeMutationLinks.json", links);
+  fs.outputJsonSync("../../artifacts/genomeLocLinks.json", locLinks);
 }
 
 function extractNode(parentName, node) {
@@ -93,26 +93,26 @@ function pushLocLinks(node) {
   // only do this for the sampled nodes. if not sampled, return early
   if (!node.sampled || node.stateID == undefined) return;
   locLinks.push({
-    label: "sampledIn",
+    label: "SAMPLED_IN",
     parent: node.id,
     child: node.stateID,
     date: node.date,
     date_formatted: node.date_formatted,
     location: node.location,
   });
-  locLinks.push({
-    label: "sampled",
-    child: node.id,
-    parent: node.stateID,
-    date: node.date,
-    date_formatted: node.date_formatted,
-    location: node.location,
-  });
+  // locLinks.push({
+  //   label: "sampled",
+  //   child: node.id,
+  //   parent: node.stateID,
+  //   date: node.date,
+  //   date_formatted: node.date_formatted,
+  //   location: node.location,
+  // });
 }
 
 function formatLink(link) {
   let l1 = {
-    label: "gChild",
+    label: "MUTATED_TO",
     parent: formatID(link.parent),
     child: formatID(link.child),
     aaMut: link.mutation && link.mutation.labels ? link.mutation.labels.aa : undefined, // get the amino acid mutations if they exist
@@ -128,14 +128,15 @@ function formatLink(link) {
       link.mutation && link.mutation.mutations && link.mutation.mutations.nuc ? link.mutation.mutations.nuc.length : 0,
   };
   let l2 = {
-    label: "gParent",
+    label: "MUTATED_FROM",
     parent: l1.child,
     child: l1.parent,
     aaMut: l1.aaMut,
     nuc: l1.nuc,
     diff: l1.diff,
   };
-  return [l1, l2];
+  // return [l1, l2];
+  return [l1];
 }
 
 // helped for pulling values out of optionally defined attributes of format

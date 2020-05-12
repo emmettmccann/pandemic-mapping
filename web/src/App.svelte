@@ -44,16 +44,22 @@
 </script>
 
 <style>
-
+  #slide {
+    position: fixed;
+    z-index: 10;
+  }
 </style>
 
 <main>
-  <input
-    type="range"
-    bind:value={prob}
-    min="0"
-    max="1"
-    step="0.1"
-    on:mouseup={getLinks} />
+  <div id="slide">
+    <input
+      type="range"
+      bind:value={prob}
+      min="0"
+      max="1"
+      step="0.1"
+      on:mouseup={getLinks} />
+  </div>
   <Graph {graph} />
+
 </main>

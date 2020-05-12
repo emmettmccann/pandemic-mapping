@@ -14,7 +14,7 @@
   onMount(async () => {
     onFirstLoad();
     loaded = true;
-    update(graph);
+    // update(graph);
   });
 
   $: update(graph);

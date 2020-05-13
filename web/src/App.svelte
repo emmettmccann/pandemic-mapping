@@ -225,7 +225,7 @@
   function getLinks() {
     if (!ready) return;
     console.log(prob);
-    let url = "http://6539011a.ngrok.io/probables/agg?";
+    let url = "http://localhost:3000/probables/agg?";
     url += "prob=" + prob;
     url += "&states=" + selectedStateKeys;
     url += "&maxDate=" + "'" + maxDate + "'";

@@ -29,7 +29,9 @@ router.get("/probables", function (req, res, next) {
   let prob = parseFloat(req.query.prob);
   if (isNaN(prob)) prob = 0.4; // do it this way to allow prob to be 0
 
-  let states = req.query.states.toString();
+  let states = req.query.states.toString() || "";
+  let maxDate = req.query.maxDate.toString() || "";
+  let minDate = req.query.minDate.toString() || "";
 
   let parents = req.query.parents;
   let children = req.query.children;
@@ -38,6 +40,8 @@ router.get("/probables", function (req, res, next) {
   if (states.length > 0) q += " WITH [" + states + "] as states ";
   q += " MATCH (loc:state)<-[samp:SAMPLED_IN]-(n:genome)-[r:PROBABLE_SOURCE]->(parent:state) where r.avg > " + prob;
   q += " and loc.id <> parent.id ";
+  if (maxDate.length > 0) q += "and n.date_formatted < " + maxDate + " ";
+  if (minDate.length > 0) q += "and n.date_formatted > " + minDate + " ";
   if (states.length > 0) {
     if (parents && children) q += " and ( loc.id in states or parent.id in states ) ";
     else if (parents) q += " and ( loc.id in states) ";

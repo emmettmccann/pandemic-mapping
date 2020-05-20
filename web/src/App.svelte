@@ -200,7 +200,7 @@
   let maxDate = "2020-04-02";
   // let links = [];
   let graph = {};
-  let ready = false;
+  let ready = true;
 
   $: liveReload(
     prob,
@@ -278,6 +278,7 @@
     });
     apiResponse.forEach(link => {
       links.push({
+        id: link.parent.id + "-" + link.child.id,
         source: link.parent.id,
         target: link.child.id,
         data: link.data
@@ -354,6 +355,11 @@
     <input type="checkbox" bind:checked={children} />
     Possible Descendants
   </div>
-  <Map lat={41} lon={-97} zoom={3} />
-  <Graph {graph} on:ready={setReady} />
+  <Map lat={41} lon={-97} zoom={3}>
+    {#if graph.nodes}
+      <!-- content here -->
+      <Graph inputGraph={graph} on:ready={setReady} />
+    {/if}
+  </Map>
+
 </main>

@@ -224,7 +224,6 @@
 
   function getLinks() {
     if (!ready) return;
-    console.log(prob);
     let url = "http://localhost:3000/probables/agg?";
     url += "prob=" + prob;
     url += "&states=" + selectedStateKeys;
@@ -236,26 +235,22 @@
       .then(response => response.json())
       .then(res => {
         let g = probableLinksToGraph(res);
-        console.log(g);
 
         g.nodes.forEach(node => {
           if (locationLock) {
-            node.locFix = true;
+            node.fixToMapLocation = true;
           } else if (locationLockSelected) {
             if (
               selectedValue.findIndex(item => {
-                console.log(selectedValue);
-                console.log(item);
-
                 return item.value == node.id;
               }) > -1
             ) {
-              node.locFix = true;
+              node.fixToMapLocation = true;
             } else {
-              node.locFix = false;
+              node.fixToMapLocation = false;
             }
           } else {
-            node.locFix = false;
+            node.fixToMapLocation = false;
           }
         });
 
@@ -358,7 +353,7 @@
   <Map lat={41} lon={-97} zoom={3}>
     {#if graph.nodes}
       <!-- content here -->
-      <Graph inputGraph={graph} on:ready={setReady} />
+      <Graph graphData={graph} on:ready={setReady} />
     {/if}
   </Map>
 

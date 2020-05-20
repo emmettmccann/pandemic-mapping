@@ -13,8 +13,6 @@
   let container;
   let map;
 
-  $: console.log(map);
-
   onMount(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";

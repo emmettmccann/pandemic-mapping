@@ -2,36 +2,23 @@
   import * as d3 from "d3";
   import { onMount, getContext } from "svelte";
   import { mapbox, key } from "./mapbox.js";
-  import { createEventDispatcher } from "svelte";
-  import { fade, scale } from "svelte/transition";
-
-  const dispatch = createEventDispatcher();
+  import { fade } from "svelte/transition";
 
   const { getMap } = getContext(key);
   const map = getMap();
 
-  var width, height;
+  let simulation; // the force directed simulation
+  let adjlist; // a list of edges for interaction information
 
-  let simulation,
-    adjlist,
-    container,
-    link,
-    transmission,
-    node,
-    nodeLabel,
-    tooltip;
+  export let graphData = { nodes: [], links: [] }; // externally available graph object
+  let graph = { nodes: [], links: [] }; // internal graph object for simulation and display
 
   // ===================== Graph Data Management =====================
-  export let inputGraph = { nodes: [], links: [] };
-  let graph = { nodes: [], links: [] };
-
   // When a new graph comes in, update the current graph to match
-  $: graph = updateGraph(inputGraph);
+  $: updateGraph(graphData);
 
   // Update 'graph', adding new nodes from newGraph and keeping all nodes that match between newGraph and graph
   function updateGraph(newGraph) {
-    console.log(newGraph);
-
     let updatedGraph = {};
 
     // create a map of the existing nodes
@@ -45,114 +32,102 @@
     // build a new set of links
     updatedGraph.links = newGraph.links.map(d => Object.assign({}, d));
 
-    return updatedGraph;
+    // rebuild the adjacency list for highlighting neighbors on hover
+    adjlist = [];
+    updatedGraph.links.forEach(function(d) {
+      adjlist[d.source + "-" + d.target] = true;
+      adjlist[d.target + "-" + d.source] = true;
+    });
+
+    graph = updatedGraph;
+
+    // reset the force simulation with the new data
+    attachSimulation(graph);
   }
-
-  $: updateForceSimulation(graph);
-
   // ==========================================
 
-  onMount(onFirstLoad);
-
-  function onFirstLoad() {
+  onMount(() => {
+    // Instantiate new force directed simulation
     simulation = d3
       .forceSimulation(graph.nodes)
-      .force("charge", d3.forceManyBody().strength(-2000))
-      .force("x", d3.forceX(window.innerWidth / 3).strength(0.2))
-      .force("y", d3.forceY(window.innerHeight / 3).strength(0.05))
-      .force("link", d3.forceLink(graph.links).id(d => d.id))
-      .on("tick", () => {
-        graph.nodes = [...graph.nodes];
-        graph.nodes.map(d => {
-          if (d.locFix) {
-            // get the pixel coordinates based on the map position
-            let { x, y } = map.project([d.lat, d.lon]);
-            d.fx = x;
-            d.fy = y;
-          } else {
-            d.fx = null;
-            d.fy = null;
-          }
-        });
-        graph.links = [...graph.links];
-      });
+      .force("charge", d3.forceManyBody().strength(-2000)) // push nodes apart to reduce clumping
+      .force("x", d3.forceX(window.innerWidth / 3).strength(0.2)) // center nodes on the xAxis
+      .force("y", d3.forceY(window.innerHeight / 3).strength(0.05)) // center nodes on the yAxis
+      .force("link", d3.forceLink(graph.links).id(d => d.id)) // add forces based on the links between nodes
+      .on("tick", simulationTick);
 
+    // Set up a listener to ping the simulation whenever the map moves
     map.on("move", function() {
-      simulation.alphaTarget(simulation.alpha());
+      simulation.alpha(0.3).restart();
+    });
+  });
+
+  function simulationTick() {
+    graph.nodes = [...graph.nodes]; // copy over nodes from step to step
+    graph.links = [...graph.links]; // copy over links from step to step
+    console.log("tick");
+
+    // Update nodes where needed
+    graph.nodes.map(node => {
+      if (node.fixToMapLocation) {
+        // get the pixel coordinates based on the map position
+        let { x, y } = map.project([node.lat, node.lon]);
+        node.fx = x;
+        node.fy = y;
+      } else {
+        // Release nodes from fixed positions
+        node.fx = null;
+        node.fy = null;
+      }
     });
   }
 
-  function neigh(a, b) {
-    return a == b || adjlist[a + "-" + b];
-  }
-
-  function updateForceSimulation(simulationGraph) {
+  function attachSimulation(graphToSimulate) {
+    // Don't run if there is no simulation to update
     if (!simulation) return;
 
     // Update the simulation.
-    simulation.nodes(simulationGraph.nodes);
-    simulation.force("link").links(simulationGraph.links);
+    simulation.nodes(graphToSimulate.nodes);
+    simulation.force("link").links(graphToSimulate.links);
 
     // Restart the simulation
     simulation.alpha(0.3).restart();
   }
 
-  function ticked() {
-    node.attr("transform", function(d) {
-      return "translate(" + fixna(d.x) + "," + fixna(d.y) + ")";
+  // Set hovering opacities
+  function focus(focusedNode) {
+    let focusedNodeID = focusedNode.id;
+
+    // update opacity for all links
+    graph.nodes.forEach(otherNode => {
+      // If the other node is connected, don't change it. Otherwise, make it nearly invisible.
+      otherNode.alpha =
+        focusedNodeID == otherNode.id || // other node is actually this node OR
+        adjlist[focusedNodeID + "-" + otherNode.id] // other node is connected to this node
+          ? null // no change
+          : 0.1; // reduced visibility
+    });
+
+    // update alpha for all links
+    graph.links.forEach(link => {
+      link.alpha =
+        link.source.id == focusedNodeID || link.target.id == focusedNodeID // Is this link connected to the focused node?
+          ? null // if it is connected, don't change
+          : 0.001; // if not connected, set its opacity to almost 0
     });
   }
 
-  function dblclick(d) {
-    if (d.locFix) {
-      d.locFix = false;
-      d.fx = null;
-      d.fy = null;
-    } else {
-      d.locFix = true;
-    }
-    // d3.select(this).classed("fixed", (d.fixed = false));
+  // Clear manual opacities
+  function unfocus() {
+    graph.nodes.forEach(node => {
+      node.alpha = null;
+    });
+    graph.links.forEach(link => {
+      link.alpha = null;
+    });
   }
 
-  function fixna(x) {
-    if (isFinite(x)) return x;
-    return 0;
-  }
-
-  // function focus(d) {
-  //   var id = d3.select(d3.event.target).datum().id;
-  //   node.style("opacity", function(o) {
-  //     return neigh(id, o.id) ? 0.8 : 0.1;
-  //   });
-  //   link.style("opacity", function(o) {
-  //     return o.source.id == id || o.target.id == id ? o.data.prob : 0.0;
-  //   });
-  // }
-
-  // function unfocus() {
-  //   node.style("opacity", 0.8);
-  //   link.style("opacity", d => {
-  //     return d.data.prob;
-  //   });
-  // }
-
-  // function dragstarted(d) {
-  //   d3.event.sourceEvent.stopPropagation();
-  //   d3.select(this).classed("fixed", (d.fixed = true));
-  //   if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-  //   d.fx = d.x;
-  //   d.fy = d.y;
-  // }
-
-  // function dragged(d) {
-  //   d.fx = d3.event.x;
-  //   d.fy = d3.event.y;
-  // }
-
-  function dragended(d) {
-    if (!d3.event.active) simulation.alphaTarget(0);
-  }
-
+  // animation for adding new nodes to the graph via growing the circle
   function expand(node, params) {
     const actualRadius = node.r.baseVal.value;
 
@@ -182,7 +157,7 @@
 
 <svg id="graph">
   {#each graph.links as link (link.id)}
-    <g stroke="#999" stroke-opacity={link.data.prob}>
+    <g stroke="#999" opacity={link.alpha || link.data.prob}>
       <line
         transition:fade={{ duration: 200 }}
         x1={link.source.x}
@@ -199,9 +174,11 @@
       transition:expand
       class="node"
       r="7"
-      opacity="0.8"
+      opacity={point.alpha || 0.8}
       cx={point.x}
-      cy={point.y}>
+      cy={point.y}
+      on:mouseover={focus(point)}
+      on:mouseout={unfocus}>
       <title>{point.id}</title>
     </circle>
   {/each}

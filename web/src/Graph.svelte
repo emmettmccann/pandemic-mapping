@@ -119,13 +119,8 @@
 
   // Clear manual opacities
   function unfocus() {
-    graph.nodes.forEach(node => {
-      node.alpha = null;
-    });
-    graph.links.forEach(link => {
-      link.alpha = null;
-    });
-
+    graph.nodes.forEach(node => (node.alpha = null));
+    graph.links.forEach(link => (link.alpha = null));
     graph = graph;
   }
 

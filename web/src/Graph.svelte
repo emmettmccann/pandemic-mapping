@@ -61,7 +61,6 @@
   function simTick() {
     graph.nodes = [...graph.nodes]; // copy over nodes from step to step
     graph.links = [...graph.links]; // copy over links from step to step
-    console.log("tick");
 
     // Update nodes where needed
     graph.nodes.map(node => {
@@ -112,6 +111,10 @@
           ? null // if it is connected, don't change
           : 0.001; // if not connected, set its opacity to almost 0
     });
+
+    // force update the DOM (svelte updates on assignment and forEach does not trigger this)
+    // https://svelte.dev/tutorial/updating-arrays-and-objects
+    graph = graph;
   }
 
   // Clear manual opacities
@@ -122,6 +125,8 @@
     graph.links.forEach(link => {
       link.alpha = null;
     });
+
+    graph = graph;
   }
 
   // animation for adding new nodes to the graph via growing the circle

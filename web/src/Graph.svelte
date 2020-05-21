@@ -13,8 +13,24 @@
   export let graphData = { nodes: [], links: [] }; // externally available graph object
   let graph = { nodes: [], links: [] }; // internal graph object for simulation and display
 
+  onMount(() => {
+    // Instantiate new force directed simulation
+    simulation = d3
+      .forceSimulation(graph.nodes)
+      .force("charge", d3.forceManyBody().strength(-2000)) // push nodes apart to reduce clumping
+      .force("x", d3.forceX(window.innerWidth / 3).strength(0.2)) // center nodes on the xAxis
+      .force("y", d3.forceY(window.innerHeight / 3).strength(0.05)) // center nodes on the yAxis
+      .force("link", d3.forceLink(graph.links).id(d => d.id)) // add forces based on the links between nodes
+      .on("tick", simTick);
+
+    // Set up a listener to ping the simulation whenever the map moves
+    map.on("move", function() {
+      simulation.alpha(0.3).restart();
+    });
+  });
+
   // ===================== Graph Data Management =====================
-  // When a new graph comes in, update the current graph to match
+  // When new graphData comes in, update the current graph to match
   $: updateGraph(graphData);
 
   // Update 'graph', adding new nodes from newGraph and keeping all nodes that match between newGraph and graph
@@ -42,27 +58,11 @@
     graph = updatedGraph;
 
     // reset the force simulation with the new data
-    attachSimulation(graph);
+    restartSim();
   }
-  // ==========================================
 
-  onMount(() => {
-    // Instantiate new force directed simulation
-    simulation = d3
-      .forceSimulation(graph.nodes)
-      .force("charge", d3.forceManyBody().strength(-2000)) // push nodes apart to reduce clumping
-      .force("x", d3.forceX(window.innerWidth / 3).strength(0.2)) // center nodes on the xAxis
-      .force("y", d3.forceY(window.innerHeight / 3).strength(0.05)) // center nodes on the yAxis
-      .force("link", d3.forceLink(graph.links).id(d => d.id)) // add forces based on the links between nodes
-      .on("tick", simulationTick);
-
-    // Set up a listener to ping the simulation whenever the map moves
-    map.on("move", function() {
-      simulation.alpha(0.3).restart();
-    });
-  });
-
-  function simulationTick() {
+  // ===================== SIMULATION HELPERS =====================
+  function simTick() {
     graph.nodes = [...graph.nodes]; // copy over nodes from step to step
     graph.links = [...graph.links]; // copy over links from step to step
     console.log("tick");
@@ -82,18 +82,19 @@
     });
   }
 
-  function attachSimulation(graphToSimulate) {
-    // Don't run if there is no simulation to update
+  function restartSim() {
+    // Don't run if there is no simulation to restart
     if (!simulation) return;
 
     // Update the simulation.
-    simulation.nodes(graphToSimulate.nodes);
-    simulation.force("link").links(graphToSimulate.links);
+    simulation.nodes(graph.nodes);
+    simulation.force("link").links(graph.links);
 
     // Restart the simulation
     simulation.alpha(0.3).restart();
   }
 
+  // ===================== INTERACTION =====================
   // Set hovering opacities
   function focus(focusedNode) {
     let focusedNodeID = focusedNode.id;

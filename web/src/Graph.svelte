@@ -35,27 +35,23 @@
 
   // Update 'graph', adding new nodes from newGraph and keeping all nodes that match between newGraph and graph
   function updateGraph(newGraph) {
-    let updatedGraph = {};
-
     // create a map of the existing nodes
-    const oldGraphNodeMap = new Map(graph.nodes.map(d => [d.id, d]));
+    const existingNodes = new Map(graph.nodes.map(d => [d.id, d]));
 
     // build new set of nodes based on existing nodes in the old graph
-    updatedGraph.nodes = newGraph.nodes.map(d =>
-      Object.assign(oldGraphNodeMap.get(d.id) || {}, d)
+    graph.nodes = newGraph.nodes.map(d =>
+      Object.assign(existingNodes.get(d.id) || {}, d)
     );
 
     // build a new set of links
-    updatedGraph.links = newGraph.links.map(d => Object.assign({}, d));
+    graph.links = newGraph.links.map(d => Object.assign({}, d));
 
     // rebuild the adjacency list for highlighting neighbors on hover
     adjlist = [];
-    updatedGraph.links.forEach(function(d) {
+    graph.links.forEach(function(d) {
       adjlist[d.source + "-" + d.target] = true;
       adjlist[d.target + "-" + d.source] = true;
     });
-
-    graph = updatedGraph;
 
     // reset the force simulation with the new data
     restartSim();

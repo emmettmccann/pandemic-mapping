@@ -7,6 +7,9 @@
   const { getMap } = getContext(key);
   const map = getMap();
 
+  let zoom;
+  $: strokeWidth = (zoom / 2) * (zoom / 2);
+
   let simulation; // the force directed simulation
   let adjlist; // a list of edges for interaction information
 
@@ -59,9 +62,6 @@
 
   // ===================== SIMULATION HELPERS =====================
   function simTick() {
-    graph.nodes = [...graph.nodes]; // copy over nodes from step to step
-    graph.links = [...graph.links]; // copy over links from step to step
-
     // Update nodes where needed
     graph.nodes.map(node => {
       if (node.fixToMapLocation) {
@@ -75,6 +75,11 @@
         node.fy = null;
       }
     });
+
+    graph.nodes = [...graph.nodes]; // copy over nodes from step to step
+    graph.links = [...graph.links]; // copy over links from step to step
+
+    zoom = map.getZoom();
   }
 
   function restartSim() {
@@ -85,7 +90,6 @@
     simulation.nodes(graph.nodes);
     simulation.force("link").links(graph.links);
 
-    // Restart the simulation
     simulation.alpha(0.3).restart();
   }
 
@@ -153,8 +157,22 @@
 </style>
 
 <svg id="graph">
+
   {#each graph.links as link (link.id)}
-    <g stroke="#999" opacity={link.alpha || link.data.prob}>
+    <linearGradient
+      id={link.id + 'grad'}
+      gradientUnits="userSpaceOnUse"
+      x1={link.source.x}
+      y1={link.source.y}
+      x2={link.target.x}
+      y2={link.target.y}>
+      <stop offset="0%" stop-color="royalblue" />
+      <stop offset="100%" stop-color="limegreen" />
+    </linearGradient>
+    <g
+      stroke={'url(#' + link.id + 'grad)'}
+      stroke-width={strokeWidth}
+      opacity={link.alpha || link.data.prob / 1.3}>
       <line
         transition:fade={{ duration: 200 }}
         x1={link.source.x}

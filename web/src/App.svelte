@@ -213,11 +213,6 @@
     minDate
   );
 
-  // createGraph();
-  function setReady() {
-    ready = true;
-  }
-
   function liveReload(p, s, l1, l2, par, chi, mxd, mnd) {
     if (ready) getLinks();
   }
@@ -352,8 +347,7 @@
   </div>
   <Map lat={41} lon={-97} zoom={3}>
     {#if graph.nodes}
-      <!-- content here -->
-      <Graph graphData={graph} on:ready={setReady} />
+      <Graph graphData={graph} />
     {/if}
   </Map>
 

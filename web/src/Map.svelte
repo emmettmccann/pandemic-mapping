@@ -23,10 +23,11 @@
         container,
         style: "mapbox://styles/emmettmccann/ck8z41m4f014n1inw6emiz6hk",
         center: [lon, lat],
-        zoom,
+        zoom: 3.5,
         attributionControl: false
       });
       // map.getCanvas().style.cursor = "crosshair";
+      map.setPitch(60);
     };
 
     document.head.appendChild(link);
@@ -45,7 +46,6 @@
     left: 25vw;
     height: 100vh;
     width: 75vw;
-    /* cursor: crosshair; */
   }
 </style>
 

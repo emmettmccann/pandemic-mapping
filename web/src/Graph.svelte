@@ -7,7 +7,7 @@
   const { getMap } = getContext(key);
   const map = getMap();
 
-  let zoom;
+  let zoom, pitch;
   $: strokeWidth = 0.5 + 1.2 * (zoom / 3) * (zoom / 3);
 
   let simulation; // the force directed simulation
@@ -80,6 +80,7 @@
     graph.links = [...graph.links]; // copy over links from step to step
 
     zoom = map.getZoom();
+    pitch = map.getPitch() / 200;
   }
 
   function restartSim() {
@@ -96,8 +97,6 @@
   // ===================== INTERACTION =====================
   // Set hovering opacities
   function focus(focusedNode) {
-    console.log(focusedNode);
-
     let focusedNodeID = focusedNode.id;
 
     // update alpha for all nodes
@@ -163,6 +162,23 @@
       css: (t, u) => `r: ${t * actualRadius}`
     };
   }
+
+  function getCurve(link) {
+    let path = "M " + link.source.x + " " + link.source.y + " ";
+    let vx = link.target.x - link.source.x;
+    let vy = link.target.y - link.source.y;
+    let vpx = vy;
+    let vpy = -vx;
+
+    let pitchCorrection = Math.abs(Math.atan2(vpx, vpy)) - Math.PI / 2;
+
+    pitchCorrection = pitchCorrection / (Math.PI / 2);
+    let controlX = vx / 2 + vpx * pitchCorrection * pitch;
+    let controlY = vy / 2 + vpy * pitchCorrection * pitch;
+    path += "q " + controlX + " " + controlY + " " + vx + " " + vy;
+
+    return path;
+  }
 </script>
 
 <style>
@@ -176,8 +192,11 @@
     pointer-events: none;
   }
 
-  :global(#graph > *) {
+  :global(#graph > #node) {
     pointer-events: all !important;
+  }
+  :global(#graph > #link) {
+    pointer-events: stroke !important;
   }
 </style>
 
@@ -194,43 +213,48 @@
       <stop offset="0%" stop-color="royalblue" />
       <stop offset="100%" stop-color="limegreen" />
     </linearGradient>
-    <g style="mix-blend-mode: hue;">
-      <line
+    <g id="link" style="mix-blend-mode: hue;">
+      <path
         stroke={'url(#' + link.id + 'grad)'}
+        d={getCurve(link)}
+        fill="transparent"
         stroke-width={strokeWidth}
         opacity={link.alpha || link.data.prob * 0.8}
-        transition:fade={{ duration: 200 }}
-        x1={link.source.x}
-        y1={link.source.y}
-        x2={link.target.x}
-        y2={link.target.y}>
+        transition:fade={{ duration: 200 }}>
         <title>{link.source.id}</title>
-      </line>
-      <line
+      </path>
+      <path
         stroke-width={strokeWidth * 4}
         opacity="0"
-        x1={link.source.x}
-        y1={link.source.y}
-        x2={link.target.x}
-        y2={link.target.y}
-        on:mouseover={focusLink(link)}
-        on:mouseout={unfocus}>
+        d={getCurve(link)}
+        fill="transparent">
         <title>{link.source.id}</title>
-      </line>
+      </path>
+      <circle
+        r={strokeWidth}
+        opacity={link.alpha || link.data.prob * 0.8}
+        fill="black">
+        <animateMotion
+          dur="5s"
+          repeatCount="indefinite"
+          path={getCurve(link)} />
+      </circle>
     </g>
   {/each}
 
   {#each graph.nodes as point (point.id)}
-    <circle
-      transition:expand
-      class="node"
-      r={zoom * 3}
-      opacity={point.alpha || 0.5}
-      cx={point.x}
-      cy={point.y}
-      on:mouseover={focus(point)}
-      on:mouseout={unfocus}>
-      <title>{point.id}</title>
-    </circle>
+    <g id="node">
+      <circle
+        transition:expand
+        class="node"
+        r={zoom * 3}
+        opacity={point.alpha || 0.5}
+        cx={point.x}
+        cy={point.y}
+        on:mouseover={focus(point)}
+        on:mouseout={unfocus}>
+        <title>{point.id}</title>
+      </circle>
+    </g>
   {/each}
 </svg>

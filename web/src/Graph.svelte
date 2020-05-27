@@ -8,7 +8,7 @@
   const map = getMap();
 
   let zoom;
-  $: strokeWidth = (zoom / 2) * (zoom / 2);
+  $: strokeWidth = 0.5 + 1.2 * (zoom / 3) * (zoom / 3);
 
   let simulation; // the force directed simulation
   let adjlist; // a list of edges for interaction information
@@ -96,9 +96,11 @@
   // ===================== INTERACTION =====================
   // Set hovering opacities
   function focus(focusedNode) {
+    console.log(focusedNode);
+
     let focusedNodeID = focusedNode.id;
 
-    // update opacity for all links
+    // update alpha for all nodes
     graph.nodes.forEach(otherNode => {
       // If the other node is connected, don't change it. Otherwise, make it nearly invisible.
       otherNode.alpha =
@@ -125,6 +127,29 @@
   function unfocus() {
     graph.nodes.forEach(node => (node.alpha = null));
     graph.links.forEach(link => (link.alpha = null));
+    graph = graph;
+  }
+
+  function focusLink(focusedLink) {
+    // update opacity for all links
+    graph.nodes.forEach(node => {
+      // If the other node is connected, don't change it. Otherwise, make it nearly invisible.
+      node.alpha =
+        node.id == focusedLink.target.id || node.id == focusedLink.source.id // other node is actually this node OR // other node is connected to this node
+          ? null // no change
+          : 0.1; // reduced visibility
+    });
+
+    // update alpha for all links
+    graph.links.forEach(link => {
+      link.alpha =
+        link.id == focusedLink.id
+          ? null // if it is connected, don't change
+          : 0.05; // if not connected, set its opacity to almost 0
+    });
+
+    // force update the DOM (svelte updates on assignment and forEach does not trigger this)
+    // https://svelte.dev/tutorial/updating-arrays-and-objects
     graph = graph;
   }
 
@@ -156,7 +181,7 @@
   }
 </style>
 
-<svg id="graph">
+<svg id="graph" on:wheel={event => map.scrollZoom.wheel(event)}>
 
   {#each graph.links as link (link.id)}
     <linearGradient
@@ -169,16 +194,27 @@
       <stop offset="0%" stop-color="royalblue" />
       <stop offset="100%" stop-color="limegreen" />
     </linearGradient>
-    <g
-      stroke={'url(#' + link.id + 'grad)'}
-      stroke-width={strokeWidth}
-      opacity={link.alpha || link.data.prob / 1.3}>
+    <g style="mix-blend-mode: hue;">
       <line
+        stroke={'url(#' + link.id + 'grad)'}
+        stroke-width={strokeWidth}
+        opacity={link.alpha || link.data.prob * 0.8}
         transition:fade={{ duration: 200 }}
         x1={link.source.x}
         y1={link.source.y}
         x2={link.target.x}
         y2={link.target.y}>
+        <title>{link.source.id}</title>
+      </line>
+      <line
+        stroke-width={strokeWidth * 4}
+        opacity="0"
+        x1={link.source.x}
+        y1={link.source.y}
+        x2={link.target.x}
+        y2={link.target.y}
+        on:mouseover={focusLink(link)}
+        on:mouseout={unfocus}>
         <title>{link.source.id}</title>
       </line>
     </g>
@@ -188,8 +224,8 @@
     <circle
       transition:expand
       class="node"
-      r="7"
-      opacity={point.alpha || 0.8}
+      r={zoom * 3}
+      opacity={point.alpha || 0.5}
       cx={point.x}
       cy={point.y}
       on:mouseover={focus(point)}

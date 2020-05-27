@@ -287,16 +287,49 @@
     width: 25vw;
     height: 100vh;
     background-color: white;
-    padding-top: 2rem;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
   map {
     z-index: -10;
   }
+
+  #titleKey {
+    position: absolute;
+    top: 0px;
+    left: 40vw;
+    width: 60vw;
+    z-index: 20;
+  }
 </style>
 
 <main>
+  <div id="titleKey">
+    <svg width="400" height="40">
+      <linearGradient id="keyGradient">
+        <stop offset="0%" stop-color="royalblue" />
+        <stop offset="100%" stop-color="limegreen" />
+      </linearGradient>
+      <text x="54" y="15" alignment-baseline="middle" text-anchor="end">
+        Origin
+      </text>
+      <text x="256" y="15" alignment-baseline="middle" text-anchor="start">
+        Destination
+      </text>
+      <line
+        stroke="url(#keyGradient)"
+        stroke-width="5px"
+        stroke-linecap="round"
+        x1="60"
+        y1="15"
+        x2="250"
+        y2="15.01" />
+
+    </svg>
+  </div>
+
   <div id="slide">
     <h2>Transmission Probability:</h2>
     0.1

@@ -8,7 +8,6 @@
 
   export let lat;
   export let lon;
-  export let zoom;
 
   let container;
   let map;

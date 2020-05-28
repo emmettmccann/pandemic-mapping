@@ -73,7 +73,7 @@ function formatTree() {
   // format each genome node
   genomeNodes = genomeNodes.map(formatGenomeNode);
   // must come after the formatting
-  genomeNodes.map(pushLocLinks);
+  genomeNodes.forEach(pushLocLinks);
   // format each mutation link
   mutationLinks = mutationLinks.reduce((array, link) => array.concat(formatLink(link)), []);
 }
@@ -85,11 +85,11 @@ function formatGenomeNode(node) {
     sampled: node.name.slice(0, 5) != "NODE_" && getDef(node.node_attrs.gisaid_epi_isl) != undefined, // check if this is an inferred node
     author: getDef(node.node_attrs.author),
     country: getDef(node.node_attrs.country),
-    // get the most likely division
+    // most likely division
     division: getDef(node.node_attrs.division),
-    // get the entropy for the division. This will be non-zero for inferred nodes
+    // entropy for the division. This will be non-zero for inferred nodes
     division_entropy: node.node_attrs.division.entropy,
-    // get the full list of divisions
+    // full list of divisions
     division_estimates: node.node_attrs.division.confidence,
     location: getDef(node.node_attrs.location),
     gisaid_epi_isl: getDef(node.node_attrs.gisaid_epi_isl),
@@ -125,6 +125,8 @@ function pushLocLinks(node) {
       location: node.location,
     });
   }
+  // remove the division estimates from the node as they are now encapsulated within the links
+  node.division_estimates = null;
 }
 
 function formatLink(link) {

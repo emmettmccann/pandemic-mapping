@@ -42,9 +42,9 @@
   div {
     position: absolute;
     top: 0px;
-    left: 25vw;
+    left: 0px;
     height: 100vh;
-    width: 75vw;
+    width: 100vw;
   }
 </style>
 

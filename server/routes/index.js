@@ -14,12 +14,12 @@ router.get("/", function (req, res, next) {
 });
 
 /* GET home page. */
-router.get("/states", function (req, res, next) {
+router.get("/locations", function (req, res, next) {
   let session = db.getSession(req);
-  session.run("MATCH (state:state) RETURN state").then((result) => {
+  session.run("MATCH (location:location) RETURN location").then((result) => {
     db.closeSession(req);
     const response = result.records.map((record) => {
-      return record.get("state");
+      return record.get("location");
     });
     res.json(response);
   });
@@ -103,6 +103,23 @@ router.get("/probables/agg", function (req, res, next) {
         parent: record.get("parent").properties,
         child: record.get("loc").properties,
         data: record.get("seed").properties,
+      };
+    });
+    res.json(response);
+  });
+});
+
+router.get("/transmissions", function (req, res, next) {
+  let q =
+    "MATCH (parent:location)-[transmission:TRANSMISSION]->(child:location) where transmission.confidence > 0.97 return parent,transmission,child order by transmission.date";
+  let session = db.getSession(req);
+  session.run(q).then((result) => {
+    db.closeSession(req);
+    const response = result.records.map((record) => {
+      return {
+        parent: record.get("parent").properties,
+        child: record.get("child").properties,
+        data: record.get("transmission").properties,
       };
     });
     res.json(response);

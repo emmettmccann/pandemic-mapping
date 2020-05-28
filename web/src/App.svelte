@@ -219,13 +219,14 @@
 
   function getLinks() {
     if (!ready) return;
-    let url = "http://localhost:3000/probables/agg?";
-    url += "prob=" + prob;
-    url += "&states=" + selectedStateKeys;
-    url += "&maxDate=" + "'" + maxDate + "'";
-    url += "&minDate=" + "'" + minDate + "'";
-    if (parents) url += "&parents=true";
-    if (children) url += "&children=true";
+    // let url = "http://localhost:3000/transmissions";
+    let url = "http://c833ea2711fb.ngrok.io/transmissions";
+    // url += "prob=" + prob;
+    // url += "&states=" + selectedStateKeys;
+    // url += "&maxDate=" + "'" + maxDate + "'";
+    // url += "&minDate=" + "'" + minDate + "'";
+    // if (parents) url += "&parents=true";
+    // if (children) url += "&children=true";
     fetch(url)
       .then(response => response.json())
       .then(res => {
@@ -248,6 +249,7 @@
             node.fixToMapLocation = false;
           }
         });
+        console.log(g);
 
         graph = g;
       });
@@ -268,7 +270,7 @@
     });
     apiResponse.forEach(link => {
       links.push({
-        id: link.parent.id + "-" + link.child.id,
+        id: link.parent.id + "-" + link.child.id + Math.random(),
         source: link.parent.id,
         target: link.child.id,
         data: link.data
@@ -296,14 +298,14 @@
   #titleKey {
     position: absolute;
     top: 0px;
-    left: 40vw;
+    left: 20vw;
     width: 60vw;
     z-index: 20;
   }
 </style>
 
 <main>
-  <div id="titleKey">
+  <!-- <div id="titleKey">
     <svg width="400" height="40">
       <linearGradient id="keyGradient">
         <stop offset="0%" stop-color="royalblue" />
@@ -325,9 +327,9 @@
         y2="15.01" />
 
     </svg>
-  </div>
+  </div> -->
 
-  <div id="slide">
+  <!-- <div id="slide">
     <h2>Transmission Probability:</h2>
     0.1
     <input type="range" bind:value={prob} min="0.1" max="0.9" step="0.1" />
@@ -374,7 +376,7 @@
     Possible Ancestors
     <input type="checkbox" bind:checked={children} />
     Possible Descendants
-  </div>
+  </div> -->
   <Map lat={41} lon={-97} zoom={3}>
     {#if graph.nodes}
       <Graph graphData={graph} />

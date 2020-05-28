@@ -66,7 +66,7 @@
     graph.nodes.map(node => {
       if (node.fixToMapLocation) {
         // get the pixel coordinates based on the map position
-        let { x, y } = map.project([node.lat, node.lon]);
+        let { x, y } = map.project([node.lon, node.lat]);
         node.fx = x;
         node.fy = y;
       } else {
@@ -215,11 +215,11 @@
     </linearGradient>
     <g id="link" style="mix-blend-mode: hue;">
       <path
-        stroke={'url(#' + link.id + 'grad)'}
+        stroke="red"
         d={getCurve(link)}
         fill="transparent"
         stroke-width={strokeWidth}
-        opacity={link.alpha || link.data.prob * 0.8}
+        opacity={link.alpha || link.data.confidence * 0.8}
         transition:fade={{ duration: 200 }}>
         <title>{link.source.id}</title>
       </path>
@@ -232,7 +232,7 @@
       </path>
       <circle
         r={strokeWidth}
-        opacity={link.alpha || link.data.prob * 0.8}
+        opacity={link.alpha || link.data.confidence * 0.8}
         fill="black">
         <animateMotion
           dur="5s"

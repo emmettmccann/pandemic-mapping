@@ -2,9 +2,9 @@ const fs = require("fs-extra");
 const path = require("path");
 const fetch = require("node-fetch");
 
-var nodes = [];
-var links = [];
-var locLinks = [];
+var genomeNodes = [];
+var mutationLinks = [];
+var locationLinks = [];
 
 let states = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../static/states.json")));
 
@@ -15,23 +15,29 @@ async function getTree() {
     res.json()
   );
 
+  // extract divisions and save as location nodes
+  const locationNodes = extractLocations(rawdata.meta);
+
   // recursively extract all info from the tree
   extractNode("root", rawdata.tree);
 
   // format the tree data
   formatTree();
 
-  console.log("Generated %d genome nodes of raw format: ", nodes.length);
-  console.log(nodes[1]);
-  console.log("Generated %d mutation links of raw format: ", links.length);
-  console.log(links[1]);
-  console.log("Generated %d location links of raw format: ", locLinks.length);
-  console.log(locLinks[1]);
+  console.log("Generated %d location nodes of raw format: ", locationNodes.length);
+  console.log(locationNodes[1]);
+  console.log("Generated %d genome nodes of raw format: ", genomeNodes.length);
+  console.log(genomeNodes[1]);
+  console.log("Generated %d mutation links of raw format: ", mutationLinks.length);
+  console.log(mutationLinks[1]);
+  console.log("Generated %d location links of raw format: ", locationLinks.length);
+  console.log(locationLinks[1]);
 
   // write the files
-  fs.outputJsonSync("../../artifacts/genomeNodes.json", nodes);
-  fs.outputJsonSync("../../artifacts/genomeMutationLinks.json", links);
-  fs.outputJsonSync("../../artifacts/genomeLocLinks.json", locLinks);
+  fs.outputJsonSync("../../artifacts/locationNodes.json", locationNodes);
+  fs.outputJsonSync("../../artifacts/genomeNodes.json", genomeNodes);
+  fs.outputJsonSync("../../artifacts/genomeMutationLinks.json", mutationLinks);
+  fs.outputJsonSync("../../artifacts/genomeLocLinks.json", locationLinks);
 }
 
 function extractNode(parentName, node) {
@@ -45,18 +51,31 @@ function extractNode(parentName, node) {
     mutation: node.branch_attrs,
     attrs: node.node_attrs,
   };
-  nodes.push(n);
-  links.push(l);
+  genomeNodes.push(n);
+  mutationLinks.push(l);
   if (node.children) node.children.forEach((el) => extractNode(node.name, el));
+}
+
+function extractLocations(meta) {
+  const locations = meta.geo_resolutions[1].demes;
+  let locationNodes = [];
+  for (const prop in locations) {
+    locationNodes.push({
+      id: prop,
+      lat: locations[prop].latitude,
+      lon: locations[prop].longitude,
+    });
+  }
+  return locationNodes;
 }
 
 function formatTree() {
   // format each genome node
-  nodes = nodes.map(formatGenomeNode);
+  genomeNodes = genomeNodes.map(formatGenomeNode);
   // must come after the formatting
-  nodes.map(pushLocLinks);
+  genomeNodes.map(pushLocLinks);
   // format each mutation link
-  links = links.reduce((array, link) => array.concat(formatLink(link)), []);
+  mutationLinks = mutationLinks.reduce((array, link) => array.concat(formatLink(link)), []);
 }
 
 function formatGenomeNode(node) {
@@ -66,7 +85,12 @@ function formatGenomeNode(node) {
     sampled: node.name.slice(0, 5) != "NODE_" && getDef(node.node_attrs.gisaid_epi_isl) != undefined, // check if this is an inferred node
     author: getDef(node.node_attrs.author),
     country: getDef(node.node_attrs.country),
+    // get the most likely division
     division: getDef(node.node_attrs.division),
+    // get the entropy for the division. This will be non-zero for inferred nodes
+    division_entropy: node.node_attrs.division.entropy,
+    // get the full list of divisions
+    division_estimates: node.node_attrs.division.confidence,
     location: getDef(node.node_attrs.location),
     gisaid_epi_isl: getDef(node.node_attrs.gisaid_epi_isl),
     date: getDef(node.node_attrs.num_date),
@@ -90,28 +114,21 @@ function formatGenomeNode(node) {
 }
 
 function pushLocLinks(node) {
-  // only do this for the sampled nodes. if not sampled, return early
-  if (!node.sampled || node.stateID == undefined) return;
-  locLinks.push({
-    label: "SAMPLED_IN",
-    parent: node.id,
-    child: node.stateID,
-    date: node.date,
-    date_formatted: node.date_formatted,
-    location: node.location,
-  });
-  // locLinks.push({
-  //   label: "sampled",
-  //   child: node.id,
-  //   parent: node.stateID,
-  //   date: node.date,
-  //   date_formatted: node.date_formatted,
-  //   location: node.location,
-  // });
+  const possibleDivisions = node.division_estimates;
+  for (const division in possibleDivisions) {
+    locationLinks.push({
+      label: "SAMPLED_IN",
+      parent: node.id,
+      child: division,
+      date: node.date,
+      confidence: possibleDivisions[division],
+      location: node.location,
+    });
+  }
 }
 
 function formatLink(link) {
-  let l1 = {
+  return {
     label: "MUTATED_TO",
     parent: formatID(link.parent),
     child: formatID(link.child),
@@ -127,16 +144,6 @@ function formatLink(link) {
     diff:
       link.mutation && link.mutation.mutations && link.mutation.mutations.nuc ? link.mutation.mutations.nuc.length : 0,
   };
-  let l2 = {
-    label: "MUTATED_FROM",
-    parent: l1.child,
-    child: l1.parent,
-    aaMut: l1.aaMut,
-    nuc: l1.nuc,
-    diff: l1.diff,
-  };
-  // return [l1, l2];
-  return [l1];
 }
 
 // helped for pulling values out of optionally defined attributes of format

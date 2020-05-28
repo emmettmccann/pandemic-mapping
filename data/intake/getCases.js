@@ -38,22 +38,11 @@ async function casesByStateTimeline() {
           child: date.date + "@" + state.stateId,
           parent: prevReport,
         });
-        caseCaseLinks.push({
-          label: "prevReport",
-          parent: date.date + "@" + state.stateId,
-          child: prevReport,
-        });
         caseLocLinks.push({
-          label: "reportedBy",
+          label: "REPORTED_IN",
           date: date.date,
           child: state.stateId.slice(-2),
           parent: date.date + "@" + state.stateId,
-        });
-        caseLocLinks.push({
-          label: "reported",
-          date: date.date,
-          parent: state.stateId.slice(-2),
-          child: date.date + "@" + state.stateId,
         });
         prevReport = date.date + "@" + state.stateId;
       }
@@ -63,9 +52,9 @@ async function casesByStateTimeline() {
   console.log("Found %d case reports of format: ", cases.length);
   console.log(cases[1]);
 
-  fs.outputJsonSync("../artifacts/caseReports.json", cases);
-  fs.outputJsonSync("../artifacts/caseCaseLinks.json", caseCaseLinks);
-  fs.outputJsonSync("../artifacts/caseLocLinks.json", caseLocLinks);
+  fs.outputJsonSync("../../artifacts/caseReports.json", cases);
+  fs.outputJsonSync("../../artifacts/caseCaseLinks.json", caseCaseLinks);
+  fs.outputJsonSync("../../artifacts/caseLocLinks.json", caseLocLinks);
   console.log("Done");
 }
 

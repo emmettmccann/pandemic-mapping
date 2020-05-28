@@ -33,8 +33,8 @@ client.addGenomes = function (nodes) {
   return this.session.run("UNWIND $props AS map CREATE (n:genome) SET n = map", { props: nodes });
 };
 
-client.addStates = function (states) {
-  return this.session.run("UNWIND $props AS map CREATE (n:state) SET n = map", { props: states });
+client.addLocations = function (locations) {
+  return this.session.run("UNWIND $props AS map CREATE (n:location) SET n = map", { props: locations });
 };
 
 client.addCaseReports = function (reports) {

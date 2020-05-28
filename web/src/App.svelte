@@ -292,9 +292,6 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  map {
-    z-index: -10;
-  }
 
   #titleKey {
     position: absolute;

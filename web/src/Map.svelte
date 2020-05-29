@@ -23,10 +23,15 @@
         style: "mapbox://styles/emmettmccann/ck8z41m4f014n1inw6emiz6hk",
         center: [lon, lat],
         zoom: 3.5,
-        attributionControl: false
+        attributionControl: false,
+        hash: true,
+        bearingSnap: 90,
+        dragRotate: false
       });
       // map.getCanvas().style.cursor = "crosshair";
-      map.setPitch(60);
+      // map.setPitch(30);
+      map.setMinPitch(30);
+      map.setMaxPitch(30);
     };
 
     document.head.appendChild(link);

@@ -30,8 +30,8 @@
       });
       // map.getCanvas().style.cursor = "crosshair";
       // map.setPitch(30);
-      map.setMinPitch(30);
-      map.setMaxPitch(30);
+      // map.setMinPitch(30);
+      // map.setMaxPitch(30);
     };
 
     document.head.appendChild(link);

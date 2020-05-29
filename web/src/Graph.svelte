@@ -8,10 +8,15 @@
   const map = getMap();
 
   let zoom, pitch;
-  $: strokeWidth = 0.5 + 1.2 * (zoom / 3) * (zoom / 3);
+  $: strokeWidth = 0.5 + 1.5 * (zoom / 3) * (zoom / 3);
 
   let simulation; // the force directed simulation
   let adjlist; // a list of edges for interaction information
+
+  let selected = new Set();
+
+  const width = window.innerWidth,
+    height = window.innerHeight;
 
   export let graphData = { nodes: [], links: [] }; // externally available graph object
   let graph = { nodes: [], links: [] }; // internal graph object for simulation and display
@@ -79,6 +84,23 @@
     graph.nodes = [...graph.nodes]; // copy over nodes from step to step
     graph.links = [...graph.links]; // copy over links from step to step
 
+    graph.links.forEach(link => {
+      const visible =
+        selected.has(link.source.id) ||
+        selected.has(link.target.id) ||
+        selected.size == 0;
+      const targetNeg = link.target.x < 0 || link.target.y < 0;
+      const targetPos = link.target.x > width || link.target.y > height;
+      const targetOffScreen = targetNeg || targetPos;
+      const sourceNeg = link.source.x < 0 || link.source.y < 0;
+      const sourcePos = link.source.x > width || link.source.y > height;
+      const sourceOffScreen = sourceNeg || sourcePos;
+
+      // one is on and one is off.
+      const partiallyOffScreen = targetOffScreen != sourceOffScreen;
+      if (partiallyOffScreen && visible) console.log(link.id);
+    });
+
     zoom = map.getZoom();
     pitch = map.getPitch() / 200;
   }
@@ -129,29 +151,6 @@
     graph = graph;
   }
 
-  function focusLink(focusedLink) {
-    // update opacity for all links
-    graph.nodes.forEach(node => {
-      // If the other node is connected, don't change it. Otherwise, make it nearly invisible.
-      node.alpha =
-        node.id == focusedLink.target.id || node.id == focusedLink.source.id // other node is actually this node OR // other node is connected to this node
-          ? null // no change
-          : 0.1; // reduced visibility
-    });
-
-    // update alpha for all links
-    graph.links.forEach(link => {
-      link.alpha =
-        link.id == focusedLink.id
-          ? null // if it is connected, don't change
-          : 0.05; // if not connected, set its opacity to almost 0
-    });
-
-    // force update the DOM (svelte updates on assignment and forEach does not trigger this)
-    // https://svelte.dev/tutorial/updating-arrays-and-objects
-    graph = graph;
-  }
-
   // animation for adding new nodes to the graph via growing the circle
   function expand(node, params) {
     const actualRadius = node.r.baseVal.value;
@@ -178,6 +177,12 @@
     path += "q " + controlX + " " + controlY + " " + vx + " " + vy;
 
     return path;
+  }
+
+  function handleClick(point) {
+    if (selected.has(point.id)) selected.delete(point.id);
+    else selected.add(point.id);
+    console.log(selected);
   }
 </script>
 
@@ -207,13 +212,10 @@
       <!-- <feOffset dx="2" dy="2" result="offsetblur" /> -->
       <feMerge>
         <feMergeNode in="coloredBlur" />
-        <!-- <feMergeNode in="SourceGraphic" /> -->
-        a
       </feMerge>
     </filter>
     <filter id="glow" filterUnits="userSpaceOnUse">
       <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="coloredBlur" />
-      <!-- <feOffset dx="2" dy="2" result="offsetblur" /> -->
       <feMerge>
         <feMergeNode in="coloredBlur" />
         <feMergeNode in="SourceGraphic" />
@@ -227,15 +229,17 @@
   </defs>
 
   {#each graph.links as link (link.id)}
-    <line
-      stroke="black"
-      stroke-width="2px"
-      x1={link.source.x}
-      y1={link.source.y}
-      x2={link.target.x}
-      y2={link.target.y}
-      opacity={link.alpha || 0.1}
-      filter="url(#shadow)" />
+    {#if selected.has(link.source.id) || selected.has(link.target.id) || selected.size == 0}
+      <line
+        stroke="black"
+        stroke-width="2px"
+        x1={link.source.x}
+        y1={link.source.y}
+        x2={link.target.x}
+        y2={link.target.y}
+        opacity={link.alpha || 0.1}
+        filter="url(#shadow)" />
+    {/if}
   {/each}
 
   {#each graph.nodes as point (point.id)}
@@ -245,48 +249,82 @@
         class="node"
         r={zoom * 3}
         fill="url(#nodeGradient)"
-        opacity={point.alpha || 0.5}
+        opacity={selected.has(point.id) || selected.size == 0 ? 0.6 : 0.1}
         cx={point.x}
         cy={point.y}
         on:mouseover={focus(point)}
-        on:mouseout={unfocus}>
+        on:mouseout={unfocus}
+        on:click={handleClick(point)}>
         <title>{point.id}</title>
       </circle>
     </g>
   {/each}
 
   {#each graph.links as link (link.id)}
-    <linearGradient
-      id={link.id.replace(/\s+/g, '') + 'grad'}
-      gradientUnits="userSpaceOnUse"
-      x1={link.source.x}
-      y1={link.source.y}
-      x2={link.target.x}
-      y2={link.target.y}>
-      <stop offset="0%" stop-color="royalblue" />
-      <stop offset="100%" stop-color="limegreen" />
-    </linearGradient>
+    {#if selected.has(link.source.id) || selected.has(link.target.id) || selected.size == 0}
+      <linearGradient
+        id={link.id.replace(/\s+/g, '') + 'grad'}
+        gradientUnits="userSpaceOnUse"
+        x1={link.source.x}
+        y1={link.source.y}
+        x2={link.target.x}
+        y2={link.target.y}>
+        <stop offset="0" stop-color="royalblue" />
+        <stop offset="1" stop-color="limegreen" />
+      </linearGradient>
+      <linearGradient
+        id={link.id.replace(/\s+/g, '') + 'animate'}
+        gradientUnits="userSpaceOnUse"
+        x1={link.source.x}
+        y1={link.source.y}
+        x2={link.target.x}
+        y2={link.target.y}>
+        <stop offset="-0.11" stop-color="white" stop-opacity="0.0">
+          <animate
+            attributeName="offset"
+            dur="5s"
+            repeatCount="indefinite"
+            from="-0.11"
+            to="1" />
+        </stop>
+        <stop offset="-0.01" stop-color="white" stop-opacity="1">
+          <animate
+            attributeName="offset"
+            dur="5s"
+            repeatCount="indefinite"
+            from="-0.01"
+            to="1.1" />
+        </stop>
+        <stop offset="0.0" stop-color="white" stop-opacity="0.0">
+          <animate
+            attributeName="offset"
+            dur="5s"
+            repeatCount="indefinite"
+            from="0"
+            to="1.11" />
+        </stop>
+      </linearGradient>
 
-    <g id="link">
-      <path
-        stroke={'url(#' + link.id.replace(/\s+/g, '') + 'grad)'}
-        d={getCurve(link)}
-        fill="transparent"
-        stroke-width={strokeWidth}
-        opacity={link.alpha || 0.5}
-        transition:fade={{ duration: 200 }}
-        stroke-linecap="round">
-        <title>{link.source.id}</title>
-      </path>
-      <!-- <circle
-        r={strokeWidth}
-        opacity={link.alpha || link.data.confidence * 0.8}
-        fill="black">
-        <animateMotion
-          dur="5s"
-          repeatCount="indefinite"
-          path={getCurve(link)} />
-      </circle> -->
-    </g>
+      <g id="link">
+        <path
+          stroke={'url(#' + link.id.replace(/\s+/g, '') + 'grad)'}
+          d={getCurve(link)}
+          fill="transparent"
+          stroke-width={strokeWidth}
+          opacity={link.alpha || 0.8}
+          transition:fade={{ duration: 200 }}
+          stroke-linecap="round" />
+        {#if link && selected.size > 0}
+          <path
+            stroke={'url(#' + link.id.replace(/\s+/g, '') + 'animate)'}
+            d={getCurve(link)}
+            fill="transparent"
+            stroke-width={strokeWidth * 0.8}
+            opacity={link.alpha || 1}
+            transition:fade={{ duration: 200 }}
+            stroke-linecap="round" />
+        {/if}
+      </g>
+    {/if}
   {/each}
 </svg>

@@ -111,7 +111,7 @@ router.get("/probables/agg", function (req, res, next) {
 
 router.get("/transmissions", function (req, res, next) {
   let q =
-    "MATCH (parent:location)-[transmission:TRANSMISSION]->(child:location) where transmission.confidence > 0.97 return parent,transmission,child order by transmission.date";
+    "MATCH (parent:location)-[transmission:TRANSMISSION]->(child:location) where transmission.confidence > 0.95 return parent,collect(transmission) as transmission,child";
   let session = db.getSession(req);
   session.run(q).then((result) => {
     db.closeSession(req);

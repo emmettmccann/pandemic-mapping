@@ -219,8 +219,8 @@
 
   function getLinks() {
     if (!ready) return;
-    // let url = "http://localhost:3000/transmissions";
-    let url = "http://c833ea2711fb.ngrok.io/transmissions";
+    let url = "http://localhost:3000/transmissions";
+    // let url = "http://c833ea2711fb.ngrok.io/transmissions";
     // url += "prob=" + prob;
     // url += "&states=" + selectedStateKeys;
     // url += "&maxDate=" + "'" + maxDate + "'";

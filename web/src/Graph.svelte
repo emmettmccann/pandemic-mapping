@@ -11,7 +11,6 @@
   $: strokeWidth = 0.5 + 1.5 * (zoom / 3) * (zoom / 3);
 
   let simulation; // the force directed simulation
-  let adjlist; // a list of edges for interaction information
 
   let selected = new Set();
 
@@ -24,18 +23,9 @@
   let graph = { nodes: [], links: [] }; // internal graph object for simulation and display
 
   onMount(() => {
-    // Instantiate new force directed simulation
-    simulation = d3
-      .forceSimulation(graph.nodes)
-      .force("charge", d3.forceManyBody().strength(-2000)) // push nodes apart to reduce clumping
-      .force("x", d3.forceX(window.innerWidth / 3).strength(0.2)) // center nodes on the xAxis
-      .force("y", d3.forceY(window.innerHeight / 3).strength(0.05)) // center nodes on the yAxis
-      .force("link", d3.forceLink(graph.links).id(d => d.id)) // add forces based on the links between nodes
-      .on("tick", simTick);
-
-    // Set up a listener to ping the simulation whenever the map moves
+    // Set up a listener to update the graph when the map moves
     map.on("move", function() {
-      simulation.alpha(0.3).restart();
+      tick();
     });
   });
 
@@ -56,31 +46,31 @@
     // build a new set of links
     graph.links = newGraph.links.map(d => Object.assign({}, d));
 
-    // rebuild the adjacency list for highlighting neighbors on hover
-    adjlist = [];
-    graph.links.forEach(function(d) {
-      adjlist[d.source + "-" + d.target] = true;
-      adjlist[d.target + "-" + d.source] = true;
+    graph.links.forEach(link => {
+      link.source = { id: link.source };
+      link.target = { id: link.target };
     });
 
-    // reset the force simulation with the new data
-    restartSim();
+    tick();
   }
 
   // ===================== SIMULATION HELPERS =====================
-  function simTick() {
+  async function tick() {
+    console.log("tick");
+
     // Update nodes where needed
-    graph.nodes.map(node => {
-      if (node.fixToMapLocation) {
-        // get the pixel coordinates based on the map position
-        let { x, y } = map.project([node.lon, node.lat]);
-        node.fx = x;
-        node.fy = y;
-      } else {
-        // Release nodes from fixed positions
-        node.fx = null;
-        node.fy = null;
-      }
+    graph.nodes.forEach(node => {
+      // get the pixel coordinates based on the map position
+      let { x, y } = map.project([node.lon, node.lat]);
+      node.x = x;
+      node.y = y;
+    });
+
+    const nodeMap = new Map(graph.nodes.map(d => [d.id, d]));
+
+    graph.links.forEach(link => {
+      link.target = nodeMap.get(link.target.id);
+      link.source = nodeMap.get(link.source.id);
     });
 
     graph.nodes = [...graph.nodes]; // copy over nodes from step to step
@@ -112,19 +102,21 @@
         };
         // console.log(line_line_intersect(topBorder, linkLine));
         let linkElement = document.getElementById("link-" + link.id);
-        let lineLength = linkElement.getTotalLength();
-        for (let i = 0; i < lineLength; i += lineLength / 10) {
-          const pt = linkElement.getPointAtLength(i);
-          if (
-            pt.x <= 10 ||
-            pt.x >= width - 10 ||
-            pt.y <= 10 ||
-            pt.y >= height - 10
-          ) {
-            pt.label = targetOffScreen ? link.target.id : link.source.id;
-            pt.linkID = "#link-" + link.id;
-            pt.offset = i;
-            edgeMarkers = [...edgeMarkers, pt];
+        if (linkElement) {
+          let lineLength = linkElement.getTotalLength();
+          for (let i = 0; i < lineLength; i += lineLength / 10) {
+            const pt = linkElement.getPointAtLength(i);
+            if (
+              pt.x <= 10 ||
+              pt.x >= width - 10 ||
+              pt.y <= 10 ||
+              pt.y >= height - 10
+            ) {
+              pt.label = targetOffScreen ? link.target.id : link.source.id;
+              pt.linkID = "#link-" + link.id;
+              pt.offset = i;
+              edgeMarkers = [...edgeMarkers, pt];
+            }
           }
         }
       }
@@ -132,59 +124,6 @@
 
     zoom = map.getZoom();
     pitch = map.getPitch() / 200;
-  }
-
-  // https://bl.ocks.org/bricof/f1f5b4d4bc02cad4dea454a3c5ff8ad7
-  function line_line_intersect(line1, line2) {
-    var x1 = line1.x1,
-      x2 = line1.x2,
-      x3 = line2.x1,
-      x4 = line2.x2;
-    var y1 = line1.y1,
-      y2 = line1.y2,
-      y3 = line2.y1,
-      y4 = line2.y2;
-    var pt_denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-    var pt_x_num =
-      (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
-    var pt_y_num =
-      (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
-    if (pt_denom == 0) {
-      return "parallel";
-    } else {
-      var pt = { x: pt_x_num / pt_denom, y: pt_y_num / pt_denom };
-      if (
-        btwn(pt.x, x1, x2) &&
-        btwn(pt.y, y1, y2) &&
-        btwn(pt.x, x3, x4) &&
-        btwn(pt.y, y3, y4)
-      ) {
-        return pt;
-      } else {
-        return "not in range";
-      }
-    }
-  }
-
-  function btwn(a, b1, b2) {
-    if (a >= b1 && a <= b2) {
-      return true;
-    }
-    if (a >= b2 && a <= b1) {
-      return true;
-    }
-    return false;
-  }
-
-  function restartSim() {
-    // Don't run if there is no simulation to restart
-    if (!simulation) return;
-
-    // Update the simulation.
-    simulation.nodes(graph.nodes);
-    simulation.force("link").links(graph.links);
-
-    simulation.alpha(0.3).restart();
   }
 
   // ===================== INTERACTION =====================
@@ -196,9 +135,9 @@
     graph.nodes.forEach(otherNode => {
       // If the other node is connected, don't change it. Otherwise, make it nearly invisible.
       otherNode.alpha =
-        focusedNodeID == otherNode.id || // other node is actually this node OR
-        adjlist[focusedNodeID + "-" + otherNode.id] // other node is connected to this node
-          ? null // no change
+        focusedNodeID == otherNode.id //|| // other node is actually this node OR
+          ? // adjlist[focusedNodeID + "-" + otherNode.id] // other node is connected to this node
+            null // no change
           : 0.1; // reduced visibility
     });
 

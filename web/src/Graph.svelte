@@ -18,6 +18,8 @@
   const width = window.innerWidth,
     height = window.innerHeight;
 
+  let edgeMarkers = [];
+
   export let graphData = { nodes: [], links: [] }; // externally available graph object
   let graph = { nodes: [], links: [] }; // internal graph object for simulation and display
 
@@ -84,6 +86,8 @@
     graph.nodes = [...graph.nodes]; // copy over nodes from step to step
     graph.links = [...graph.links]; // copy over links from step to step
 
+    edgeMarkers = [];
+
     graph.links.forEach(link => {
       const visible =
         selected.has(link.source.id) ||
@@ -98,11 +102,78 @@
 
       // one is on and one is off.
       const partiallyOffScreen = targetOffScreen != sourceOffScreen;
-      if (partiallyOffScreen && visible) console.log(link.id);
+      if (partiallyOffScreen && visible) {
+        const topBorder = { x1: 0, x2: width, y1: 0, y2: 0 };
+        const linkLine = {
+          x1: link.source.x,
+          x2: link.target.x,
+          y1: link.source.y,
+          y2: link.target.y
+        };
+        // console.log(line_line_intersect(topBorder, linkLine));
+        let linkElement = document.getElementById("link-" + link.id);
+        let lineLength = linkElement.getTotalLength();
+        for (let i = 0; i < lineLength; i += lineLength / 10) {
+          const pt = linkElement.getPointAtLength(i);
+          if (
+            pt.x <= 10 ||
+            pt.x >= width - 10 ||
+            pt.y <= 10 ||
+            pt.y >= height - 10
+          ) {
+            pt.label = targetOffScreen ? link.target.id : link.source.id;
+            pt.linkID = "#link-" + link.id;
+            pt.offset = i;
+            edgeMarkers = [...edgeMarkers, pt];
+          }
+        }
+      }
     });
 
     zoom = map.getZoom();
     pitch = map.getPitch() / 200;
+  }
+
+  // https://bl.ocks.org/bricof/f1f5b4d4bc02cad4dea454a3c5ff8ad7
+  function line_line_intersect(line1, line2) {
+    var x1 = line1.x1,
+      x2 = line1.x2,
+      x3 = line2.x1,
+      x4 = line2.x2;
+    var y1 = line1.y1,
+      y2 = line1.y2,
+      y3 = line2.y1,
+      y4 = line2.y2;
+    var pt_denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+    var pt_x_num =
+      (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
+    var pt_y_num =
+      (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
+    if (pt_denom == 0) {
+      return "parallel";
+    } else {
+      var pt = { x: pt_x_num / pt_denom, y: pt_y_num / pt_denom };
+      if (
+        btwn(pt.x, x1, x2) &&
+        btwn(pt.y, y1, y2) &&
+        btwn(pt.x, x3, x4) &&
+        btwn(pt.y, y3, y4)
+      ) {
+        return pt;
+      } else {
+        return "not in range";
+      }
+    }
+  }
+
+  function btwn(a, b1, b2) {
+    if (a >= b1 && a <= b2) {
+      return true;
+    }
+    if (a >= b2 && a <= b1) {
+      return true;
+    }
+    return false;
   }
 
   function restartSim() {
@@ -307,6 +378,7 @@
 
       <g id="link">
         <path
+          id={'link-' + link.id}
           stroke={'url(#' + link.id.replace(/\s+/g, '') + 'grad)'}
           d={getCurve(link)}
           fill="transparent"
@@ -326,5 +398,13 @@
         {/if}
       </g>
     {/if}
+  {/each}
+  {#each edgeMarkers as mark}
+    <!-- <text x={mark.x} y={mark.y}>{marsk.label}</text> -->
+    <text style="stroke: #000;">
+      <textPath xlink:href={mark.linkID} side="right" startOffset={mark.offset}>
+        {mark.label}
+      </textPath>
+    </text>
   {/each}
 </svg>

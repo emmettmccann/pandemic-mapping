@@ -196,50 +196,46 @@
     pointer-events: all !important;
   }
   :global(#graph > #link) {
-    pointer-events: stroke !important;
+    pointer-events: none !important;
   }
 </style>
 
 <svg id="graph" on:wheel={event => map.scrollZoom.wheel(event)}>
+  <defs>
+    <filter id="shadow" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="coloredBlur" />
+      <!-- <feOffset dx="2" dy="2" result="offsetblur" /> -->
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <!-- <feMergeNode in="SourceGraphic" /> -->
+        a
+      </feMerge>
+    </filter>
+    <filter id="glow" filterUnits="userSpaceOnUse">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="coloredBlur" />
+      <!-- <feOffset dx="2" dy="2" result="offsetblur" /> -->
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <radialGradient id="nodeGradient">
+      <stop offset="20%" stop-color="black" stop-opacity="1" />
+      <stop offset="70%" stop-color="black" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="black" stop-opacity="0" />
+    </radialGradient>
+  </defs>
 
   {#each graph.links as link (link.id)}
-    <linearGradient
-      id={link.id + 'grad'}
-      gradientUnits="userSpaceOnUse"
+    <line
+      stroke="black"
+      stroke-width="2px"
       x1={link.source.x}
       y1={link.source.y}
       x2={link.target.x}
-      y2={link.target.y}>
-      <stop offset="0%" stop-color="royalblue" />
-      <stop offset="100%" stop-color="limegreen" />
-    </linearGradient>
-    <g id="link" style="mix-blend-mode: hue;">
-      <path
-        stroke="red"
-        d={getCurve(link)}
-        fill="transparent"
-        stroke-width={strokeWidth}
-        opacity={link.alpha || link.data.confidence * 0.8}
-        transition:fade={{ duration: 200 }}>
-        <title>{link.source.id}</title>
-      </path>
-      <path
-        stroke-width={strokeWidth * 4}
-        opacity="0"
-        d={getCurve(link)}
-        fill="transparent">
-        <title>{link.source.id}</title>
-      </path>
-      <circle
-        r={strokeWidth}
-        opacity={link.alpha || link.data.confidence * 0.8}
-        fill="black">
-        <animateMotion
-          dur="5s"
-          repeatCount="indefinite"
-          path={getCurve(link)} />
-      </circle>
-    </g>
+      y2={link.target.y}
+      opacity={link.alpha || 0.1}
+      filter="url(#shadow)" />
   {/each}
 
   {#each graph.nodes as point (point.id)}
@@ -248,6 +244,7 @@
         transition:expand
         class="node"
         r={zoom * 3}
+        fill="url(#nodeGradient)"
         opacity={point.alpha || 0.5}
         cx={point.x}
         cy={point.y}
@@ -255,6 +252,41 @@
         on:mouseout={unfocus}>
         <title>{point.id}</title>
       </circle>
+    </g>
+  {/each}
+
+  {#each graph.links as link (link.id)}
+    <linearGradient
+      id={link.id.replace(/\s+/g, '') + 'grad'}
+      gradientUnits="userSpaceOnUse"
+      x1={link.source.x}
+      y1={link.source.y}
+      x2={link.target.x}
+      y2={link.target.y}>
+      <stop offset="0%" stop-color="royalblue" />
+      <stop offset="100%" stop-color="limegreen" />
+    </linearGradient>
+
+    <g id="link">
+      <path
+        stroke={'url(#' + link.id.replace(/\s+/g, '') + 'grad)'}
+        d={getCurve(link)}
+        fill="transparent"
+        stroke-width={strokeWidth}
+        opacity={link.alpha || 0.5}
+        transition:fade={{ duration: 200 }}
+        stroke-linecap="round">
+        <title>{link.source.id}</title>
+      </path>
+      <!-- <circle
+        r={strokeWidth}
+        opacity={link.alpha || link.data.confidence * 0.8}
+        fill="black">
+        <animateMotion
+          dur="5s"
+          repeatCount="indefinite"
+          path={getCurve(link)} />
+      </circle> -->
     </g>
   {/each}
 </svg>

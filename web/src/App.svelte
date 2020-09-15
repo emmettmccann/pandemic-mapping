@@ -179,7 +179,7 @@
     "2020-04-29"
   ];
   let maxDateIndex = dates.length - 1;
-  $: maxDate = dates[maxDateIndex];
+  $: maxDate = dates[minDateIndex + dateRangeSize];
   let minDateIndex = 0;
   $: minDate = dates[minDateIndex];
 
@@ -198,6 +198,7 @@
   let parents = true;
   let children = true;
   let maxDate = "2020-04-02";
+  let dateRangeSize = 0;
   // let links = [];
   let graph = {};
   let ready = true;
@@ -431,7 +432,8 @@
             <stop offset="100%" stop-color="limegreen" />
           </linearGradient>
           <line
-            stroke="url(#keyGradient)"x
+            stroke="url(#keyGradient)"
+            x
             stroke-width="5px"
             stroke-linecap="round"
             x1="3"
@@ -453,27 +455,27 @@
       </div>
       <div>
         <p>
-          <strong>After {dates[minDateIndex]}</strong>
+          <strong>Date Range Size {dateRangeSize}</strong>
+        </p>
+        1 day
+        <input
+          type="range"
+          bind:value={dateRangeSize}
+          min={1}
+          max={30}
+          step={1} />
+        30 days
+      </div>
+      <div>
+        <p>
+          <strong>Date Range {minDate} to {maxDate}</strong>
         </p>
         {dates[0]}
         <input
           type="range"
           bind:value={minDateIndex}
           min={0}
-          max={dates.length - 1}
-          step={1} />
-        {dates[dates.length - 1]}
-      </div>
-      <div>
-        <p>
-          <strong>Before {dates[maxDateIndex]}</strong>
-        </p>
-        {dates[0]}
-        <input
-          type="range"
-          bind:value={maxDateIndex}
-          min={0}
-          max={dates.length - 1}
+          max={dates.length - dateRangeSize}
           step={1} />
         {dates[dates.length - 1]}
       </div>

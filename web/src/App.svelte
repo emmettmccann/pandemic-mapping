@@ -4,7 +4,7 @@
   import Map from "./Map.svelte";
   import Select from "svelte-select";
 
-  let prob = 0.5;
+  let prob = 0.95;
   let trans = [];
   const stateOptions = [
     { value: "VA", label: "Virginia" },
@@ -220,11 +220,11 @@
   function getLinks() {
     if (!ready) return;
     let url = "http://localhost:3000/transmissions";
-    // let url = "http://c833ea2711fb.ngrok.io/transmissions";
-    // url += "prob=" + prob;
+    // let url = "http://7906920a345c.ngrok.io/transmissions";
+    url += "?prob=" + prob;
     // url += "&states=" + selectedStateKeys;
-    // url += "&maxDate=" + "'" + maxDate + "'";
-    // url += "&minDate=" + "'" + minDate + "'";
+    url += "&maxDate=" + "'" + maxDate + "'";
+    url += "&minDate=" + "'" + minDate + "'";
     // if (parents) url += "&parents=true";
     // if (children) url += "&children=true";
     fetch(url)
@@ -270,7 +270,7 @@
     });
     apiResponse.forEach(link => {
       links.push({
-        id: link.parent.id + "-" + link.child.id + Math.random(),
+        id: link.parent.id + "-" + link.child.id,
         source: link.parent.id,
         target: link.child.id,
         data: link.data
@@ -301,6 +301,46 @@
     left: 20vw;
     width: 60vw;
     z-index: 20;
+  }
+
+  #hud {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+
+  #topBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    background-image: linear-gradient(white, white, transparent);
+    min-height: 10%;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+  }
+
+  #bottomBar {
+    display: flex;
+    pointer-events: all;
+    justify-content: space-around;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    /* min-height: 10%; */
+    align-items: center;
+    flex-wrap: wrap;
+    background-image: linear-gradient(transparent, white, white, white);
+  }
+
+  #bottomBar > * {
+    text-align: center;
   }
 </style>
 
@@ -377,6 +417,68 @@
     <input type="checkbox" bind:checked={children} />
     Possible Descendants
   </div> -->
+
+  <div id="hud">
+    <div id="topBar">
+      <h1 style="margin-top: 10px; margin-bottom:10px;">
+        Probable Transmissions of COVID-19
+      </h1>
+      <div>
+        Origin
+        <svg width="250" height="15">
+          <linearGradient id="keyGradient">
+            <stop offset="0%" stop-color="royalblue" />
+            <stop offset="100%" stop-color="limegreen" />
+          </linearGradient>
+          <line
+            stroke="url(#keyGradient)"x
+            stroke-width="5px"
+            stroke-linecap="round"
+            x1="3"
+            y1="10"
+            x2="247"
+            y2="10.01" />
+        </svg>
+        Destination
+      </div>
+    </div>
+    <div id="bottomBar">
+      <div>
+        <p>
+          <strong>Probability > {prob}</strong>
+        </p>
+        0.3
+        <input type="range" bind:value={prob} min="0.3" max="1" step="0.01" />
+        1.0
+      </div>
+      <div>
+        <p>
+          <strong>After {dates[minDateIndex]}</strong>
+        </p>
+        {dates[0]}
+        <input
+          type="range"
+          bind:value={minDateIndex}
+          min={0}
+          max={dates.length - 1}
+          step={1} />
+        {dates[dates.length - 1]}
+      </div>
+      <div>
+        <p>
+          <strong>Before {dates[maxDateIndex]}</strong>
+        </p>
+        {dates[0]}
+        <input
+          type="range"
+          bind:value={maxDateIndex}
+          min={0}
+          max={dates.length - 1}
+          step={1} />
+        {dates[dates.length - 1]}
+      </div>
+    </div>
+  </div>
   <Map lat={41} lon={-97} zoom={3}>
     {#if graph.nodes}
       <Graph graphData={graph} />

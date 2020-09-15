@@ -24,12 +24,12 @@
         center: [lon, lat],
         zoom: 3.5,
         attributionControl: false,
-        hash: true,
+        // hash: true,
         bearingSnap: 90,
         dragRotate: false
       });
       // map.getCanvas().style.cursor = "crosshair";
-      // map.setPitch(30);
+      map.setPitch(30);
       // map.setMinPitch(30);
       // map.setMaxPitch(30);
     };

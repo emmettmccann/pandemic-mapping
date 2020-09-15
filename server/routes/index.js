@@ -110,8 +110,23 @@ router.get("/probables/agg", function (req, res, next) {
 });
 
 router.get("/transmissions", function (req, res, next) {
+  console.log("test");
+
+  let prob = parseFloat(req.query.prob);
+  if (isNaN(prob)) prob = 0.95; // do it this way to allow prob to be 0
+
+  let maxDate = req.query.maxDate.toString() || "";
+  let minDate = req.query.minDate.toString() || "";
+
+  console.log("t2");
+
   let q =
-    "MATCH (parent:location)-[transmission:TRANSMISSION]->(child:location) where transmission.confidence > 0.95 return parent,collect(transmission) as transmission,child";
+    "MATCH (parent:location)-[transmission:TRANSMISSION]->(child:location) where transmission.confidence > " + prob;
+  if (maxDate.length > 0) q += " and transmission.date < " + maxDate;
+  if (minDate.length > 0) q += " and transmission.date > " + minDate;
+  q += " return parent,collect(transmission) as transmission,child";
+  console.log(q);
+
   let session = db.getSession(req);
   session.run(q).then((result) => {
     db.closeSession(req);

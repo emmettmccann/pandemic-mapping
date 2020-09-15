@@ -7,15 +7,20 @@
   const { getMap } = getContext(key);
   const map = getMap();
 
-  let zoom, pitch;
+  let zoom = 3.5,
+    pitch;
   $: strokeWidth = 0.5 + 1.5 * (zoom / 3) * (zoom / 3);
 
   let simulation; // the force directed simulation
 
-  let selected = new Set();
+  let selected = new Set(),
+    selectOn = false;
+  const edgeMarkerPadding = 80;
 
-  const width = window.innerWidth,
-    height = window.innerHeight;
+  const top = edgeMarkerPadding + 10,
+    left = edgeMarkerPadding,
+    bottom = window.innerHeight - edgeMarkerPadding - 50,
+    right = window.innerWidth - edgeMarkerPadding;
 
   let edgeMarkers = [];
 
@@ -26,6 +31,11 @@
     // Set up a listener to update the graph when the map moves
     map.on("move", function() {
       tick();
+      // call it again to fix any holdover errors
+    });
+
+    map.on("moveend", function() {
+      setTimeout(tick, 1000);
     });
   });
 
@@ -52,6 +62,7 @@
     });
 
     tick();
+    setTimeout(tick, 200);
   }
 
   // ===================== SIMULATION HELPERS =====================
@@ -83,40 +94,62 @@
         selected.has(link.source.id) ||
         selected.has(link.target.id) ||
         selected.size == 0;
-      const targetNeg = link.target.x < 0 || link.target.y < 0;
-      const targetPos = link.target.x > width || link.target.y > height;
+      const targetNeg = link.target.x < left || link.target.y < top;
+      const targetPos = link.target.x > right || link.target.y > bottom;
       const targetOffScreen = targetNeg || targetPos;
-      const sourceNeg = link.source.x < 0 || link.source.y < 0;
-      const sourcePos = link.source.x > width || link.source.y > height;
+      const sourceNeg = link.source.x < left || link.source.y < top;
+      const sourcePos = link.source.x > right || link.source.y > bottom;
       const sourceOffScreen = sourceNeg || sourcePos;
 
       // one is on and one is off.
       const partiallyOffScreen = targetOffScreen != sourceOffScreen;
       if (partiallyOffScreen && visible) {
-        const topBorder = { x1: 0, x2: width, y1: 0, y2: 0 };
-        const linkLine = {
-          x1: link.source.x,
-          x2: link.target.x,
-          y1: link.source.y,
-          y2: link.target.y
-        };
-        // console.log(line_line_intersect(topBorder, linkLine));
         let linkElement = document.getElementById("link-" + link.id);
         if (linkElement) {
           let lineLength = linkElement.getTotalLength();
-          for (let i = 0; i < lineLength; i += lineLength / 10) {
+
+          // check along line, progressing from on screen to off screen
+          if (targetOffScreen) {
+            for (let i = 0; i < lineLength; i += edgeMarkerPadding / 2)
+              if (checkArcAt(i)) break;
+          } else if (sourceOffScreen) {
+            for (let i = lineLength; i > 0; i -= edgeMarkerPadding / 2)
+              if (checkArcAt(i)) break;
+          }
+
+          function checkArcAt(i) {
             const pt = linkElement.getPointAtLength(i);
-            if (
-              pt.x <= 10 ||
-              pt.x >= width - 10 ||
-              pt.y <= 10 ||
-              pt.y >= height - 10
-            ) {
-              pt.label = targetOffScreen ? link.target.id : link.source.id;
+            const pointIsOffscreen =
+              pt.x <= left || pt.x >= right || pt.y <= top || pt.y >= bottom;
+            if (pointIsOffscreen) {
+              var p2 = linkElement.getPointAtLength(i + 3);
+              pt.deg = Math.atan2(pt.y - p2.y, pt.x - p2.x) * (180 / Math.PI);
+
+              var textCheck = {
+                x: pt.x + Math.cos(pt.deg) * edgeMarkerPadding * 2,
+                y: pt.y + Math.sin(pt.deg) * edgeMarkerPadding * 2
+              };
+
+              const textCheckFail =
+                textCheck.x < left ||
+                textCheck.y < top ||
+                textCheck.x > right ||
+                textCheck.y > bottom;
+
+              pt.textAnchor = textCheckFail ? "start" : "end";
+
+              // Make text upright
+              if (pt.deg > 90) pt.deg -= 180;
+              if (pt.deg < -90) pt.deg += 180;
+
+              pt.offscreenNodeLabel = targetOffScreen
+                ? link.target.id
+                : link.source.id;
               pt.linkID = "#link-" + link.id;
               pt.offset = i;
               edgeMarkers = [...edgeMarkers, pt];
             }
+            return pointIsOffscreen;
           }
         }
       }
@@ -181,6 +214,12 @@
 
     let pitchCorrection = Math.abs(Math.atan2(vpx, vpy)) - Math.PI / 2;
 
+    // const eastWest = vx > 0;
+    if (vx > 0) {
+      vpx *= 1.3;
+      vpy *= 1.3;
+    }
+
     pitchCorrection = pitchCorrection / (Math.PI / 2);
     let controlX = vx / 2 + vpx * pitchCorrection * pitch;
     let controlY = vy / 2 + vpy * pitchCorrection * pitch;
@@ -192,7 +231,8 @@
   function handleClick(point) {
     if (selected.has(point.id)) selected.delete(point.id);
     else selected.add(point.id);
-    console.log(selected);
+    selectOn = selected.size > 0;
+    tick();
   }
 </script>
 
@@ -219,7 +259,6 @@
   <defs>
     <filter id="shadow" filterUnits="userSpaceOnUse">
       <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="coloredBlur" />
-      <!-- <feOffset dx="2" dy="2" result="offsetblur" /> -->
       <feMerge>
         <feMergeNode in="coloredBlur" />
       </feMerge>
@@ -230,6 +269,21 @@
         <feMergeNode in="coloredBlur" />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
+      <!-- https://gist.github.com/molily/60fe900634801560cbd6 -->
+    </filter>
+    <filter id="whiteShadow" x="0" y="0" width="200%" height="200%">
+      <feMorphology
+        in="SourceAlpha"
+        operator="dilate"
+        radius="2"
+        result="dilated" />
+      <feColorMatrix
+        in="dilated"
+        type="matrix"
+        values="-1 0 0 0 1, 0 -1 0 0 1, 0 0 -1 0 1, 0 0 0 1 0"
+        result="matrix" />
+      <feGaussianBlur in="matrix" stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
     <radialGradient id="nodeGradient">
       <stop offset="20%" stop-color="black" stop-opacity="1" />
@@ -292,7 +346,7 @@
         <stop offset="-0.11" stop-color="white" stop-opacity="0.0">
           <animate
             attributeName="offset"
-            dur="5s"
+            dur="3s"
             repeatCount="indefinite"
             from="-0.11"
             to="1" />
@@ -300,7 +354,7 @@
         <stop offset="-0.01" stop-color="white" stop-opacity="1">
           <animate
             attributeName="offset"
-            dur="5s"
+            dur="3s"
             repeatCount="indefinite"
             from="-0.01"
             to="1.1" />
@@ -308,7 +362,7 @@
         <stop offset="0.0" stop-color="white" stop-opacity="0.0">
           <animate
             attributeName="offset"
-            dur="5s"
+            dur="3s"
             repeatCount="indefinite"
             from="0"
             to="1.11" />
@@ -325,7 +379,7 @@
           opacity={link.alpha || 0.8}
           transition:fade={{ duration: 200 }}
           stroke-linecap="round" />
-        {#if link && selected.size > 0}
+        {#if selectOn}
           <path
             stroke={'url(#' + link.id.replace(/\s+/g, '') + 'animate)'}
             d={getCurve(link)}
@@ -338,12 +392,19 @@
       </g>
     {/if}
   {/each}
-  {#each edgeMarkers as mark}
-    <!-- <text x={mark.x} y={mark.y}>{marsk.label}</text> -->
-    <text style="stroke: #000;">
-      <textPath xlink:href={mark.linkID} side="right" startOffset={mark.offset}>
-        {mark.label}
-      </textPath>
-    </text>
-  {/each}
+  {#if selectOn > 0}
+    {#each edgeMarkers as mark}
+      <text
+        style="stroke: #000;"
+        x={mark.x}
+        y={mark.y}
+        text-anchor={mark.textAnchor}
+        transform={'rotate(' + mark.deg + ',' + mark.x + ',' + mark.y + ')'}
+        font-size="1em"
+        alignment-baseline="middle"
+        filter="url(#whiteShadow)">
+        {mark.offscreenNodeLabel}
+      </text>
+    {/each}
+  {/if}
 </svg>

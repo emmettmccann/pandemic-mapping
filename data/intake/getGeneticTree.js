@@ -38,6 +38,8 @@ async function getTree() {
   fs.outputJsonSync("../../artifacts/genomeNodes.json", genomeNodes);
   fs.outputJsonSync("../../artifacts/genomeMutationLinks.json", mutationLinks);
   fs.outputJsonSync("../../artifacts/genomeLocLinks.json", locationLinks);
+
+  console.log("Finished saving files");
 }
 
 function extractNode(parentName, node) {

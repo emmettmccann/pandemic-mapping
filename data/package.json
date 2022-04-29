@@ -4,7 +4,7 @@
    "description": "Short sample Node.js app to demonstrate seeding from JSON and traversing a path between two nodes",
    "main": "app.js",
    "dependencies": {
-      "async": "^2.6.0",
+      "async": "^2.6.4",
       "cli-progress": "^3.8.0",
       "colors": "^1.4.0",
       "dotenv": "^8.2.0",
